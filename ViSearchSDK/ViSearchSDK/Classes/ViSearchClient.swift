@@ -149,6 +149,8 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
                       handler:  ( (_ success: Bool, Error?) -> Void )?
                       ) -> Void {
         
+        params.cid = accessKey
+        
         // different url for tracking
         let url = requestSerialization.generateRequestUrl(baseUrl: trackUrl , apiEndPoint: .TRACK , searchParams: params)
         let request = NSMutableURLRequest(url: URL(string: url)! , cachePolicy: .useProtocolCachePolicy , timeoutInterval: timeoutInterval)

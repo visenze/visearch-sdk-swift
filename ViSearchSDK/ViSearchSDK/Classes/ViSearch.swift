@@ -92,7 +92,7 @@ open class ViSearch: NSObject {
         return nil
     }
     
-    // track the API calls and various actions
+    /// track the API calls and various actions
     /// Tracking API
     @discardableResult public func track(params: ViTrackParams,
                                          handler:  ( (_ success: Bool, Error?) -> Void )?

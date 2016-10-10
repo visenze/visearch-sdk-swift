@@ -84,7 +84,7 @@ class SearchResultsCollectionViewController: UICollectionViewController {
         
         // call tracking api here to register the click
         // alternately, you can present similar images or recommend them to users in the image detail page
-        let params = ViTrackParams(accessKey: ViSearch.sharedInstance.client!.accessKey, reqId: self.reqId, action: "click")
+        let params = ViTrackParams(reqId: self.reqId, action: "click")
         params?.imName = im_name
         
         ViSearch.sharedInstance.track(params: params!) { (success, error) in

@@ -549,7 +549,7 @@ User action (e.g. click on an image after search) can be sent in this way:
 
 ```swift
 
-let params = ViTrackParams(accessKey: ViSearch.sharedInstance.client!.accessKey, reqId: recentReqId, action: "click" )
+let params = ViTrackParams(reqId: recentReqId, action: "click" )
                                     
 // You can also append an im_name field
 params.imName = "example_clicked_im_name"
