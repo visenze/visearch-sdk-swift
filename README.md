@@ -147,6 +147,19 @@ client = ViSearchClient(baseUrl: yourUrl, accessKey: accessKey, secret: secret)
 ...
 ```
 
+By default, API search requests will timeout after 10s. To change the timeout, you can configure the client as below:
+
+```swift
+            
+// configure timeout to 30s example. By default timeout is set 10s.
+ViSearch.sharedInstance.client?.timeoutInterval = 30
+ViSearch.sharedInstance.client?.sessionConfig.timeoutIntervalForRequest = 30
+ViSearch.sharedInstance.client?.sessionConfig.timeoutIntervalForResource = 30
+ViSearch.sharedInstance.client?.session = URLSession(configuration: (ViSearch.sharedInstance.client?.sessionConfig)!)
+    
+```
+
+
 ## 4. Solutions
 
 ### 4.1 Find Similar
