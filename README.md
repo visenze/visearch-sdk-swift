@@ -137,7 +137,7 @@ You are done!
 iOS 10 now requires user permission to access camera and photo library. If your app requires these access, please add description for NSCameraUsageDescription, NSPhotoLibraryUsageDescription in the Info.plist. More details can be found [here](https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW24).
 
 ## 3. Initialization
-`ViSearch` **must** be initialized with an accessKey/secretKey pair **before** it can be used.
+`ViSearch` **must** be initialized with an `appKey` or `accessKey`/`secretKey` pair **before** it can be used.
 
 ```swift
 import ViSearchSDK
