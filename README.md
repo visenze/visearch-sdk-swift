@@ -4,12 +4,12 @@
 
 ---
 
-##Table of Contents
+## Table of Contents
  1. [Overview](#1-overview)
  2. [Setup](#2-setup)
       - 2.1 [Run the Demo](#21-run-the-demo)
       - 2.2 [Set up Xcode Project](#22-set-up-xcode-project)
-      - 2.3 [Import ViSearch SDK](#23-import-visearch-sdk)
+      - 2.3 [Import ViSearch Swift SDK](##23-import-visearch-swift-sdk)
       - 2.4 [Add Privacy Usage Description](#24-add-privacy-usage-description)
  3. [Initialization](#3-initialization)
  4. [Solution APIs](#4-solution-apis)
@@ -24,6 +24,7 @@
 	  - 6.2 [Filtering Results](#62-filtering-results)
 	  - 6.3 [Result Score](#63-result-score)
 	  - 6.4 [Automatic Object Recognition Beta](#64-automatic-object-recognition-beta)
+	  - 6.5 [Facets Filtering](#65-facets-filtering)
  7. [Event Tracking](#7-event-tracking)
 
 ---
@@ -35,7 +36,7 @@ ViSearch is an API that provides accurate, reliable and scalable image search. V
 
 The ViSearch iOS SDK is an open source software to provide easy integration of ViSearch Search API with your iOS applications. It provides four search methods based on the ViSearch Solution APIs - Find Similar, You May Also Like, Search By Image and Search By Color. For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-swift).
 
->Current stable version: 1.0
+>Current stable version: 1.1.0
 
 >Supported iOS version: iOS 8.x and higher
 
@@ -48,10 +49,14 @@ The source code of a demo application is provided together with the SDK ([demo](
 
 <img src="./doc/xcode_1_1.png" alt="screenshot" height="200">
 
-You should change the access key and secret key in AppDelegate file to your own key pair before running.
+You should initialize the ViSearch client in AppDelegate file by using your app key or access/secret key pair.
 
 ```swift
 
+// recommended way of init ViSearch client with app key
+ViSearch.sharedInstance.setup(appKey: "YOUR_APP_KEY")
+
+// old way of init ViSearch client with access and secret key pair
 ViSearch.sharedInstance.setup(accessKey: "YOUR_ACCESS_KEY", secret: "YOUR_SECRET_KEY")
        
 ```
@@ -93,7 +98,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'ViSearchSDK', '~>1.0'
+    pod 'ViSearchSDK', '~>1.1.0'
 end
 ...
 ```
@@ -132,12 +137,17 @@ You are done!
 iOS 10 now requires user permission to access camera and photo library. If your app requires these access, please add description for NSCameraUsageDescription, NSPhotoLibraryUsageDescription in the Info.plist. More details can be found [here](https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW24).
 
 ## 3. Initialization
-`ViSearch` **must** be initialized with an accessKey/secretKey pair **before** it can be used.
+`ViSearch` **must** be initialized with an `appKey` or `accessKey`/`secretKey` pair **before** it can be used.
 
 ```swift
 import ViSearchSDK
 ...
 // using default ViSearch client. The client, by default, will connect to Visenze's server
+
+// recommended way of init ViSearch client with app key
+ViSearch.sharedInstance.setup(appKey: "YOUR_APP_KEY")
+
+// old way of init ViSearch client with access and secret key pair
 ViSearch.sharedInstance.setup(accessKey: "YOUR_ACCESS_KEY", secret: "YOUR_SECRET_KEY")
 
 ...
@@ -146,13 +156,26 @@ client = ViSearchClient(baseUrl: yourUrl, accessKey: accessKey, secret: secret)
 ...
 ```
 
+By default, API search requests will timeout after 10s. To change the timeout, you can configure the client as below:
+
+```swift
+            
+// configure timeout to 30s example. By default timeout is set 10s.
+ViSearch.sharedInstance.client?.timeoutInterval = 30
+ViSearch.sharedInstance.client?.sessionConfig.timeoutIntervalForRequest = 30
+ViSearch.sharedInstance.client?.sessionConfig.timeoutIntervalForResource = 30
+ViSearch.sharedInstance.client?.session = URLSession(configuration: (ViSearch.sharedInstance.client?.sessionConfig)!)
+    
+```
+
+
 ## 4. Solution APIs
 
 ### 4.1 Visually Similar Recommendations
 
 GET /search
 
-**Find similar** solution is used to search for visually similar images in the image database giving an indexed image’s unique identifier (im_name).
+**Visually Similar Recommendations** solution is used to search for visually similar images in the image database giving an indexed image’s unique identifier (im_name).
 
 ```swift
 import ViSearchSDK
@@ -174,7 +197,6 @@ ViSearch.sharedInstance.findSimilar( params: params!,
 
 ...
 ```
-
 
 ### 4.2 Search by Image
 
@@ -527,6 +549,41 @@ params.detection = "bag";
 ```
 
 The detected product types are listed in `product_types` together with the match score and box area of the detected object. Multiple objects can be detected from the query image and they are ranked from the highest score to lowest. The full list of supported product types by our API will also be returned in `product_types_list`.
+
+### 6.5 Facets Filtering
+
+You can get the facet results by sending a list of fields to enable faceting on. Here are some limitations on the request:
+
+- Facet fields need to be marked as `searchable` on ViSenze dashboard.
+Text field is not supported as facet field even it is `searchable`.
+System will return value range, the min, max value for numerical fields which are in ‘int’, ‘float’ type.
+
+- Only facet values that exist in current search results will be returned. For example, if your search results contain 10 unique brands, then the facet filters will return the value for these 10 brands.
+ 
+- Facet value list is ordered by the item count descendingly.
+When the value is set to all (facets = *), all the searchable fields will be used as facet fields.
+
+Name | Type | Description
+--- | --- | --- |
+facets | array | List of fields to enable faceting.
+facets_limit | Int | Limit of the number of facet values to be returned. Only for non-numerical fields.
+facets_show_count | Boolean | Option to show the facets count in the response.
+
+```swift
+params?.facets = ["price", "brand"]
+params?.facetsLimit = 10
+params?.facetShowCount = true
+
+// view facet results
+ViResponseData.facets
+
+// numerical facet would have a min and max
+// ViFacet.min , ViFacet.max
+
+// string fields would have a count (if facetShowCount is set )
+// ViFacet.items
+
+```
 
 ## 7. Event Tracking
 

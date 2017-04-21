@@ -1,5 +1,5 @@
 #
-#  Be sure to run `pod spec lint ViSearchSwiftDev.podspec' to ensure this is a
+#  Be sure to run `pod spec lint ViSearchSwift.podspec' to ensure this is a
 #  valid spec and to remove all comments including this before submitting the spec.
 #
 #  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
   
   s.name         = "ViSearchSDK"
-  s.version      = "1.0"
+  s.version      = "1.2.1"
   s.summary      = "A Visual Search API solution (Swift SDK)"
 
   s.description  = <<-DESC
@@ -44,7 +44,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "ViSearchSDK", "ViSearchSDK/ViSearchSDK/**/*.{h,m,swift}"
+  s.source_files  = "ViSearchSDK/ViSearchSDK/**/*.{h,swift}"
   #s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
@@ -87,5 +87,6 @@ Pod::Spec.new do |s|
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
+  s.xcconfig    = { 'SWIFT_VERSION' => '3.0' }
  
 end

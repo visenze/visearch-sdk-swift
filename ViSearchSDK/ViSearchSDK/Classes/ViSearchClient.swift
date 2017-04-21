@@ -25,8 +25,12 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
     public typealias FailureHandler = (Error) -> ()
     
     // MARK: properties
+    
+    // if isAppKeyEnabled is true, this refers to the appKey. If fail it is accessKey and meant to be used with secret
     public var accessKey : String
-    public var secret    : String
+    
+    // with the new authentication, this would be optional
+    public var secret    : String = ""
     public var baseUrl   : String
     public var trackUrl  : String
     
@@ -36,6 +40,12 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
 
     public var timeoutInterval : TimeInterval = 10 // how long to timeout request
     public var requestSerialization: ViRequestSerialization
+    
+    public var userAgent : String = "visearch-swift-sdk/1.2.1"
+    private static let userAgentHeader : String = "X-Requested-With"
+    
+    // whether to authenticate by appkey or by access/secret key point
+    public var isAppKeyEnabled : Bool = true
     
  
     // MARK: constructors
@@ -56,6 +66,7 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         self.baseUrl = baseUrl
         self.accessKey = accessKey
         self.secret = secret
+        self.isAppKeyEnabled = false
         
         self.requestSerialization = ViRequestSerialization()
         
@@ -83,9 +94,53 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         
     }
     
+    public init?(baseUrl: String, appKey: String ) {
+        
+        if baseUrl.isEmpty {
+            return nil;
+        }
+        
+        if appKey.isEmpty {
+            return nil;
+        }
+        
+        self.baseUrl = baseUrl
+        self.accessKey = appKey
+        self.secret = ""
+        self.isAppKeyEnabled = true
+        
+        self.requestSerialization = ViRequestSerialization()
+        
+        // config default session
+        sessionConfig = URLSessionConfiguration.default
+        sessionConfig.allowsCellularAccess = true
+        sessionConfig.timeoutIntervalForRequest = timeoutInterval
+        sessionConfig.timeoutIntervalForResource = timeoutInterval
+        
+        // Configuring caching behavior for the default session
+        let cachesDirectoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+        let cacheURL = cachesDirectoryURL.appendingPathComponent("viSearchCache")
+        let diskPath = cacheURL.path
+        
+        let cache = URLCache(memoryCapacity:16384, diskCapacity: 268435456, diskPath: diskPath)
+        sessionConfig.urlCache = cache
+        sessionConfig.requestCachePolicy = .useProtocolCachePolicy
+        
+        session = URLSession(configuration: sessionConfig)
+        
+        self.trackUrl = ViSearchClient.VISENZE_TRACK_URL
+        
+    }
+
+    
     public convenience init?(accessKey: String , secret: String)
     {
         self.init( baseUrl: ViSearchClient.VISENZE_URL , accessKey: accessKey, secret: secret)
+    }
+    
+    public convenience init?(appKey: String)
+    {
+        self.init( baseUrl: ViSearchClient.VISENZE_URL , appKey: appKey)
     }
     
     // MARK: Visenze APIs
@@ -93,14 +148,25 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
                              successHandler: @escaping SuccessHandler,
                              failureHandler: @escaping FailureHandler) -> URLSessionTask
     {
+        var url : String? = nil
+        
         // NOTE: image must be first line before generating of url
         // url box parameters depend on whether the compress image is generated
         let imageData: Data? = params.generateCompressImageForUpload()
-        let url = requestSerialization.generateRequestUrl(baseUrl: baseUrl, apiEndPoint: .UPLOAD_SEARCH , searchParams: params)
-        let request = NSMutableURLRequest(url: URL(string: url)! , cachePolicy: .useProtocolCachePolicy , timeoutInterval: timeoutInterval)
+        
+        if self.isAppKeyEnabled {
+            url = requestSerialization.generateRequestUrl(baseUrl: baseUrl, apiEndPoint: .UPLOAD_SEARCH , searchParams: params, appKey: self.accessKey)
+        }
+        else {
+            url = requestSerialization.generateRequestUrl(baseUrl: baseUrl, apiEndPoint: .UPLOAD_SEARCH , searchParams: params)
+            
+        }
+        
+        let request = NSMutableURLRequest(url: URL(string: url!)! , cachePolicy: .useProtocolCachePolicy , timeoutInterval: timeoutInterval)
         
         let boundary = ViMultipartFormData.randomBoundary()
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
         request.httpBody = ViMultipartFormData.encode(imageData: imageData, boundary: boundary);
         
         // make tracking call to record the action
@@ -157,6 +223,7 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         
         let deviceUid = UidHelper.uniqueDeviceUid()
         request.addValue("uid=\(deviceUid)", forHTTPHeaderField: "Cookie")
+        request.addValue(getUserAgentValue() , forHTTPHeaderField: ViSearchClient.userAgentHeader )
         
         session.dataTask(with: request as URLRequest, completionHandler:{
             (data, response, error) in
@@ -176,8 +243,16 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
                                    failureHandler: @escaping FailureHandler
         ) -> URLSessionTask{
         
-        let url = requestSerialization.generateRequestUrl(baseUrl: baseUrl, apiEndPoint: apiEndPoint , searchParams: params)
-        let request = NSMutableURLRequest(url: URL(string: url)! , cachePolicy: .useProtocolCachePolicy , timeoutInterval: timeoutInterval)
+        var url : String? = nil
+        if self.isAppKeyEnabled {
+            url = requestSerialization.generateRequestUrl(baseUrl: baseUrl, apiEndPoint: apiEndPoint , searchParams: params, appKey: self.accessKey)
+        }
+        else {
+            url = requestSerialization.generateRequestUrl(baseUrl: baseUrl, apiEndPoint: apiEndPoint , searchParams: params)
+            
+        }
+        
+        let request = NSMutableURLRequest(url: URL(string: url!)! , cachePolicy: .useProtocolCachePolicy , timeoutInterval: timeoutInterval)
         
         // make tracking call to record the action 
         return httpGet(request: request,
@@ -236,6 +311,8 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
                                               successHandler: @escaping SuccessHandler,
                                               failureHandler: @escaping FailureHandler) -> URLSessionTask
     {
+        request.addValue(getUserAgentValue() , forHTTPHeaderField: ViSearchClient.userAgentHeader )
+        
         let task = session.dataTask(with: request as URLRequest , completionHandler:{
             (data, response, error) in
             if (error != nil) {
@@ -253,6 +330,10 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         })
         
         return task
+    }
+    
+    private func getUserAgentValue() -> String{
+        return userAgent ;
     }
     
     
