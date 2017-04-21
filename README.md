@@ -12,13 +12,12 @@
       - 2.3 [Import ViSearch SDK](#23-import-visearch-sdk)
       - 2.4 [Add Privacy Usage Description](#24-add-privacy-usage-description)
  3. [Initialization](#3-initialization)
- 4. [Solutions](#4-solutions)
-    - 4.1 [Find Similar](#41-find-similar)
-    - 4.2 [You May Also Like](#42-you-may-also-like)
-    - 4.3 [Search by Image](#43-search-by-image)
-	    - 4.3.1 [Selection Box](#431-selection-box)
-	    - 4.3.2 [Resizing Settings](#432-resizing-settings)
-    - 4.4 [Search by Color](#44-search-by-color)
+ 4. [Solution APIs](#4-solution-apis)
+    - 4.1 [Visually Similar Recommendations](#41-visually-similar-recommendations)
+    - 4.2 [Search by Image](#42-search-by-image)
+	    - 4.2.1 [Selection Box](#421-selection-box)
+	    - 4.2.2 [Resizing Settings](#422-resizing-settings)
+    - 4.3 [Search by Color](#43-search-by-color)
  5. [Search Results](#5-search-results)
  6. [Advanced Search Parameters](#6-advanced-search-parameters)
 	  - 6.1 [Retrieving Metadata](#61-retrieving-metadata)
@@ -147,9 +146,12 @@ client = ViSearchClient(baseUrl: yourUrl, accessKey: accessKey, secret: secret)
 ...
 ```
 
-## 4. Solutions
+## 4. Solution APIs
 
-### 4.1 Find Similar
+### 4.1 Visually Similar Recommendations
+
+GET /search
+
 **Find similar** solution is used to search for visually similar images in the image database giving an indexed image’s unique identifier (im_name).
 
 ```swift
@@ -173,30 +175,11 @@ ViSearch.sharedInstance.findSimilar( params: params!,
 ...
 ```
 
-### 4.2 You May Also Like
-**You may also like** solution is used to provide a list of recommended items from the indexed image database based on customizable rules giving an indexed image’s unique identifier (im_name).
 
-```swift
-import ViSearchSDK
-...
+### 4.2 Search by Image
 
-let params = ViSearchParams(imName: "imName-example")
-ViSearch.sharedInstance.recommendation( params: params!,
-                    successHandler: {
-                        (data : ViResponseData?) -> Void in
-                            // Do something when request succeeds
-                            // preview by calling : dump(data)
-                            // check ViResponseData.hasError and ViResponseData.error for any errors return by ViSenze server
-                    },
-                   failureHandler: {
-                        (err) -> Void in
-                        // Do something when request fails e.g. due to network error
-                        print ("error: \\(err.localizedDescription)")
-                    })
-...
-```
+POST /uploadsearch
 
-### 4.3 Search by Image
 **Search by image** solution is used to search similar images by uploading an image or providing an image url. You should construct the `UIImage` object and pass it to `ViUploadSearchParams` to start a search.
 
 * Using  Image
@@ -269,7 +252,7 @@ ViSearch.sharedInstance.uploadSearch(params: params!,
 
 ...
 ```
-#### 4.3.1 Selection Box
+#### 4.2.1 Selection Box
 If the object you wish to search for takes up only a small portion of your image, or other irrelevant objects exists in the same image, chances are the search result could become inaccurate. Use the Box parameter to refine the search area of the image to improve accuracy. The box coordinated is set with respect to the original size of the uploading image. Note: the coordinate system uses pixel as unit instead of point.
 
 ```swift
@@ -288,7 +271,7 @@ params!.box = box
 ...
 ```
 
-#### 4.3.2 Resizing Settings
+#### 4.2.2 Resizing Settings
 When performing upload search, you may notice the increased search latency with increased image file size. This is due to the increased time spent in network transferring your images to the ViSearch server, and the increased time for processing larger image files in ViSearch.
 
 To reduce upload search latency, by default the uploadSearch method makes a copy of your image file and resizes the copy to 512x512 pixels if one of the original dimensions exceed 512 pixels. This is the optimized size to lower search latency while not sacrificing search accuracy for general use cases:
@@ -322,7 +305,10 @@ params?.img_settings = ViImageSettings(size: CGSize(width: 800, height: 800), qu
         
 ```
 
-### 4.4 Search by Color
+### 4.3 Search by Color
+
+GET /colorsearch
+
 **Search by color** solution is used to search images with similar color by providing a color code. The color code should be in **Hexadecimal** and passed to `ViColorSearchParams` as a `String`.
 
 ```swift
