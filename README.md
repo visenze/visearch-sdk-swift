@@ -18,6 +18,7 @@
 	    - 4.2.1 [Selection Box](#421-selection-box)
 	    - 4.2.2 [Resizing Settings](#422-resizing-settings)
     - 4.3 [Search by Color](#43-search-by-color)
+    - 4.4 [Multiple Products Search](#44-multiple-products-search)
  5. [Search Results](#5-search-results)
  6. [Advanced Search Parameters](#6-advanced-search-parameters)
 	  - 6.1 [Retrieving Metadata](#61-retrieving-metadata)
@@ -353,6 +354,83 @@ client.colorSearch( params: params!,
                         // Do something when request fails e.g. due to network error
                         print ("error: \(err.localizedDescription)")
 					})
+
+...
+```
+
+### 4.4 Multiple Products Search
+
+POST /discoversearch
+
+**Multiple Product Search** solution is to search similar images by uploading an image or providing an image url, similar to **Search by Image**. Multiple Product Search is able to detect all objects in the image and return similar images for each at one time.
+
+* Using  Image
+
+```swift
+import ViSearchSDK
+...
+
+let image = UIImage(named: "someImage.png")
+let params = ViUploadSearchParams(image: image!)
+
+ViSearch.sharedInstance.discoverSearch(params: params,
+                    successHandler: {
+                        (data : ViResponseData?) -> Void in
+                        // Do something when request succeeds
+                        // preview by calling : dump(data)
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by ViSenze server
+                    },
+                    failureHandler: {
+                        (err) -> Void in
+                        // Do something when request fails e.g. due to network error
+                        print ("error: \\(err.localizedDescription)")
+					})
+
+```
+
+* Alternatively, you can pass an image url directly to `ViUploadSearchParams` to start the search :
+
+```swift
+import ViSearchSDK
+...
+
+let params = ViUploadSearchParams(im_url: "http://somesite.com/sample_image.png")
+        
+ViSearch.sharedInstance.discoverSearch(params: params!,
+                    successHandler: {
+                        (data : ViResponseData?) -> Void in
+                        // Do something when request succeeds
+                        // preview by calling : dump(data)
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by ViSenze server
+                    },
+                    failureHandler: {
+                        (err) -> Void in
+                        // Do something when request fails e.g. due to network error
+                        print ("error: \\(err.localizedDescription)")
+                    })
+...
+```
+
+* Once uploading an image, you will receive a im\_id attribute from the [Search Results](#5-search-results). If you want to search the same image again, you can save the bandwidth by specifying the im\_id in the params:
+
+```swift
+import ViSearchSDK
+...
+
+let params = ViUploadSearchParams(im_id: "im_id_example")
+        
+ViSearch.sharedInstance.discoverSearch(params: params!,
+                    successHandler: {
+                        (data : ViResponseData?) -> Void in
+                        // Do something when request succeeds
+                        // preview by calling : dump(data)
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by ViSenze server
+                    },
+                    failureHandler: {
+                        (err) -> Void in
+                        // Do something when request fails e.g. due to network error
+                        print ("error: \\(err.localizedDescription)")
+
 
 ...
 ```
