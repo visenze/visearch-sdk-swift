@@ -25,6 +25,7 @@
 		BD7DEDAD1DA2B81C00CDF6DE /* ViColorSearchParamsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7DEDAC1DA2B81C00CDF6DE /* ViColorSearchParamsTests.swift */; };
 		BD7DEDAF1DA2C10100CDF6DE /* ViImageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7DEDAE1DA2C10100CDF6DE /* ViImageSettings.swift */; };
 		BD7DEDB11DA2C2C900CDF6DE /* ViSearchParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7DEDB01DA2C2C900CDF6DE /* ViSearchParams.swift */; };
+		BD815AA81FC8003800E8DA76 /* ViObjectResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD815AA71FC8003800E8DA76 /* ViObjectResult.swift */; };
 		BDB1F7CC1DA4E01D000C5EAA /* ViImageResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB1F7CB1DA4E01D000C5EAA /* ViImageResult.swift */; };
 		BDB1F7CE1DA4EA9C000C5EAA /* ViProductType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB1F7CD1DA4EA9C000C5EAA /* ViProductType.swift */; };
 		BDB1F7D01DA4EBBC000C5EAA /* ViProductTypeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB1F7CF1DA4EBBC000C5EAA /* ViProductTypeList.swift */; };
@@ -70,6 +71,7 @@
 		BD7DEDAC1DA2B81C00CDF6DE /* ViColorSearchParamsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViColorSearchParamsTests.swift; sourceTree = "<group>"; };
 		BD7DEDAE1DA2C10100CDF6DE /* ViImageSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViImageSettings.swift; sourceTree = "<group>"; };
 		BD7DEDB01DA2C2C900CDF6DE /* ViSearchParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViSearchParams.swift; sourceTree = "<group>"; };
+		BD815AA71FC8003800E8DA76 /* ViObjectResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViObjectResult.swift; sourceTree = "<group>"; };
 		BDB1F7CB1DA4E01D000C5EAA /* ViImageResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViImageResult.swift; sourceTree = "<group>"; };
 		BDB1F7CD1DA4EA9C000C5EAA /* ViProductType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViProductType.swift; sourceTree = "<group>"; };
 		BDB1F7CF1DA4EBBC000C5EAA /* ViProductTypeList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViProductTypeList.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				BDB1F7CF1DA4EBBC000C5EAA /* ViProductTypeList.swift */,
 				BD7020EC1E49BB1D006BAE40 /* ViFacet.swift */,
 				BD7020EE1E49BB99006BAE40 /* ViFacetItem.swift */,
+				BD815AA71FC8003800E8DA76 /* ViObjectResult.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				BD7020EF1E49BB99006BAE40 /* ViFacetItem.swift in Sources */,
 				BD65405A1DA63F5200E10162 /* ViSearch.swift in Sources */,
 				BD7DEDAB1DA2B6C400CDF6DE /* ViColorSearchParams.swift in Sources */,
+				BD815AA81FC8003800E8DA76 /* ViObjectResult.swift in Sources */,
 				BD7020ED1E49BB1D006BAE40 /* ViFacet.swift in Sources */,
 				BDB1F7CC1DA4E01D000C5EAA /* ViImageResult.swift in Sources */,
 				BD7DEDA61DA2B14100CDF6DE /* ViBox.swift in Sources */,

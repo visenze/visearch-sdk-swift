@@ -66,6 +66,19 @@ open class ViSearch: NSObject {
         return nil
     }
     
+    /// Discover Search API
+    @discardableResult public func discoverSearch(params: ViUploadSearchParams,
+                                                successHandler: @escaping ViSearchClient.SuccessHandler,
+                                                failureHandler: @escaping ViSearchClient.FailureHandler) -> URLSessionTask?
+    {
+        if let client = client {
+            return client.discoverSearch(params: params, successHandler: successHandler, failureHandler: failureHandler);
+        }
+        
+        print("\(type(of: self)).\(#function)[line:\(#line)] - error: client is not initialized. Please call setup(accessKey, secret) before using the API.")
+        return nil
+    }
+    
     /// Search by Color API
     @discardableResult public func colorSearch(params: ViColorSearchParams,
                                                successHandler: @escaping ViSearchClient.SuccessHandler,

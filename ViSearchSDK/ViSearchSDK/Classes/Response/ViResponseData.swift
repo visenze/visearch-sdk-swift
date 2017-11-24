@@ -40,6 +40,18 @@ open class ViResponseData: NSObject {
     ///  for automatic object detection. See http://developers.visenze.com/api/?shell#automatic-object-recognition-beta for details
     public var productTypeList : [ViProductTypeList] = []
     
+    /// for discoverSearch only. Object types list
+    public var objectTypeList : [ViProductTypeList] = []
+    
+    /// for discoverSearch only. Objects in search result
+    public var objects: [ViObjectResult] = []
+    
+    /// for discoverSearch only
+    public var resultLimit : Int?
+    
+    /// for discoverSearch only
+    public var detectionLimit : Int?
+    
     /// facet results. Refer to http://developers.visenze.com/api/index.php#facet-and-filtering for details
     public var facets : [ViFacet] = []
     
@@ -104,6 +116,23 @@ open class ViResponseData: NSObject {
             
             if let facetListJson = json["facets"] as? [Any] {
                 self.facets = ViResponseData.parseFacets(facetListJson)
+            }
+            
+            // discover search response
+            if let objectTypeListJson = json["object_types_list"] as? [Any] {
+                self.objectTypeList = ViResponseData.parseProductTypeList(objectTypeListJson)
+            }
+            
+            if let objectsJson = json["objects"] as? [Any] {
+                self.objects = ViResponseData.parseObjectResults(objectsJson)
+            }
+            
+            if let resultLimit = json["result_limit"] as? Int {
+                self.resultLimit = resultLimit
+            }
+            
+            if let detectionLimit = json["detection_limit"] as? Int {
+                self.detectionLimit = detectionLimit
             }
 
         }
@@ -208,6 +237,38 @@ open class ViResponseData: NSObject {
         return results
     }
     
+    public static func parseObjectResults(_ arr: [Any]) -> [ViObjectResult]{
+        var results = [ViObjectResult]()
+        
+        for jsonItem in arr {
+            if let dict = jsonItem as? [String:Any] {
+                let type = dict["type"] as! String
+                let item = ViObjectResult(type: type)
+                item.attributes = dict["attributes"] as! [String: Any]
+                
+                item.score = dict["score"] as! Float
+                let boxArr = dict["box"] as! [Int]
+                
+                if boxArr.count > 3 {
+                    item.box = ViBox(x1: boxArr[0], y1: boxArr[1], x2: boxArr[2], y2: boxArr[3])
+                }
+                
+                item.total = dict["total"] as! Int
+                
+                if let result = dict["result"] as? [Any] {
+                    item.result = ViResponseData.parseResults(result)
+                }
+                
+                if let facetListJson = dict["facets"] as? [Any] {
+                    item.facets = ViResponseData.parseFacets(facetListJson)
+                }
+                
+                results.append(item)
+            }
+        }
+        
+        return results
+    }
     
 
 }

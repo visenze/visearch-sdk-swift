@@ -23,6 +23,17 @@ public class ViUploadSearchParams: ViBaseSearchParams {
     private var compressed_image : UIImage?
     private var compressed_image_data : Data?
     
+    // discover search parameters
+    
+    /// result limit
+    public var resultLimit: Int?
+    
+    // detection limit i.e. max no. of detected objects
+    public var detectionLimit: Int?
+    
+    // detection sensitivity
+    public var detectionSensitivity: String?
+    
     public init(image: UIImage){
         self.image = image
         im_id = nil
@@ -136,6 +147,18 @@ public class ViUploadSearchParams: ViBaseSearchParams {
         }
         else{
             print ("image or im_url or im_id must be provided. Request likely will fail")
+        }
+        
+        if let resultLimit = resultLimit {
+            dict["result_limit"] = String(resultLimit)
+        }
+        
+        if let detectionLimit = detectionLimit {
+            dict["detection_limit"] = String(detectionLimit)
+        }
+        
+        if let detectionSensitivity = detectionSensitivity {
+            dict["detection_sensitivity"] = detectionSensitivity
         }
         
         return dict;
