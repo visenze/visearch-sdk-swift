@@ -46,6 +46,12 @@ open class ViResponseData: NSObject {
     /// for discoverSearch only. Objects in search result
     public var objects: [ViObjectResult] = []
     
+    /// for discoverSearch only
+    public var resultLimit : Int?
+    
+    /// for discoverSearch only
+    public var detectionLimit : Int?
+    
     /// facet results. Refer to http://developers.visenze.com/api/index.php#facet-and-filtering for details
     public var facets : [ViFacet] = []
     
@@ -119,6 +125,14 @@ open class ViResponseData: NSObject {
             
             if let objectsJson = json["objects"] as? [Any] {
                 self.objects = ViResponseData.parseObjectResults(objectsJson)
+            }
+            
+            if let resultLimit = json["result_limit"] as? Int {
+                self.resultLimit = resultLimit
+            }
+            
+            if let detectionLimit = json["detection_limit"] as? Int {
+                self.detectionLimit = detectionLimit
             }
 
         }
