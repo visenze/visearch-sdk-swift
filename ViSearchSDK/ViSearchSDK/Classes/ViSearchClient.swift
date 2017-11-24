@@ -187,6 +187,47 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
                        failureHandler: failureHandler )
     }
     
+    @discardableResult public func discoverSearch(params: ViUploadSearchParams,
+                                                successHandler: @escaping SuccessHandler,
+                                                failureHandler: @escaping FailureHandler) -> URLSessionTask
+    {
+        var url : String? = nil
+        
+        // NOTE: image must be first line before generating of url
+        // url box parameters depend on whether the compress image is generated
+        let imageData: Data? = params.generateCompressImageForUpload()
+        
+        if self.isAppKeyEnabled {
+            url = requestSerialization.generateRequestUrl(baseUrl: baseUrl, apiEndPoint: .DISCOVER_SEARCH , searchParams: params, appKey: self.accessKey)
+        }
+        else {
+            url = requestSerialization.generateRequestUrl(baseUrl: baseUrl, apiEndPoint: .DISCOVER_SEARCH , searchParams: params)
+        }
+        
+        let request = NSMutableURLRequest(url: URL(string: url!)! , cachePolicy: .useProtocolCachePolicy , timeoutInterval: timeoutInterval)
+        
+        let boundary = ViMultipartFormData.randomBoundary()
+        request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+        request.httpBody = ViMultipartFormData.encode(imageData: imageData, boundary: boundary);
+        
+        // make tracking call to record the action
+        return httpPost(request: request,
+                        successHandler: {
+                            (data: ViResponseData?) -> Void in
+                            
+                            if let resData = data {
+                                if let reqId = resData.reqId {
+                                    let params = ViTrackParams(accessKey: self.accessKey, reqId: reqId, action: ViAPIEndPoints.DISCOVER_SEARCH.rawValue )
+                                    self.track(params: params!, handler: nil)
+                                }
+                            }
+                            
+                            successHandler(data)
+        },
+                        failureHandler: failureHandler )
+    }
+    
     @discardableResult public func colorSearch(params: ViColorSearchParams,
                             successHandler: @escaping SuccessHandler,
                             failureHandler: @escaping FailureHandler
