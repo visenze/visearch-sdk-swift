@@ -12,6 +12,7 @@ public enum ViAPIEndPoints: String {
     case ID_SEARCH     = "search"
     case UPLOAD_SEARCH = "uploadsearch"
     case REC_SEARCH    = "recommendation"
+    case DISCOVER_SEARCH = "discoversearch"
     case TRACK         = "__aq.gif"
 }
 
@@ -41,7 +42,7 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
     public var timeoutInterval : TimeInterval = 10 // how long to timeout request
     public var requestSerialization: ViRequestSerialization
     
-    public var userAgent : String = "visearch-swift-sdk/1.2.1"
+    public var userAgent : String = "visearch-swift-sdk/1.3.0"
     private static let userAgentHeader : String = "X-Requested-With"
     
     // whether to authenticate by appkey or by access/secret key point
