@@ -157,6 +157,12 @@ client = ViSearchClient(baseUrl: yourUrl, accessKey: accessKey, secret: secret)
 ...
 ```
 
+Please init ViSearch client in this way if you connect to another endpoint rather than default (https://visearch.visenze.com)
+
+```
+client = ViSearchClient(baseUrl: "https://custom-visearch.yourdomain.com", accessKey: accessKey, secret: secret)
+```
+
 By default, API search requests will timeout after 10s. To change the timeout, you can configure the client as below:
 
 ```swift
