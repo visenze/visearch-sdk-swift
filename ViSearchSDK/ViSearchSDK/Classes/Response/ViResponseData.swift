@@ -247,10 +247,10 @@ open class ViResponseData: NSObject {
                 item.attributes = dict["attributes"] as! [String: Any]
                 
                 item.score = dict["score"] as! Float
-                let boxArr = dict["box"] as! [Int]
-                
-                if boxArr.count > 3 {
-                    item.box = ViBox(x1: boxArr[0], y1: boxArr[1], x2: boxArr[2], y2: boxArr[3])
+                if let boxArr = dict["box"] as? [Int] {
+                    if boxArr.count > 3 {
+                        item.box = ViBox(x1: boxArr[0], y1: boxArr[1], x2: boxArr[2], y2: boxArr[3])
+                    }
                 }
                 
                 item.total = dict["total"] as! Int
