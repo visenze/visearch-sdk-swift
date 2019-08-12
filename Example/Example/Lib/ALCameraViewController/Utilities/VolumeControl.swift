@@ -47,7 +47,7 @@ public class VolumeControl {
     
     func configureInView(_ view: UIView) {
         view.addSubview(volumeView)
-        view.sendSubview(toBack: volumeView)
+        view.sendSubviewToBack(volumeView)
     }
     
     @objc func volumeChanged() {

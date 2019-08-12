@@ -98,7 +98,7 @@ public class ViUploadSearchParams: ViBaseSearchParams {
             UIGraphicsBeginImageContextWithOptions(rect.size, false, 1.0);
             image.draw(in: rect)
             let img = UIGraphicsGetImageFromCurrentImageContext();
-            let imageData : Data = UIImageJPEGRepresentation(img!, CGFloat(quality))!;
+            let imageData : Data = img!.jpegData(compressionQuality: CGFloat(quality))!;
             UIGraphicsEndImageContext();
             
             self.compressed_image_data = imageData

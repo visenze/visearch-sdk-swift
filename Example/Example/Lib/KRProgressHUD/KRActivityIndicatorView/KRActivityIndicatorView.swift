@@ -142,10 +142,10 @@ extension KRActivityIndicatorView {
         animation.fromValue = 0
         animation.toValue = M_PI*2
         animation.duration = 1.1
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         animation.isRemovedOnCompletion = false
         animation.repeatCount = Float(NSIntegerMax)
-        animation.fillMode = kCAFillModeForwards
+        animation.fillMode = CAMediaTimingFillMode.forwards
         animation.autoreverses = false
 
         animationLayer.isHidden = false
