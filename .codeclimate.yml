@@ -37,3 +37,4 @@ checks:
     enabled: false
   identical-code:
     enabled: true
+
