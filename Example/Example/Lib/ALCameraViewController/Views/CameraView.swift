@@ -239,16 +239,16 @@ public class CameraView: UIView {
         }
         switch UIApplication.shared.statusBarOrientation {
             case .portrait:
-              preview?.connection.videoOrientation = AVCaptureVideoOrientation.portrait
+              preview?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
               break
             case .portraitUpsideDown:
-              preview?.connection.videoOrientation = AVCaptureVideoOrientation.portraitUpsideDown
+              preview?.connection?.videoOrientation = AVCaptureVideoOrientation.portraitUpsideDown
               break
             case .landscapeRight:
-              preview?.connection.videoOrientation = AVCaptureVideoOrientation.landscapeRight
+              preview?.connection?.videoOrientation = AVCaptureVideoOrientation.landscapeRight
               break
             case .landscapeLeft:
-              preview?.connection.videoOrientation = AVCaptureVideoOrientation.landscapeLeft
+              preview?.connection?.videoOrientation = AVCaptureVideoOrientation.landscapeLeft
               break
             default: break
         }
