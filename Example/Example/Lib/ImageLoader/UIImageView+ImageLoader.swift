@@ -107,7 +107,7 @@ extension UIImageView {
             if UIImageView.imageLoader.automaticallyAddTransition && cacheType == CacheType.none {
                 let transition = CATransition()
                 transition.duration = 0.5
-                transition.type = kCATransitionFade
+                transition.type = CATransitionType.fade
                 wSelf.layer.add(transition, forKey: nil)
             }
 

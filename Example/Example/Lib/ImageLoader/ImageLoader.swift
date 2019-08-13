@@ -116,7 +116,7 @@ public var state: State {
     return sharedInstance.state
 }
 
-func dispatch_main(_ block: @escaping (Void) -> Void) {
+func dispatch_main(_ block: @escaping () -> Void) {
     if Thread.isMainThread {
         block()
     } else {

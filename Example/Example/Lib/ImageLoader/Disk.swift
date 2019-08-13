@@ -19,6 +19,8 @@ extension String {
 public class Disk {
 
     var storedData = [String: Data]()
+    
+    public init() {}
 
     class Directory {
         init() {

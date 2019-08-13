@@ -61,7 +61,7 @@ internal func errorWithKey(_ key: String, domain: String) -> NSError {
     return error
 }
 
-internal func normalizedRect(_ rect: CGRect, orientation: UIImageOrientation) -> CGRect {
+internal func normalizedRect(_ rect: CGRect, orientation: UIImage.Orientation) -> CGRect {
     let normalizedX = rect.origin.x
     let normalizedY = rect.origin.y
     
@@ -84,7 +84,7 @@ internal func normalizedRect(_ rect: CGRect, orientation: UIImageOrientation) ->
     return normalizedRect
 }
 
-internal func flashImage(_ mode: AVCaptureFlashMode) -> String {
+internal func flashImage(_ mode: AVCaptureDevice.FlashMode) -> String {
     let image: String
     switch mode {
     case .auto:

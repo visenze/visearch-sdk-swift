@@ -54,7 +54,7 @@ public class CameraViewController: UIViewController {
     
     var animationDuration: TimeInterval = 0.5
     var animationSpring: CGFloat = 0.5
-    var rotateAnimation: UIViewAnimationOptions = .curveLinear
+    var rotateAnimation: UIView.AnimationOptions = .curveLinear
     
     var cameraButtonEdgeConstraint: NSLayoutConstraint?
     var cameraButtonGravityConstraint: NSLayoutConstraint?
@@ -327,11 +327,11 @@ public class CameraViewController: UIViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(rotateCameraView),
-            name: NSNotification.Name.UIDeviceOrientationDidChange,
+            name: UIDevice.orientationDidChangeNotification,
             object: nil)
     }
     
-    internal func notifyCameraReady() {
+    @objc internal func notifyCameraReady() {
         cameraButton.isEnabled = true
     }
     
@@ -369,7 +369,7 @@ public class CameraViewController: UIViewController {
             libraryButton].forEach({ $0.isEnabled = enabled })
     }
     
-    func rotateCameraView() {
+    @objc func rotateCameraView() {
         cameraView.rotatePreview()
     }
     
@@ -429,8 +429,8 @@ public class CameraViewController: UIViewController {
      * the user that it not allow the permissions.
      */
     private func checkPermissions() {
-        if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) != .authorized {
-            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { granted in
+        if AVCaptureDevice.authorizationStatus(for: AVMediaType(rawValue: convertFromAVMediaType(AVMediaType.video))) != .authorized {
+            AVCaptureDevice.requestAccess(for: AVMediaType(rawValue: convertFromAVMediaType(AVMediaType.video))) { granted in
                 DispatchQueue.main.async() {
                     if !granted {
                         self.showNoPermissionsView()
@@ -468,7 +468,7 @@ public class CameraViewController: UIViewController {
      */
     internal func capturePhoto() {
         guard let output = cameraView.imageOutput,
-            let connection = output.connection(withMediaType: AVMediaTypeVideo) else {
+            let connection = output.connection(with: AVMediaType(rawValue: convertFromAVMediaType(AVMediaType.video))) else {
             return
         }
         
@@ -536,7 +536,7 @@ public class CameraViewController: UIViewController {
     
     internal func swapCamera() {
         cameraView.swapCameraInput()
-        flashButton.isHidden = cameraView.currentPosition == AVCaptureDevicePosition.front
+        flashButton.isHidden = cameraView.currentPosition == AVCaptureDevice.Position.front
     }
     
     internal func layoutCameraResult(asset: PHAsset) {
@@ -558,4 +558,9 @@ public class CameraViewController: UIViewController {
         present(confirmViewController, animated: true, completion: nil)
     }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVMediaType(_ input: AVMediaType) -> String {
+	return input.rawValue
 }

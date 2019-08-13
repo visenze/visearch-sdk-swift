@@ -116,7 +116,7 @@ public final class KRProgressHUD {
     fileprivate func configureProgressHUDView() {
         let rootViewController = KRProgressHUDViewController()
         window.rootViewController = rootViewController
-        window.windowLevel = UIWindowLevelNormal
+        window.windowLevel = UIWindow.Level.normal
         window.alpha = 0
 
         progressHUDView.center = defaultPosition
