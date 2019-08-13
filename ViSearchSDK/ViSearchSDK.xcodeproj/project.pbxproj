@@ -262,7 +262,7 @@
 					BD7DED811DA2AFCF00CDF6DE = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = NKN6QECX9M;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1030;
 						ProvisioningStyle = Automatic;
 					};
 					BD7DED8A1DA2AFCF00CDF6DE = {
@@ -277,6 +277,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = BD7DED781DA2AFCF00CDF6DE;
@@ -494,8 +495,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSearchSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -515,8 +515,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSearchSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
