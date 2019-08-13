@@ -274,11 +274,11 @@
 			};
 			buildConfigurationList = BD7DED7C1DA2AFCF00CDF6DE /* Build configuration list for PBXProject "ViSearchSDK" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				Base,
 			);
 			mainGroup = BD7DED781DA2AFCF00CDF6DE;
 			productRefGroup = BD7DED831DA2AFCF00CDF6DE /* Products */;

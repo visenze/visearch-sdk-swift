@@ -236,7 +236,7 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         return makeGetApiRequest(params: params, apiEndPoint: .COLOR_SEARCH, successHandler: successHandler, failureHandler: failureHandler)
     }
     
-    @discardableResult public func findSimilar(params: ViSearchParams,
+    public func findSimilar(params: ViSearchParams,
                             successHandler: @escaping SuccessHandler,
                             failureHandler: @escaping FailureHandler
         ) -> URLSessionTask
@@ -244,7 +244,7 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         return makeGetApiRequest(params: params, apiEndPoint: .ID_SEARCH, successHandler: successHandler, failureHandler: failureHandler)
     }
     
-    @discardableResult public func recommendation(params: ViSearchParams,
+    public func recommendation(params: ViSearchParams,
                             successHandler: @escaping SuccessHandler,
                             failureHandler: @escaping FailureHandler
         ) -> URLSessionTask
@@ -253,7 +253,7 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
     }
     
     // track the API calls and various actions
-    @discardableResult public func track(params: ViTrackParams,
+    public func track(params: ViTrackParams,
                       handler:  ( (_ success: Bool, Error?) -> Void )?
                       ) -> Void {
         

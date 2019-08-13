@@ -123,7 +123,7 @@ open class ViSearch: NSObject {
     
     /// track the API calls and various actions
     /// Tracking API
-    @discardableResult public func track(params: ViTrackParams,
+    public func track(params: ViTrackParams,
                                          handler:  ( (_ success: Bool, Error?) -> Void )?
         ) -> Void {
         

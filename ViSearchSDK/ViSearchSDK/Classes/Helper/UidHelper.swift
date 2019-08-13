@@ -13,7 +13,7 @@ public class UidHelper: NSObject {
     public static func uniqueDeviceUid() -> String {
         let storeUid = SettingHelper.getStringSettingProp(propName: ViSearchUidKey)
         
-        if storeUid == nil || storeUid?.characters.count == 0 {
+        if storeUid == nil || storeUid?.count == 0 {
             let deviceId = UIDevice.current.identifierForVendor?.uuidString ;
             
             // store in the setting
