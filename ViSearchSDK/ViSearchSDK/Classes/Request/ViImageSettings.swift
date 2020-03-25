@@ -11,15 +11,16 @@ public class ViImageSettings {
     public var maxWidth: Float
     
     public init(setting: Options){
+        // default setting
+        quality = 0.97;
+        maxWidth = 512;
+        
         // high quality
         if(setting == .highQualitySetting){
             quality = 0.985;
             maxWidth = 1024;
         }
         
-        // default setting
-        quality = 0.97;
-        maxWidth = 512;
     }
     
     public convenience init(){

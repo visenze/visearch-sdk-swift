@@ -149,7 +149,13 @@ open class ViResponseData: NSObject {
         for jsonItem in arr {
             if let dict = jsonItem as? [String:Any] {
                 let type = dict["type"] as! String
-                let score = dict["score"] as! Float
+                var score : Float = 0
+                if let floatScore = dict["score"] as? Float {
+                    score = floatScore
+                } else if let numScore = dict["score"] as? NSNumber {
+                    score = numScore.floatValue
+                }
+                
                 let boxArr = dict["box"] as! [Int]
                 let box = ViBox(x1: boxArr[0], y1: boxArr[1], x2: boxArr[2], y2: boxArr[3])
                 let item = ViProductType(box: box, score: score, type: type)
@@ -246,7 +252,15 @@ open class ViResponseData: NSObject {
                 let item = ViObjectResult(type: type)
                 item.attributes = dict["attributes"] as! [String: Any]
                 
-                item.score = dict["score"] as! Float
+                var score : Float = 0
+                if let floatScore = dict["score"] as? Float {
+                    score = floatScore
+                } else if let numScore = dict["score"] as? NSNumber {
+                    score = numScore.floatValue
+                }
+                
+                item.score = score
+                
                 if let boxArr = dict["box"] as? [Int] {
                     if boxArr.count > 3 {
                         item.box = ViBox(x1: boxArr[0], y1: boxArr[1], x2: boxArr[2], y2: boxArr[3])
