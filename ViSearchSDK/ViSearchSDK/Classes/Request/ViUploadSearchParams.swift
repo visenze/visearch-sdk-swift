@@ -114,10 +114,14 @@ public class ViUploadSearchParams: ViBaseSearchParams {
     public override func toDict() -> [String: Any] {
         var dict = super.toDict()
         
+        if let box = box {
+            dict["box"] = "\(box.x1),\(box.y1),\(box.x2),\(box.y2)"
+        }
+        
         if let image = image {
             // add in box parameters
             if let box = box {
-                
+        
                 if let compressed_image = compressed_image {
                     
                     let scale : CGFloat =
@@ -133,9 +137,7 @@ public class ViUploadSearchParams: ViBaseSearchParams {
                     dict["box"] = "\(scaleX1),\(scaleY1),\(scaleX2),\(scaleY2)"
                     
                 }
-                else{
-                    dict["box"] = "\(box.x1),\(box.y1),\(box.x2),\(box.y2)"
-                }
+    
             }
             
         }
