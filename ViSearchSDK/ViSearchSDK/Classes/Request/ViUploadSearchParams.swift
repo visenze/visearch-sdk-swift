@@ -34,6 +34,9 @@ public class ViUploadSearchParams: ViBaseSearchParams {
     // detection sensitivity
     public var detectionSensitivity: String?
     
+    // PS-828 new point parameter
+    public var points: [ViPoint] = []
+    
     public init(image: UIImage){
         self.image = image
         im_id = nil
@@ -161,6 +164,17 @@ public class ViUploadSearchParams: ViBaseSearchParams {
         
         if let detectionSensitivity = detectionSensitivity {
             dict["detection_sensitivity"] = detectionSensitivity
+        }
+        
+    
+        if points.count > 0 {
+            var pointArr : [String] = []
+            for point in points {
+                let pointComma = "\(point.x),\(point.y)"
+                pointArr.append(pointComma)
+            }
+            
+            dict["point"] = pointArr
         }
         
         return dict;
