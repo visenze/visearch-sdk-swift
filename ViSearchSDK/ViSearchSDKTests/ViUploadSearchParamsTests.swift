@@ -29,9 +29,9 @@ class ViUploadSearchParamsTests: XCTestCase {
         let expectation = self.expectation(description: "wait_for_response")
         
         ViSearch.sharedInstance.setup(appKey: "")
-        let params = ViUploadSearchParams(im_url: "https://imgresize.visenze.com.cn/6163/512x512/VIP-CN_2165183117.jpeg")
+        let params = ViUploadSearchParams(im_url: "https://visenze-productivity-evaluation.s3.ap-southeast-1.amazonaws.com/956e8a53af44bd65c9287bde62016106")
         params?.score = true
-        let p = ViPoint(x: 100, y: 100)
+        let p = ViPoint(x: 458, y: 309)
         params?.points = [p]
         
         ViSearch.sharedInstance.discoverSearch(params: params!,
@@ -51,7 +51,8 @@ class ViUploadSearchParamsTests: XCTestCase {
             expectation.fulfill()
         })
         
-        waitForExpectations(timeout: 30, handler: nil) */
+        waitForExpectations(timeout: 30, handler: nil)
+        */
     }
     
 }
