@@ -149,12 +149,7 @@ open class ViResponseData: NSObject {
         for jsonItem in arr {
             if let dict = jsonItem as? [String:Any] {
                 let type = dict["type"] as! String
-                var score : Float = 0
-                if let floatScore = dict["score"] as? Float {
-                    score = floatScore
-                } else if let numScore = dict["score"] as? NSNumber {
-                    score = numScore.floatValue
-                }
+                let score = parseFloat(dict, "score")
                 
                 let boxArr = dict["box"] as! [Int]
                 let box = ViBox(x1: boxArr[0], y1: boxArr[1], x2: boxArr[2], y2: boxArr[3])
@@ -226,7 +221,8 @@ open class ViResponseData: NSObject {
                 let item = ViImageResult(im_name)
                 if(item != nil)
                 {
-                    item?.score = dict["score"] as? Float
+                    item?.score = parseFloat(dict, "score")
+                    
                     item?.metadataDict = dict["value_map"] as? [String: Any]
                     if(item?.metadataDict != nil){
                         item?.im_url = item?.metadataDict?["im_url"] as? String
@@ -252,18 +248,17 @@ open class ViResponseData: NSObject {
                 let item = ViObjectResult(type: type)
                 item.attributes = dict["attributes"] as! [String: Any]
                 
-                var score : Float = 0
-                if let floatScore = dict["score"] as? Float {
-                    score = floatScore
-                } else if let numScore = dict["score"] as? NSNumber {
-                    score = numScore.floatValue
-                }
-                
-                item.score = score
+                item.score = parseFloat(dict, "score")
                 
                 if let boxArr = dict["box"] as? [Int] {
                     if boxArr.count > 3 {
                         item.box = ViBox(x1: boxArr[0], y1: boxArr[1], x2: boxArr[2], y2: boxArr[3])
+                    }
+                }
+                
+                if let pointArr = dict["point"] as? [Int] {
+                    if pointArr.count > 1 {
+                        item.point = ViPoint(x: pointArr[0], y: pointArr[1])
                     }
                 }
                 
@@ -284,5 +279,26 @@ open class ViResponseData: NSObject {
         return results
     }
     
+    
+    private static func parseFloat(_ dict:  [String:Any], _ field: String) -> Float{
+      
+        if let floatScore = dict[field] as? Float {
+            return floatScore
+        }
+        
+        if let numScore = dict[field] as? NSNumber {
+            return numScore.floatValue
+        }
+        
+        if let intScore = dict[field] as? Int {
+           return Float(intScore)
+        }
+        
+        if let floatVal = Float(String(describing: dict[field]) ) {
+            return floatVal
+        }
+        
+        return 0
+    }
 
 }

@@ -12,6 +12,7 @@ open class ViObjectResult: NSObject {
     public var type  : String
     public var attributes : [String: Any] = [:]
     public var box   : ViBox?
+    public var point : ViPoint?
     public var score : Float = 0
     public var total : Int = 0
     public var result: [ViImageResult] = []
