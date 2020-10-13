@@ -69,6 +69,20 @@ open class ViBaseSearchParams : ViSearchParamsProtocol {
     /// add dedup parameter
     public var dedup : Bool? = nil
     
+    // MARK: Analytics parameters
+    public var uid: String?
+    public var sid: String?
+    public var source: String?
+    public var platform: String?
+    public var os: String?
+    public var osv: String?
+    public var deviceBrand: String?
+    public var deviceModel: String?
+    public var language: String?
+    public var appId: String?
+    public var appName: String?
+    public var appVersion: String?
+    
     
     // MARK: search protocol
     public func toDict() -> [String: Any] {
@@ -119,6 +133,54 @@ open class ViBaseSearchParams : ViSearchParamsProtocol {
             dict["facets"] = self.facets
             dict["facets_limit"] = self.facetsLimit
             dict["facets_show_count"] = self.facetShowCount ? "true" : "false"
+        }
+        
+        if let uid = self.uid {
+            dict["va_uid"] = uid
+        }
+        
+        if let sid = self.sid {
+            dict["va_sid"] = sid
+        }
+        
+        if let source = self.source {
+            dict["va_source"] = source
+        }
+        
+        if let platform = self.platform {
+            dict["va_platform"] = platform
+        }
+        
+        if let os = self.os {
+            dict["va_os"] = os
+        }
+        
+        if let osv = self.osv {
+            dict["va_osv"] = osv
+        }
+        
+        if let appId = self.appId {
+            dict["va_app_bundle_id"] = appId
+        }
+        
+        if let appName = self.appName {
+            dict["va_app_name"] = appName
+        }
+        
+        if let appVersion = self.appVersion {
+            dict["va_app_version"] = appVersion
+        }
+        
+        if let deviceBrand = self.deviceBrand {
+            dict["va_device_brand"] = deviceBrand
+        }
+        
+        if let deviceModel = self.deviceModel {
+            dict["va_device_model"] = deviceModel
+        }
+        
+        if let language = self.language {
+            dict["va_language"] = language
         }
         
         return dict ;

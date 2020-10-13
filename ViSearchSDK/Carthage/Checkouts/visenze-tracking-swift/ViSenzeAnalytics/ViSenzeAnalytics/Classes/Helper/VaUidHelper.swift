@@ -21,12 +21,12 @@ public class VaUidHelper: NSObject {
         let storeUid = SettingHelper.getStringSettingProp(propName: ViSenzeUidKey)
         
         if storeUid == nil || storeUid?.count == 0 {
-            let deviceId = UIDevice.current.identifierForVendor?.uuidString ;
+            let deviceId = StringHelper.limitMaxLength(UIDevice.current.identifierForVendor!.uuidString, 64) ;
             
             // store in the setting
-            SettingHelper.setSettingProp(propName: ViSenzeUidKey, newValue: deviceId!)
+            SettingHelper.setSettingProp(propName: ViSenzeUidKey, newValue: deviceId)
             
-            return deviceId!
+            return deviceId
         }
         
         return storeUid!

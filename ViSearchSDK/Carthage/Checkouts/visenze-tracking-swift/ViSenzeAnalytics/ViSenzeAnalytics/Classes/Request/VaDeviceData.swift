@@ -171,15 +171,15 @@ public class VaDeviceData: NSObject {
         /// Example: `iOS Example/1.0 (org.alamofire.iOS-Example; build:1; iOS 13.0.0) ViSenzeTracker/5.0.0`
         self.userAgent = "\(executable)/\(appVersion) (\(bundle); build:\(appBuild); \(osNameVersion)) \(trackerVersionString)"
         
-        self.os = osName
-        self.osv = osVersionString
+        self.os = StringHelper.limitMaxLength(osName, 32)
+        self.osv = StringHelper.limitMaxLength(osVersionString, 32)
         
-        self.appBundleId = bundle
-        self.appVersion = appVersion
-        self.appName = appDisplayName
+        self.appBundleId = StringHelper.limitMaxLength(bundle, 32)
+        self.appVersion = StringHelper.limitMaxLength(appVersion, 32)
+        self.appName = StringHelper.limitMaxLength(appDisplayName, 32)
         
         self.deviceBrand = "Apple"
-        self.deviceModel = UIDevice.modelName
+        self.deviceModel = StringHelper.limitMaxLength(UIDevice.modelName, 32)
         
         let nWidth = Int(UIScreen.main.nativeBounds.width)
         let nHeight = Int(UIScreen.main.nativeBounds.height)
@@ -188,4 +188,6 @@ public class VaDeviceData: NSObject {
         
         super.init()
     }
+    
+    
 }

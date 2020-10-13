@@ -20,6 +20,8 @@
 		BD9AD0E42508B1C20012918F /* VaEventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AD0E32508B1C10012918F /* VaEventResponse.swift */; };
 		BD9AD0E62508B2010012918F /* VaError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AD0E52508B2010012918F /* VaError.swift */; };
 		BD9AD0E82508BFC30012918F /* VaSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AD0E72508BFC30012918F /* VaSessionManager.swift */; };
+		BDA338A62535EA9700D4E74A /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA338A52535EA9700D4E74A /* StringHelper.swift */; };
+		BDA338A82535EC8900D4E74A /* StringHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA338A72535EC8900D4E74A /* StringHelperTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		BD9AD0E32508B1C10012918F /* VaEventResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaEventResponse.swift; sourceTree = "<group>"; };
 		BD9AD0E52508B2010012918F /* VaError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaError.swift; sourceTree = "<group>"; };
 		BD9AD0E72508BFC30012918F /* VaSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaSessionManager.swift; sourceTree = "<group>"; };
+		BDA338A52535EA9700D4E74A /* StringHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
+		BDA338A72535EC8900D4E74A /* StringHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelperTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				BD9AD0C32507CC520012918F /* ViSenzeAnalyticsTests.swift */,
+				BDA338A72535EC8900D4E74A /* StringHelperTests.swift */,
 				BD9AD0C52507CC520012918F /* Info.plist */,
 			);
 			path = ViSenzeAnalyticsTests;
@@ -125,6 +130,7 @@
 			children = (
 				BD9AD0D52507D0340012918F /* VaUidHelper.swift */,
 				BD9AD0D12507CE660012918F /* SettingHelper.swift */,
+				BDA338A52535EA9700D4E74A /* StringHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -260,6 +266,7 @@
 			files = (
 				BD9AD0E42508B1C20012918F /* VaEventResponse.swift in Sources */,
 				BD9AD0E82508BFC30012918F /* VaSessionManager.swift in Sources */,
+				BDA338A62535EA9700D4E74A /* StringHelper.swift in Sources */,
 				BD9AD0D22507CE660012918F /* SettingHelper.swift in Sources */,
 				BD9AD0DB2507D2C40012918F /* ViSenzeAnalytics.swift in Sources */,
 				BD9AD0D92507D2720012918F /* VaRequestSerialization.swift in Sources */,
@@ -275,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDA338A82535EC8900D4E74A /* StringHelperTests.swift in Sources */,
 				BD9AD0C42507CC520012918F /* ViSenzeAnalyticsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,6 +423,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = NKN6QECX9M;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -428,7 +437,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSenzeAnalytics;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -444,6 +453,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = NKN6QECX9M;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -457,7 +467,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSenzeAnalytics;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
