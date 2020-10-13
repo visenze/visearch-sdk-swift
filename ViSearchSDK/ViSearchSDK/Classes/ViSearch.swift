@@ -57,6 +57,7 @@ open class ViSearch: NSObject {
     }
     
     
+    
     // MARK: API calls
     
     /// Search by Image API
