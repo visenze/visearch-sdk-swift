@@ -174,14 +174,6 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         return httpPost(request: request,
                        successHandler: {
                         (data: ViResponseData?) -> Void in
-                        
-                        if let resData = data {
-                            if let reqId = resData.reqId {
-                                let params = ViTrackParams(accessKey: self.accessKey, reqId: reqId, action: ViAPIEndPoints.UPLOAD_SEARCH.rawValue )
-                                self.track(params: params!, handler: nil)
-                            }
-                        }
-                        
                         successHandler(data)
             },
                        failureHandler: failureHandler )
@@ -216,13 +208,6 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
                         successHandler: {
                             (data: ViResponseData?) -> Void in
                             
-                            if let resData = data {
-                                if let reqId = resData.reqId {
-                                    let params = ViTrackParams(accessKey: self.accessKey, reqId: reqId, action: ViAPIEndPoints.DISCOVER_SEARCH.rawValue )
-                                    self.track(params: params!, handler: nil)
-                                }
-                            }
-                            
                             successHandler(data)
         },
                         failureHandler: failureHandler )
@@ -252,30 +237,7 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         return makeGetApiRequest(params: params, apiEndPoint: .REC_SEARCH, successHandler: successHandler, failureHandler: failureHandler)
     }
     
-    // track the API calls and various actions
-    public func track(params: ViTrackParams,
-                      handler:  ( (_ success: Bool, Error?) -> Void )?
-                      ) -> Void {
-        
-        params.cid = accessKey
-        
-        // different url for tracking
-        let url = requestSerialization.generateRequestUrl(baseUrl: trackUrl , apiEndPoint: .TRACK , searchParams: params)
-        let request = NSMutableURLRequest(url: URL(string: url)! , cachePolicy: .useProtocolCachePolicy , timeoutInterval: timeoutInterval)
-        
-        let deviceUid = UidHelper.uniqueDeviceUid()
-        request.addValue("uid=\(deviceUid)", forHTTPHeaderField: "Cookie")
-        request.addValue(getUserAgentValue() , forHTTPHeaderField: ViSearchClient.userAgentHeader )
-        
-        session.dataTask(with: request as URLRequest, completionHandler:{
-            (data, response, error) in
-            if handler != nil {
-                let hasError = (error == nil)
-                handler!( hasError ,  error )
-            }
-        }).resume()
-    }
-    
+
     // MARK: http requests internal
     
     // make API call and also send a tracking request immediately if successful
@@ -300,13 +262,6 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         return httpGet(request: request,
                        successHandler: {
                              (data: ViResponseData?) -> Void in
-                        
-                               if let resData = data {
-                                  if let reqId = resData.reqId {
-                                    let params = ViTrackParams(accessKey: self.accessKey, reqId: reqId, action: apiEndPoint.rawValue )
-                                    self.track(params: params!, handler: nil)
-                                  }
-                               }
                         
                                successHandler(data)
                        },

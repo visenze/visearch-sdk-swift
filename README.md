@@ -27,6 +27,7 @@
 	  - 6.4 [Automatic Object Recognition Beta](#64-automatic-object-recognition-beta)
 	  - 6.5 [Facets Filtering](#65-facets-filtering)
  7. [Event Tracking](#7-event-tracking)
+ 8. [Developer Notes](#8-developer-notes)
 
 ---
 
@@ -695,3 +696,14 @@ Field | Description | Required
 reqid| visearch request id of current search. This attribute can be accessed in ViResponseData in [Section 5](#5-search-results) | Require
 action | The type of the action. Currently we support three types, `click`, `add_to_cart`, and `add_to_wishlist`. | Require
 imName | image id (im_name) for this behavior | Optional
+
+## 8. Developer Notes
+
+The SDK requires ViSenze Tracking library as a dependency [https://github.com/visenze/visenze-tracking-swift](https://github.com/visenze/visenze-tracking-swift). For local development, the dependency can be pulled by running the following within `ViSearchSDK` folder.
+
+```
+# first update version within Cartfile
+
+# pull latest changes and build framework
+carthage update --platform ios
+```
