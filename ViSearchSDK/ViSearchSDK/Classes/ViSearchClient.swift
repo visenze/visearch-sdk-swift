@@ -21,7 +21,6 @@ public enum ViAPIEndPoints: String {
 open class ViSearchClient: NSObject, URLSessionDelegate {
     
     public static let VISENZE_URL = "https://visearch.visenze.com"
-    public static let VISENZE_TRACK_URL = "https://track.visenze.com"
     
     public typealias SuccessHandler = (ViResponseData?) -> ()
     public typealias FailureHandler = (Error) -> ()
@@ -34,7 +33,6 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
     // with the new authentication, this would be optional
     public var secret    : String = ""
     public var baseUrl   : String
-    public var trackUrl  : String
     
     public var session: URLSession
     public var sessionConfig: URLSessionConfiguration
@@ -92,8 +90,6 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         
         session = URLSession(configuration: sessionConfig)
         
-        self.trackUrl = ViSearchClient.VISENZE_TRACK_URL
-        
     }
     
     public init?(baseUrl: String, appKey: String ) {
@@ -129,8 +125,6 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         sessionConfig.requestCachePolicy = .useProtocolCachePolicy
         
         session = URLSession(configuration: sessionConfig)
-        
-        self.trackUrl = ViSearchClient.VISENZE_TRACK_URL
         
     }
 

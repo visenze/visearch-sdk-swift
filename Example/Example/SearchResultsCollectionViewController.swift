@@ -78,7 +78,7 @@ class SearchResultsCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        showHud()
+        //showHud()
         
         let im_name = photoResults[indexPath.row].im_name
         
