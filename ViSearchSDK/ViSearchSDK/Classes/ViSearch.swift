@@ -50,6 +50,8 @@ open class ViSearch: NSObject {
 
     }
     
+    // MARK: Analytics
+    
     public func newTracker(code: String, forCn: Bool) -> ViSenzeTracker {
         return ViSenzeTracker(code: code, isCn: forCn)!
     }

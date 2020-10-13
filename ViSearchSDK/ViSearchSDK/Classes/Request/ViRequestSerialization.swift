@@ -23,7 +23,8 @@ open class ViRequestSerialization {
     
     /// generate the url with query string and escape parameter properly
     public func generateRequestUrl( baseUrl: String , apiEndPoint: ViAPIEndPoints , searchParams : ViSearchParamsProtocol) -> String {
-        let queryString = generateQueryString(searchParams.toDict())
+        let searchParamsDict : [String: Any] = searchParams.toDict()
+        let queryString = generateQueryString(searchParamsDict)
         return "\(baseUrl)/\(apiEndPoint.rawValue)?\(queryString)"
     }
     
@@ -38,6 +39,7 @@ open class ViRequestSerialization {
         return "\(baseUrl)/\(apiEndPoint.rawValue)?\(queryString)"
     }
     
+
     /// generate the query string to append to the url
     public func generateQueryString(_ parameters: [String: Any]) -> String {
         var components: [(String, String)] = []

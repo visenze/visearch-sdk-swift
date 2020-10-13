@@ -1,4 +1,5 @@
 import Foundation
+import ViSenzeAnalytics
 
 public enum ViHttpMethod: String {
     case GET = "GET"
@@ -150,6 +151,7 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
                              failureHandler: @escaping FailureHandler) -> URLSessionTask
     {
         var url : String? = nil
+        self.addAnalyticParams(params: params)
         
         // NOTE: image must be first line before generating of url
         // url box parameters depend on whether the compress image is generated
@@ -184,6 +186,7 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
                                                 failureHandler: @escaping FailureHandler) -> URLSessionTask
     {
         var url : String? = nil
+        self.addAnalyticParams(params: params)
         
         // NOTE: image must be first line before generating of url
         // url box parameters depend on whether the compress image is generated
@@ -247,6 +250,8 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
                                    failureHandler: @escaping FailureHandler
         ) -> URLSessionTask{
         
+        self.addAnalyticParams(params: params)
+        
         var url : String? = nil
         if self.isAppKeyEnabled {
             url = requestSerialization.generateRequestUrl(baseUrl: baseUrl, apiEndPoint: apiEndPoint , searchParams: params, appKey: self.accessKey)
@@ -267,6 +272,57 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
                        },
                        failureHandler: failureHandler )
         
+    }
+    
+    private func addAnalyticParams(params: ViBaseSearchParams) {
+        let sessionManager = VaSessionManager.sharedInstance
+        let deviceData = VaDeviceData.sharedInstance
+        
+        if params.uid == nil {
+            params.uid = sessionManager.getUid()
+        }
+        
+        if params.sid == nil {
+            params.sid = sessionManager.getSessionId()
+        }
+        
+        if params.appId == nil {
+            params.appId = deviceData.appBundleId
+        }
+        
+        if params.appName == nil {
+            params.appName = deviceData.appName
+        }
+        
+        if params.appVersion == nil {
+            params.appVersion = deviceData.appVersion
+        }
+        
+        if params.deviceBrand == nil {
+            params.deviceBrand = deviceData.deviceBrand
+        }
+        
+        if params.deviceModel == nil {
+            params.deviceModel = deviceData.deviceModel
+        }
+        
+        if params.language == nil {
+            params.language = deviceData.language
+        }
+        
+        if params.os == nil {
+            params.os = deviceData.os
+        }
+        
+        if params.osv == nil {
+            params.osv = deviceData.osv
+        }
+        
+        if params.platform == nil {
+            params.platform = deviceData.platform
+        }
+        
+    
     }
     
     private func httpGet(request: NSMutableURLRequest,
