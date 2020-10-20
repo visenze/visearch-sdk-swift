@@ -38,7 +38,7 @@ ViSearch is an API that provides accurate, reliable and scalable image search. V
 
 The ViSearch iOS SDK is an open source software to provide easy integration of ViSearch Search API with your iOS applications. It provides four search methods based on the ViSearch Solution APIs - Find Similar, You May Also Like, Search By Image and Search By Color. For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-swift).
 
-> Current stable version: `1.4.3` (Swift 5.0)
+> Current stable version: `1.5.0` (Swift 5+)
 > 
 > For Swift 3.0 please use version `1.3.0`.
 
@@ -751,6 +751,31 @@ imgUrl | Image URL ( generally this is the `im_url`) for this product. Can be re
 pos | Position of the product in Search Results e.g. click position/ view position. Note that this start from 1 , not 0. | Required for product view, product click and add to cart events
 transactionId | Transaction ID | Required for transaction event.
 value | Transaction value e.g. order value | Required for transaction event.
+uid | Unique user/device ID. If not provided, a random (non-personalizable) UUID will be generated to track the browser. | No
+category | A generic string to categorize / group the events in related user flow. For example: `privacy_flow`, `videos`, `search_results`. Typically, categories are used to group related UI elements. Max length: 32 | No
+name | Event name e.g. `open_app` , `click_on_camera_btn`. Max length: 32. | No
+label | label for main interaction object such as product title, page title. This together with `action` can be used to decide whether an event is unique e.g. if user clicks on same product twice, only 1 unique click . Max length: 32. | No
+fromReqId | Generic request ID field to specify which request leads to this event e.g. click request ID that leads to the purchase. The chain can be like this queryId → clickId → purchase. Max length: 32. | No
+source | Segment the traffic by tagging them e.g. from camera, from desktop. Max length: 32. | No
+brand | Product brand. Max length: 64. | No
+price | Product price. Numeric field, if provided must be >=0 and is a valid number. | No
+currency | ISO 3 characters code e.g. “USD”. Will be validated if provided. | No
+productUrl| Product URL. Max length: 512 | No
+campaign | Advertising campaign. Max length : 64. | No
+adGroup | Ad group name (only relevant for campaign) | No
+creative | Creative name (only relevant for campaign) | No
+n1 | Custom numeric parameter. | No
+n2 | Custom numeric parameter. | No
+n3 | Custom numeric parameter. | No
+n4 | Custom numeric parameter. | No
+n5 | Custom numeric parameter. | No
+s1 | Custom string parameter. Max length: 64. | No
+s2 | Custom string parameter. Max length: 64. | No
+s3 | Custom string parameter. Max length: 64. | No
+s4 | Custom string parameter. Max length: 64. | No
+s5 | Custom string parameter. Max length: 64. | No
+json | Custom json parameter. Max length: 512. | No
+
 
 ## 8. Developer Notes
 
