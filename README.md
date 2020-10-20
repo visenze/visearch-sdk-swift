@@ -102,7 +102,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'ViSearchSDK', '~>1.4.0'
+    pod 'ViSearchSDK', '~>1.5.0'
 end
 ...
 ```
