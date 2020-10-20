@@ -78,22 +78,22 @@ class SearchResultsCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        showHud()
+        //showHud()
         
         let im_name = photoResults[indexPath.row].im_name
         
         // call tracking api here to register the click
         // alternately, you can present similar images or recommend them to users in the image detail page
-        let params = ViTrackParams(reqId: self.reqId, action: "click")
-        params?.imName = im_name
-        
-        ViSearch.sharedInstance.track(params: params!) { (success, error) in
-            DispatchQueue.main.async {
-                self.alert(message: "Click event sent!")
-                self.dismissHud()
-            }
-
-        }
+//        let params = ViTrackParams(reqId: self.reqId, action: "click")
+//        params?.imName = im_name
+//
+//        ViSearch.sharedInstance.track(params: params!) { (success, error) in
+//            DispatchQueue.main.async {
+//                self.alert(message: "Click event sent!")
+//                self.dismissHud()
+//            }
+//
+//        }
         
         
     }

@@ -27,6 +27,7 @@
 	  - 6.4 [Automatic Object Recognition Beta](#64-automatic-object-recognition-beta)
 	  - 6.5 [Facets Filtering](#65-facets-filtering)
  7. [Event Tracking](#7-event-tracking)
+ 8. [Developer Notes](#8-developer-notes)
 
 ---
 
@@ -673,25 +674,91 @@ ViResponseData.facets
 
 ## 7. Event Tracking
 
-### Send Action For Tracking
-User action (e.g. click on an image after search) can be sent in this way:
+To improve search performance and gain useful data insights, it is recommended to send user interactions (actions) with our visual search results. 
+
+### 7.1 Setup Tracking
+
+You can initiliase ViSenze tracker with a tracking ID (code) by logging to ViSenze dashboard. There are two different endpoints for tracker (1 for China and another for the rest of the world). If the SDK is intended to be used outside of China, please set forCn parameter to false
+
 
 ```swift
+import ViSearch
+import ViSenzeAnalytics
+...
 
-let params = ViTrackParams(reqId: recentReqId, action: "click" )
-                                    
-// You can also append an im_name field
-params.imName = "example_clicked_im_name"
 
-// send tracking request to server
-ViSearch.sharedInstance.track(params: params!, handler: nil)
+let tracker = ViSearch.sharedInstance.newTracker(code: "your-code", forCn: false)
+
+```
+
+### 7.2  Send Events
+
+Currently we support the following event actions: `click`, `view`, `product_click`, `product_view`, `add_to_cart`, and `transaction`. The `action` parameter can be an arbitrary string and custom events can be sent.
+
+To send events, first retrieve the search query ID found in the search results call back:
+
+```
+
+successHandler: {
+                    (data : ViResponseData?) -> Void in
+                       if let data = data {
+                           let queryId = data.reqId
+                       }
+
+}
+
+``` 
+
+Then the events can be sent as follows:
 
 
 ```
-The following fields could be used for tracking user events:
+# send product click
+let productClickEvent = VaEvent.newProductClickEvent(queryId: "ViSearch reqid in API response", pid: "product ID", imgUrl: "product image URL", pos: 3)
+tracker.sendEvent(productClickEvent) { (eventResponse, networkError) in
+   
+}
+
+# send product impression
+let impressionEvent = VaEvent.newProductImpressionEvent(queryId: "ViSearch reqid in API response", pid: "product ID", imgUrl: "product image URL", pos: 3)
+tracker.sendEvent(impressionEvent)
+
+# send Transaction event e.g order purchase of $300
+let transEvent = VaEvent.newTransactionEvent(queryId: "xxx", transactionId:"your trans id", value: 300)
+tracker.sendEvent(transEvent)
+
+# send Add to Cart Event
+let add2Cart = VaEvent.newAdd2CartEvent(queryId: "ViSearch reqid in API response", pid: "product ID", imgUrl: "product image URL", pos: 3)
+tracker.sendEvent(add2Cart)
+ 
+```
+
+Finally send the event via the tracker:
+
+```
+tracker.sendEvent(event);
+```
+
+
+Below are the brief description for various parameters:
 
 Field | Description | Required
 --- | --- | ---
-reqid| visearch request id of current search. This attribute can be accessed in ViResponseData in [Section 5](#5-search-results) | Require
-action | The type of the action. Currently we support three types, `click`, `add_to_cart`, and `add_to_wishlist`. | Require
-imName | image id (im_name) for this behavior | Optional
+queryId| The request id of the search request. This reqid can be obtained from the search response handler:```ViResponseData.reqId``` | Yes
+action | Event action. Currently we support the following event actions: `click`, `view`, `product_click`, `product_view`, `add_to_cart`, and `transaction`. | Yes
+pid | Product ID ( generally this is the `im_name`) for this product. Can be retrieved via `ViImageResult.im_name` | Required for product view, product click and add to cart events
+imgUrl | Image URL ( generally this is the `im_url`) for this product. Can be retrieved via `ViImageResult.im_url ` | Required for product view, product click and add to cart events
+pos | Position of the product in Search Results e.g. click position/ view position. Note that this start from 1 , not 0. | Required for product view, product click and add to cart events
+transactionId | Transaction ID | Required for transaction event.
+value | Transaction value e.g. order value | Required for transaction event.
+
+## 8. Developer Notes
+
+The SDK requires ViSenze Tracking library as a dependency [https://github.com/visenze/visenze-tracking-swift](https://github.com/visenze/visenze-tracking-swift). For local development, the dependency can be pulled by running the following within `ViSearchSDK` folder.
+
+```
+# first update version within Cartfile
+
+# pull latest changes and build framework
+carthage update --platform ios
+```

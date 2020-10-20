@@ -1,45 +1,47 @@
 //
-//  ViRequestSerialization.swift
-//  ViSearchSDK
+//  VaRequestSerialization.swift
+//  ViSenzeAnalytics
 //
-//  Created by Hung on 4/10/16.
-//  Copyright © 2016 Hung. All rights reserved.
+//  Created by Hung on 8/9/20.
+//  Copyright © 2020 ViSenze. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-/// Serialize request parameters and data
-open class ViRequestSerialization {
-    
-    /// generate base 64 basic authentication header value
-    public func getBasicAuthenticationString(accessKey : String, secret: String) -> String {
-        let userPasswordString = "\(accessKey):\(secret)"
-        let userPasswordData = userPasswordString.data(using: String.Encoding.utf8)
-        let base64EncodedCredential = userPasswordData!.base64EncodedString()
-        let authString = "Basic \(base64EncodedCredential)"
-        
-        return authString
-    }
+public class VaRequestSerialization: NSObject {
     
     /// generate the url with query string and escape parameter properly
-    public func generateRequestUrl( baseUrl: String , apiEndPoint: ViAPIEndPoints , searchParams : ViSearchParamsProtocol) -> String {
-        let searchParamsDict : [String: Any] = searchParams.toDict()
-        let queryString = generateQueryString(searchParamsDict)
-        return "\(baseUrl)/\(apiEndPoint.rawValue)?\(queryString)"
+    public func generateRequestUrl(
+                                    baseUrl: String ,
+                                    code: String,
+                                    apiMethod: VaApiMethod ,
+                                    params : VaParamsProtocol,
+                                    deviceData: VaDeviceData) -> String {
+        
+        var paramDict = params.toDict()
+        paramDict["code"] = code
+        
+        // add in device data
+        paramDict["sdk"] = deviceData.sdk
+        paramDict["v"] = deviceData.sdkVersion
+        paramDict["p"] = deviceData.platform
+        paramDict["os"] = deviceData.os
+        paramDict["osv"] = deviceData.osv
+        paramDict["sr"] = deviceData.screenResolution
+        paramDict["ab"] = deviceData.appBundleId
+        paramDict["an"] = deviceData.appName
+        paramDict["av"] = deviceData.appVersion
+        paramDict["db"] = deviceData.deviceBrand
+        paramDict["dm"] = deviceData.deviceModel
+        paramDict["lang"] = deviceData.language
+        
+        
+        
+        let queryString = generateQueryString(paramDict)
+        
+        return "\(baseUrl)/\(apiMethod.rawValue)?\(queryString)"
     }
     
-    /// generate the url with query string and escape parameter properly
-    public func generateRequestUrl( baseUrl: String , apiEndPoint: ViAPIEndPoints , searchParams : ViSearchParamsProtocol, appKey: String) -> String {
-        
-        var searchParamsDict : [String: Any] = searchParams.toDict()
-        searchParamsDict["access_key"] = appKey
-        
-        let queryString = generateQueryString(searchParamsDict)
-        
-        return "\(baseUrl)/\(apiEndPoint.rawValue)?\(queryString)"
-    }
-    
-
     /// generate the query string to append to the url
     public func generateQueryString(_ parameters: [String: Any]) -> String {
         var components: [(String, String)] = []
@@ -96,6 +98,4 @@ open class ViRequestSerialization {
         
         return string.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet) ?? string
     }
-
-
 }

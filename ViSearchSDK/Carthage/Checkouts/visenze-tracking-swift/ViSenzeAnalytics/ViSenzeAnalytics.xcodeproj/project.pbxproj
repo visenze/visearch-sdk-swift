@@ -1,0 +1,551 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BD9AD0BF2507CC520012918F /* ViSenzeAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD9AD0B52507CC520012918F /* ViSenzeAnalytics.framework */; };
+		BD9AD0C42507CC520012918F /* ViSenzeAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AD0C32507CC520012918F /* ViSenzeAnalyticsTests.swift */; };
+		BD9AD0C62507CC520012918F /* ViSenzeAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = BD9AD0B82507CC520012918F /* ViSenzeAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BD9AD0D22507CE660012918F /* SettingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AD0D12507CE660012918F /* SettingHelper.swift */; };
+		BD9AD0D62507D0340012918F /* VaUidHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AD0D52507D0340012918F /* VaUidHelper.swift */; };
+		BD9AD0D92507D2720012918F /* VaRequestSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AD0D82507D2720012918F /* VaRequestSerialization.swift */; };
+		BD9AD0DB2507D2C40012918F /* ViSenzeAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AD0DA2507D2C40012918F /* ViSenzeAnalytics.swift */; };
+		BD9AD0DD2507D2E70012918F /* ViSenzeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AD0DC2507D2E70012918F /* ViSenzeTracker.swift */; };
+		BD9AD0DF2507D3EF0012918F /* VaEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AD0DE2507D3EF0012918F /* VaEvent.swift */; };
+		BD9AD0E125088B840012918F /* VaDeviceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AD0E025088B840012918F /* VaDeviceData.swift */; };
+		BD9AD0E42508B1C20012918F /* VaEventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AD0E32508B1C10012918F /* VaEventResponse.swift */; };
+		BD9AD0E62508B2010012918F /* VaError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AD0E52508B2010012918F /* VaError.swift */; };
+		BD9AD0E82508BFC30012918F /* VaSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AD0E72508BFC30012918F /* VaSessionManager.swift */; };
+		BDA338A62535EA9700D4E74A /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA338A52535EA9700D4E74A /* StringHelper.swift */; };
+		BDA338A82535EC8900D4E74A /* StringHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA338A72535EC8900D4E74A /* StringHelperTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BD9AD0C02507CC520012918F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BD9AD0AC2507CC520012918F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BD9AD0B42507CC520012918F;
+			remoteInfo = ViSenzeAnalytics;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BD9AD0B52507CC520012918F /* ViSenzeAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ViSenzeAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD9AD0B82507CC520012918F /* ViSenzeAnalytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViSenzeAnalytics.h; sourceTree = "<group>"; };
+		BD9AD0B92507CC520012918F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BD9AD0BE2507CC520012918F /* ViSenzeAnalyticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViSenzeAnalyticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD9AD0C32507CC520012918F /* ViSenzeAnalyticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViSenzeAnalyticsTests.swift; sourceTree = "<group>"; };
+		BD9AD0C52507CC520012918F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BD9AD0D12507CE660012918F /* SettingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHelper.swift; sourceTree = "<group>"; };
+		BD9AD0D52507D0340012918F /* VaUidHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaUidHelper.swift; sourceTree = "<group>"; };
+		BD9AD0D82507D2720012918F /* VaRequestSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaRequestSerialization.swift; sourceTree = "<group>"; };
+		BD9AD0DA2507D2C40012918F /* ViSenzeAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViSenzeAnalytics.swift; sourceTree = "<group>"; };
+		BD9AD0DC2507D2E70012918F /* ViSenzeTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViSenzeTracker.swift; sourceTree = "<group>"; };
+		BD9AD0DE2507D3EF0012918F /* VaEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaEvent.swift; sourceTree = "<group>"; };
+		BD9AD0E025088B840012918F /* VaDeviceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaDeviceData.swift; sourceTree = "<group>"; };
+		BD9AD0E32508B1C10012918F /* VaEventResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaEventResponse.swift; sourceTree = "<group>"; };
+		BD9AD0E52508B2010012918F /* VaError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaError.swift; sourceTree = "<group>"; };
+		BD9AD0E72508BFC30012918F /* VaSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaSessionManager.swift; sourceTree = "<group>"; };
+		BDA338A52535EA9700D4E74A /* StringHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
+		BDA338A72535EC8900D4E74A /* StringHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelperTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BD9AD0B22507CC520012918F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD9AD0BB2507CC520012918F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD9AD0BF2507CC520012918F /* ViSenzeAnalytics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BD9AD0AB2507CC520012918F = {
+			isa = PBXGroup;
+			children = (
+				BD9AD0B72507CC520012918F /* ViSenzeAnalytics */,
+				BD9AD0C22507CC520012918F /* ViSenzeAnalyticsTests */,
+				BD9AD0B62507CC520012918F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BD9AD0B62507CC520012918F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BD9AD0B52507CC520012918F /* ViSenzeAnalytics.framework */,
+				BD9AD0BE2507CC520012918F /* ViSenzeAnalyticsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BD9AD0B72507CC520012918F /* ViSenzeAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				BD9AD0CF2507CCB40012918F /* Classes */,
+				BD9AD0B82507CC520012918F /* ViSenzeAnalytics.h */,
+				BD9AD0B92507CC520012918F /* Info.plist */,
+			);
+			path = ViSenzeAnalytics;
+			sourceTree = "<group>";
+		};
+		BD9AD0C22507CC520012918F /* ViSenzeAnalyticsTests */ = {
+			isa = PBXGroup;
+			children = (
+				BD9AD0C32507CC520012918F /* ViSenzeAnalyticsTests.swift */,
+				BDA338A72535EC8900D4E74A /* StringHelperTests.swift */,
+				BD9AD0C52507CC520012918F /* Info.plist */,
+			);
+			path = ViSenzeAnalyticsTests;
+			sourceTree = "<group>";
+		};
+		BD9AD0CF2507CCB40012918F /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BD9AD0E225089FEA0012918F /* Response */,
+				BD9AD0D72507D07B0012918F /* Request */,
+				BD9AD0D02507CE530012918F /* Helper */,
+				BD9AD0DA2507D2C40012918F /* ViSenzeAnalytics.swift */,
+				BD9AD0DC2507D2E70012918F /* ViSenzeTracker.swift */,
+				BD9AD0E72508BFC30012918F /* VaSessionManager.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		BD9AD0D02507CE530012918F /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				BD9AD0D52507D0340012918F /* VaUidHelper.swift */,
+				BD9AD0D12507CE660012918F /* SettingHelper.swift */,
+				BDA338A52535EA9700D4E74A /* StringHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		BD9AD0D72507D07B0012918F /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				BD9AD0D82507D2720012918F /* VaRequestSerialization.swift */,
+				BD9AD0DE2507D3EF0012918F /* VaEvent.swift */,
+				BD9AD0E025088B840012918F /* VaDeviceData.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		BD9AD0E225089FEA0012918F /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				BD9AD0E32508B1C10012918F /* VaEventResponse.swift */,
+				BD9AD0E52508B2010012918F /* VaError.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		BD9AD0B02507CC520012918F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD9AD0C62507CC520012918F /* ViSenzeAnalytics.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		BD9AD0B42507CC520012918F /* ViSenzeAnalytics */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD9AD0C92507CC520012918F /* Build configuration list for PBXNativeTarget "ViSenzeAnalytics" */;
+			buildPhases = (
+				BD9AD0B02507CC520012918F /* Headers */,
+				BD9AD0B12507CC520012918F /* Sources */,
+				BD9AD0B22507CC520012918F /* Frameworks */,
+				BD9AD0B32507CC520012918F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ViSenzeAnalytics;
+			productName = ViSenzeAnalytics;
+			productReference = BD9AD0B52507CC520012918F /* ViSenzeAnalytics.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		BD9AD0BD2507CC520012918F /* ViSenzeAnalyticsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD9AD0CC2507CC520012918F /* Build configuration list for PBXNativeTarget "ViSenzeAnalyticsTests" */;
+			buildPhases = (
+				BD9AD0BA2507CC520012918F /* Sources */,
+				BD9AD0BB2507CC520012918F /* Frameworks */,
+				BD9AD0BC2507CC520012918F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BD9AD0C12507CC520012918F /* PBXTargetDependency */,
+			);
+			name = ViSenzeAnalyticsTests;
+			productName = ViSenzeAnalyticsTests;
+			productReference = BD9AD0BE2507CC520012918F /* ViSenzeAnalyticsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BD9AD0AC2507CC520012918F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = ViSenze;
+				TargetAttributes = {
+					BD9AD0B42507CC520012918F = {
+						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1130;
+					};
+					BD9AD0BD2507CC520012918F = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = BD9AD0AF2507CC520012918F /* Build configuration list for PBXProject "ViSenzeAnalytics" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BD9AD0AB2507CC520012918F;
+			productRefGroup = BD9AD0B62507CC520012918F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BD9AD0B42507CC520012918F /* ViSenzeAnalytics */,
+				BD9AD0BD2507CC520012918F /* ViSenzeAnalyticsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BD9AD0B32507CC520012918F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD9AD0BC2507CC520012918F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BD9AD0B12507CC520012918F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD9AD0E42508B1C20012918F /* VaEventResponse.swift in Sources */,
+				BD9AD0E82508BFC30012918F /* VaSessionManager.swift in Sources */,
+				BDA338A62535EA9700D4E74A /* StringHelper.swift in Sources */,
+				BD9AD0D22507CE660012918F /* SettingHelper.swift in Sources */,
+				BD9AD0DB2507D2C40012918F /* ViSenzeAnalytics.swift in Sources */,
+				BD9AD0D92507D2720012918F /* VaRequestSerialization.swift in Sources */,
+				BD9AD0DD2507D2E70012918F /* ViSenzeTracker.swift in Sources */,
+				BD9AD0E125088B840012918F /* VaDeviceData.swift in Sources */,
+				BD9AD0D62507D0340012918F /* VaUidHelper.swift in Sources */,
+				BD9AD0E62508B2010012918F /* VaError.swift in Sources */,
+				BD9AD0DF2507D3EF0012918F /* VaEvent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD9AD0BA2507CC520012918F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDA338A82535EC8900D4E74A /* StringHelperTests.swift in Sources */,
+				BD9AD0C42507CC520012918F /* ViSenzeAnalyticsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BD9AD0C12507CC520012918F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BD9AD0B42507CC520012918F /* ViSenzeAnalytics */;
+			targetProxy = BD9AD0C02507CC520012918F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		BD9AD0C72507CC520012918F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BD9AD0C82507CC520012918F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		BD9AD0CA2507CC520012918F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = NKN6QECX9M;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ViSenzeAnalytics/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSenzeAnalytics;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BD9AD0CB2507CC520012918F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = NKN6QECX9M;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ViSenzeAnalytics/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSenzeAnalytics;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BD9AD0CD2507CC520012918F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NKN6QECX9M;
+				INFOPLIST_FILE = ViSenzeAnalyticsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSenzeAnalyticsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BD9AD0CE2507CC520012918F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NKN6QECX9M;
+				INFOPLIST_FILE = ViSenzeAnalyticsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSenzeAnalyticsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BD9AD0AF2507CC520012918F /* Build configuration list for PBXProject "ViSenzeAnalytics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD9AD0C72507CC520012918F /* Debug */,
+				BD9AD0C82507CC520012918F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BD9AD0C92507CC520012918F /* Build configuration list for PBXNativeTarget "ViSenzeAnalytics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD9AD0CA2507CC520012918F /* Debug */,
+				BD9AD0CB2507CC520012918F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BD9AD0CC2507CC520012918F /* Build configuration list for PBXNativeTarget "ViSenzeAnalyticsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD9AD0CD2507CC520012918F /* Debug */,
+				BD9AD0CE2507CC520012918F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BD9AD0AC2507CC520012918F /* Project object */;
+}

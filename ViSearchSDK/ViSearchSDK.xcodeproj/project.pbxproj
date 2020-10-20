@@ -19,13 +19,12 @@
 		BD7DED931DA2AFCF00CDF6DE /* ViSearchSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BD7DED851DA2AFCF00CDF6DE /* ViSearchSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BD7DEDA51DA2B14100CDF6DE /* ViBaseSearchParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7DEDA11DA2B14100CDF6DE /* ViBaseSearchParams.swift */; };
 		BD7DEDA61DA2B14100CDF6DE /* ViBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7DEDA21DA2B14100CDF6DE /* ViBox.swift */; };
-		BD7DEDA71DA2B14100CDF6DE /* ViTrackParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7DEDA31DA2B14100CDF6DE /* ViTrackParams.swift */; };
-		BD7DEDA91DA2B1FC00CDF6DE /* ViTrackParamsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7DEDA81DA2B1FC00CDF6DE /* ViTrackParamsTests.swift */; };
 		BD7DEDAB1DA2B6C400CDF6DE /* ViColorSearchParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7DEDAA1DA2B6C400CDF6DE /* ViColorSearchParams.swift */; };
 		BD7DEDAD1DA2B81C00CDF6DE /* ViColorSearchParamsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7DEDAC1DA2B81C00CDF6DE /* ViColorSearchParamsTests.swift */; };
 		BD7DEDAF1DA2C10100CDF6DE /* ViImageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7DEDAE1DA2C10100CDF6DE /* ViImageSettings.swift */; };
 		BD7DEDB11DA2C2C900CDF6DE /* ViSearchParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7DEDB01DA2C2C900CDF6DE /* ViSearchParams.swift */; };
 		BD815AA81FC8003800E8DA76 /* ViObjectResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD815AA71FC8003800E8DA76 /* ViObjectResult.swift */; };
+		BDA3389F2535B98600D4E74A /* ViSenzeAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA3389E2535B98600D4E74A /* ViSenzeAnalytics.framework */; };
 		BDB1F7CC1DA4E01D000C5EAA /* ViImageResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB1F7CB1DA4E01D000C5EAA /* ViImageResult.swift */; };
 		BDB1F7CE1DA4EA9C000C5EAA /* ViProductType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB1F7CD1DA4EA9C000C5EAA /* ViProductType.swift */; };
 		BDB1F7D01DA4EBBC000C5EAA /* ViProductTypeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB1F7CF1DA4EBBC000C5EAA /* ViProductTypeList.swift */; };
@@ -33,9 +32,6 @@
 		BDB1F7DE1DA60029000C5EAA /* ViMultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB1F7DD1DA60029000C5EAA /* ViMultipartFormData.swift */; };
 		BDC0410F24651DD6008C58D0 /* ViPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC0410E24651DD6008C58D0 /* ViPoint.swift */; };
 		BDC0963C1DA34FC0002166B4 /* ViSearchParamsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC0963B1DA34FC0002166B4 /* ViSearchParamsTests.swift */; };
-		BDC0963E1DA35650002166B4 /* UidHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC0963D1DA35650002166B4 /* UidHelper.swift */; };
-		BDC096421DA357C8002166B4 /* SettingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC096411DA357C8002166B4 /* SettingHelper.swift */; };
-		BDC096441DA35BA2002166B4 /* UidHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC096431DA35BA2002166B4 /* UidHelperTests.swift */; };
 		BDCA2E3E1DA3A7F0004C2EF7 /* ViSearchClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA2E3D1DA3A7F0004C2EF7 /* ViSearchClient.swift */; };
 		BDCA2E401DA3AD39004C2EF7 /* ViSearchClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA2E3F1DA3AD39004C2EF7 /* ViSearchClientTests.swift */; };
 /* End PBXBuildFile section */
@@ -66,13 +62,12 @@
 		BD7DED921DA2AFCF00CDF6DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD7DEDA11DA2B14100CDF6DE /* ViBaseSearchParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViBaseSearchParams.swift; sourceTree = "<group>"; };
 		BD7DEDA21DA2B14100CDF6DE /* ViBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViBox.swift; sourceTree = "<group>"; };
-		BD7DEDA31DA2B14100CDF6DE /* ViTrackParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViTrackParams.swift; sourceTree = "<group>"; };
-		BD7DEDA81DA2B1FC00CDF6DE /* ViTrackParamsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViTrackParamsTests.swift; sourceTree = "<group>"; };
 		BD7DEDAA1DA2B6C400CDF6DE /* ViColorSearchParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViColorSearchParams.swift; sourceTree = "<group>"; };
 		BD7DEDAC1DA2B81C00CDF6DE /* ViColorSearchParamsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViColorSearchParamsTests.swift; sourceTree = "<group>"; };
 		BD7DEDAE1DA2C10100CDF6DE /* ViImageSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViImageSettings.swift; sourceTree = "<group>"; };
 		BD7DEDB01DA2C2C900CDF6DE /* ViSearchParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViSearchParams.swift; sourceTree = "<group>"; };
 		BD815AA71FC8003800E8DA76 /* ViObjectResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViObjectResult.swift; sourceTree = "<group>"; };
+		BDA3389E2535B98600D4E74A /* ViSenzeAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ViSenzeAnalytics.framework; path = Carthage/Build/iOS/ViSenzeAnalytics.framework; sourceTree = "<group>"; };
 		BDB1F7CB1DA4E01D000C5EAA /* ViImageResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViImageResult.swift; sourceTree = "<group>"; };
 		BDB1F7CD1DA4EA9C000C5EAA /* ViProductType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViProductType.swift; sourceTree = "<group>"; };
 		BDB1F7CF1DA4EBBC000C5EAA /* ViProductTypeList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViProductTypeList.swift; sourceTree = "<group>"; };
@@ -80,9 +75,6 @@
 		BDB1F7DD1DA60029000C5EAA /* ViMultipartFormData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViMultipartFormData.swift; sourceTree = "<group>"; };
 		BDC0410E24651DD6008C58D0 /* ViPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViPoint.swift; sourceTree = "<group>"; };
 		BDC0963B1DA34FC0002166B4 /* ViSearchParamsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViSearchParamsTests.swift; sourceTree = "<group>"; };
-		BDC0963D1DA35650002166B4 /* UidHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UidHelper.swift; path = ViSearchSDK/Classes/Helper/UidHelper.swift; sourceTree = SOURCE_ROOT; };
-		BDC096411DA357C8002166B4 /* SettingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingHelper.swift; path = Helper/SettingHelper.swift; sourceTree = "<group>"; };
-		BDC096431DA35BA2002166B4 /* UidHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UidHelperTests.swift; sourceTree = "<group>"; };
 		BDCA2E3D1DA3A7F0004C2EF7 /* ViSearchClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViSearchClient.swift; sourceTree = "<group>"; };
 		BDCA2E3F1DA3AD39004C2EF7 /* ViSearchClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViSearchClientTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDA3389F2535B98600D4E74A /* ViSenzeAnalytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +105,7 @@
 				BD7DED841DA2AFCF00CDF6DE /* ViSearchSDK */,
 				BD7DED8F1DA2AFCF00CDF6DE /* ViSearchSDKTests */,
 				BD7DED831DA2AFCF00CDF6DE /* Products */,
+				BDA3389D2535B98600D4E74A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,10 +132,8 @@
 			isa = PBXGroup;
 			children = (
 				BD7DED901DA2AFCF00CDF6DE /* ViSearchSDKTests.swift */,
-				BD7DEDA81DA2B1FC00CDF6DE /* ViTrackParamsTests.swift */,
 				BD7DEDAC1DA2B81C00CDF6DE /* ViColorSearchParamsTests.swift */,
 				BDC0963B1DA34FC0002166B4 /* ViSearchParamsTests.swift */,
-				BDC096431DA35BA2002166B4 /* UidHelperTests.swift */,
 				BD7DED921DA2AFCF00CDF6DE /* Info.plist */,
 				BDCA2E3F1DA3AD39004C2EF7 /* ViSearchClientTests.swift */,
 				BD6540561DA6302D00E10162 /* ViUploadSearchParamsTests.swift */,
@@ -166,7 +158,6 @@
 			children = (
 				BD7DEDA11DA2B14100CDF6DE /* ViBaseSearchParams.swift */,
 				BD7DEDA21DA2B14100CDF6DE /* ViBox.swift */,
-				BD7DEDA31DA2B14100CDF6DE /* ViTrackParams.swift */,
 				BD7DEDAA1DA2B6C400CDF6DE /* ViColorSearchParams.swift */,
 				BD7DEDAE1DA2C10100CDF6DE /* ViImageSettings.swift */,
 				BD7DEDB01DA2C2C900CDF6DE /* ViSearchParams.swift */,
@@ -192,11 +183,17 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
+		BDA3389D2535B98600D4E74A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BDA3389E2535B98600D4E74A /* ViSenzeAnalytics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BDC096401DA35668002166B4 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				BDC0963D1DA35650002166B4 /* UidHelper.swift */,
-				BDC096411DA357C8002166B4 /* SettingHelper.swift */,
 				BD50FD611DA8B4220035FD78 /* UIColorExtension.swift */,
 			);
 			name = Helper;
@@ -224,6 +221,7 @@
 				BD7DED7E1DA2AFCF00CDF6DE /* Frameworks */,
 				BD7DED7F1DA2AFCF00CDF6DE /* Headers */,
 				BD7DED801DA2AFCF00CDF6DE /* Resources */,
+				BDA338A22535B9FB00D4E74A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -311,6 +309,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		BDA338A22535B9FB00D4E74A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/ViSenzeAnalytics.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BD7DED7D1DA2AFCF00CDF6DE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -332,9 +351,6 @@
 				BD7020ED1E49BB1D006BAE40 /* ViFacet.swift in Sources */,
 				BDB1F7CC1DA4E01D000C5EAA /* ViImageResult.swift in Sources */,
 				BD7DEDA61DA2B14100CDF6DE /* ViBox.swift in Sources */,
-				BDC096421DA357C8002166B4 /* SettingHelper.swift in Sources */,
-				BDC0963E1DA35650002166B4 /* UidHelper.swift in Sources */,
-				BD7DEDA71DA2B14100CDF6DE /* ViTrackParams.swift in Sources */,
 				BDC0410F24651DD6008C58D0 /* ViPoint.swift in Sources */,
 				BDCA2E3E1DA3A7F0004C2EF7 /* ViSearchClient.swift in Sources */,
 				BD7DEDA51DA2B14100CDF6DE /* ViBaseSearchParams.swift in Sources */,
@@ -345,10 +361,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDC096441DA35BA2002166B4 /* UidHelperTests.swift in Sources */,
 				BDCA2E401DA3AD39004C2EF7 /* ViSearchClientTests.swift in Sources */,
 				BDC0963C1DA34FC0002166B4 /* ViSearchParamsTests.swift in Sources */,
-				BD7DEDA91DA2B1FC00CDF6DE /* ViTrackParamsTests.swift in Sources */,
 				BD7DED911DA2AFCF00CDF6DE /* ViSearchSDKTests.swift in Sources */,
 				BD7DEDAD1DA2B81C00CDF6DE /* ViColorSearchParamsTests.swift in Sources */,
 				BD6540571DA6302D00E10162 /* ViUploadSearchParamsTests.swift in Sources */,
@@ -487,16 +501,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = NKN6QECX9M;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ViSearchSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 1.4.3;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSearchSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -509,16 +528,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = NKN6QECX9M;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ViSearchSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 1.4.3;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSearchSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

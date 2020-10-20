@@ -1,4 +1,5 @@
 import Foundation
+import ViSenzeAnalytics
 
 /// wrapper for various API calls
 /// create shared client
@@ -47,6 +48,12 @@ open class ViSearch: NSObject {
         client?.accessKey = appKey
         client?.isAppKeyEnabled = true
 
+    }
+    
+    // MARK: Analytics
+    
+    public func newTracker(code: String, forCn: Bool) -> ViSenzeTracker {
+        return ViSenzeTracker(code: code, isCn: forCn)!
     }
     
     
@@ -121,20 +128,6 @@ open class ViSearch: NSObject {
         return nil
     }
     
-    /// track the API calls and various actions
-    /// Tracking API
-    public func track(params: ViTrackParams,
-                                         handler:  ( (_ success: Bool, Error?) -> Void )?
-        ) -> Void {
-        
-        if let client = client {
-            client.track(params: params, handler: handler)
-            return
-        }
-        
-        print("\(type(of: self)).\(#function)[line:\(#line)] - error: client is not initialized. Please call setup(accessKey, secret) before using the API.")
-        
-    }
     
 
 }

@@ -1,4 +1,5 @@
 import Foundation
+import ViSenzeAnalytics
 
 public enum ViHttpMethod: String {
     case GET = "GET"
@@ -20,7 +21,6 @@ public enum ViAPIEndPoints: String {
 open class ViSearchClient: NSObject, URLSessionDelegate {
     
     public static let VISENZE_URL = "https://visearch.visenze.com"
-    public static let VISENZE_TRACK_URL = "https://track.visenze.com"
     
     public typealias SuccessHandler = (ViResponseData?) -> ()
     public typealias FailureHandler = (Error) -> ()
@@ -33,7 +33,6 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
     // with the new authentication, this would be optional
     public var secret    : String = ""
     public var baseUrl   : String
-    public var trackUrl  : String
     
     public var session: URLSession
     public var sessionConfig: URLSessionConfiguration
@@ -91,8 +90,6 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         
         session = URLSession(configuration: sessionConfig)
         
-        self.trackUrl = ViSearchClient.VISENZE_TRACK_URL
-        
     }
     
     public init?(baseUrl: String, appKey: String ) {
@@ -129,8 +126,6 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         
         session = URLSession(configuration: sessionConfig)
         
-        self.trackUrl = ViSearchClient.VISENZE_TRACK_URL
-        
     }
 
     
@@ -150,6 +145,7 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
                              failureHandler: @escaping FailureHandler) -> URLSessionTask
     {
         var url : String? = nil
+        self.addAnalyticParams(params: params)
         
         // NOTE: image must be first line before generating of url
         // url box parameters depend on whether the compress image is generated
@@ -174,14 +170,6 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         return httpPost(request: request,
                        successHandler: {
                         (data: ViResponseData?) -> Void in
-                        
-                        if let resData = data {
-                            if let reqId = resData.reqId {
-                                let params = ViTrackParams(accessKey: self.accessKey, reqId: reqId, action: ViAPIEndPoints.UPLOAD_SEARCH.rawValue )
-                                self.track(params: params!, handler: nil)
-                            }
-                        }
-                        
                         successHandler(data)
             },
                        failureHandler: failureHandler )
@@ -192,6 +180,7 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
                                                 failureHandler: @escaping FailureHandler) -> URLSessionTask
     {
         var url : String? = nil
+        self.addAnalyticParams(params: params)
         
         // NOTE: image must be first line before generating of url
         // url box parameters depend on whether the compress image is generated
@@ -215,13 +204,6 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         return httpPost(request: request,
                         successHandler: {
                             (data: ViResponseData?) -> Void in
-                            
-                            if let resData = data {
-                                if let reqId = resData.reqId {
-                                    let params = ViTrackParams(accessKey: self.accessKey, reqId: reqId, action: ViAPIEndPoints.DISCOVER_SEARCH.rawValue )
-                                    self.track(params: params!, handler: nil)
-                                }
-                            }
                             
                             successHandler(data)
         },
@@ -252,30 +234,7 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         return makeGetApiRequest(params: params, apiEndPoint: .REC_SEARCH, successHandler: successHandler, failureHandler: failureHandler)
     }
     
-    // track the API calls and various actions
-    public func track(params: ViTrackParams,
-                      handler:  ( (_ success: Bool, Error?) -> Void )?
-                      ) -> Void {
-        
-        params.cid = accessKey
-        
-        // different url for tracking
-        let url = requestSerialization.generateRequestUrl(baseUrl: trackUrl , apiEndPoint: .TRACK , searchParams: params)
-        let request = NSMutableURLRequest(url: URL(string: url)! , cachePolicy: .useProtocolCachePolicy , timeoutInterval: timeoutInterval)
-        
-        let deviceUid = UidHelper.uniqueDeviceUid()
-        request.addValue("uid=\(deviceUid)", forHTTPHeaderField: "Cookie")
-        request.addValue(getUserAgentValue() , forHTTPHeaderField: ViSearchClient.userAgentHeader )
-        
-        session.dataTask(with: request as URLRequest, completionHandler:{
-            (data, response, error) in
-            if handler != nil {
-                let hasError = (error == nil)
-                handler!( hasError ,  error )
-            }
-        }).resume()
-    }
-    
+
     // MARK: http requests internal
     
     // make API call and also send a tracking request immediately if successful
@@ -284,6 +243,8 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
                                    successHandler: @escaping SuccessHandler,
                                    failureHandler: @escaping FailureHandler
         ) -> URLSessionTask{
+        
+        self.addAnalyticParams(params: params)
         
         var url : String? = nil
         if self.isAppKeyEnabled {
@@ -301,17 +262,61 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
                        successHandler: {
                              (data: ViResponseData?) -> Void in
                         
-                               if let resData = data {
-                                  if let reqId = resData.reqId {
-                                    let params = ViTrackParams(accessKey: self.accessKey, reqId: reqId, action: apiEndPoint.rawValue )
-                                    self.track(params: params!, handler: nil)
-                                  }
-                               }
-                        
                                successHandler(data)
                        },
                        failureHandler: failureHandler )
         
+    }
+    
+    private func addAnalyticParams(params: ViBaseSearchParams) {
+        let sessionManager = VaSessionManager.sharedInstance
+        let deviceData = VaDeviceData.sharedInstance
+        
+        if params.uid == nil {
+            params.uid = sessionManager.getUid()
+        }
+        
+        if params.sid == nil {
+            params.sid = sessionManager.getSessionId()
+        }
+        
+        if params.appId == nil {
+            params.appId = deviceData.appBundleId
+        }
+        
+        if params.appName == nil {
+            params.appName = deviceData.appName
+        }
+        
+        if params.appVersion == nil {
+            params.appVersion = deviceData.appVersion
+        }
+        
+        if params.deviceBrand == nil {
+            params.deviceBrand = deviceData.deviceBrand
+        }
+        
+        if params.deviceModel == nil {
+            params.deviceModel = deviceData.deviceModel
+        }
+        
+        if params.language == nil {
+            params.language = deviceData.language
+        }
+        
+        if params.os == nil {
+            params.os = deviceData.os
+        }
+        
+        if params.osv == nil {
+            params.osv = deviceData.osv
+        }
+        
+        if params.platform == nil {
+            params.platform = deviceData.platform
+        }
+        
+    
     }
     
     private func httpGet(request: NSMutableURLRequest,

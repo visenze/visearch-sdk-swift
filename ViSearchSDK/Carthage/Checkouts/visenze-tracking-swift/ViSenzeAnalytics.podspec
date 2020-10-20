@@ -1,5 +1,5 @@
 #
-#  Be sure to run `pod spec lint ViSearchSwift.podspec' to ensure this is a
+#  Be sure to run `pod spec lint ViSenzeAnalytics.podspec' to ensure this is a
 #  valid spec and to remove all comments including this before submitting the spec.
 #
 #  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html
@@ -9,27 +9,21 @@
 Pod::Spec.new do |s|
 
   
-  s.name         = "ViSearchSDK"
-  s.version      = "1.5.0"
-  s.summary      = "A Visual Search API solution (Swift SDK)"
+  s.name         = "ViSenzeAnalytics"
+  s.version      = "0.1.2"
+  s.summary      = "ViSenze Tracking SDK"
 
   s.description  = <<-DESC
-                    ViSearch is a Visual Recognition Service API developed by ViSenze Pte. Ltd.
-                    This Swift SDK provides a quick way to integrate with the ViSearch API.
+                    ViSenze Swift SDK for data tracking.
                    DESC
 
-  s.homepage     = "https://github.com/visenze/visearch-sdk-swift"
-  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
-
+  s.homepage     = "https://github.com/visenze/visenze-tracking-swift"
+  
   s.license          = {:type => "MIT", :file => "LICENSE"}
  
   s.author             = { "Ngo Hung" => "hung@visenze.com" }
  
-  # Or just: s.author    = "Ngo Hung"
-  # s.authors            = { "Ngo Hung" => "hung@visenze.com" }
-  # s.social_media_url   = "http://twitter.com/Ngo Hung"
-
-  s.source = { :git => 'https://github.com/visenze/visearch-sdk-swift.git', :tag => s.version }
+  s.source = { :git => 'https://github.com/visenze/visenze-tracking-swift.git', :tag => s.version }
   s.ios.deployment_target = '8.0'
 
   # s.platform     = :ios
@@ -44,7 +38,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "ViSearchSDK/ViSearchSDK/**/*.{h,swift}"
+  s.source_files  = "ViSenzeAnalytics/ViSenzeAnalytics/**/*.{h,swift}"
   #s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
@@ -86,7 +80,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  s.dependency "ViSenzeAnalytics", "~> 0.1"
+  # s.dependency "JSONKit", "~> 1.4"
   s.swift_versions = ['5.1', '5.2', '5.3']
-  
+ 
 end
