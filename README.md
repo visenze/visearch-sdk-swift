@@ -102,7 +102,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'ViSearchSDK', '~>1.4.0'
+    pod 'ViSearchSDK', '~>1.5.0'
 end
 ...
 ```
@@ -709,7 +709,7 @@ successHandler: {
 
 ``` 
 
-Then the events can be sent as follows:
+Then the linked events can be sent as follows:
 
 
 ```
@@ -732,13 +732,6 @@ let add2Cart = VaEvent.newAdd2CartEvent(queryId: "ViSearch reqid in API response
 tracker.sendEvent(add2Cart)
  
 ```
-
-Finally send the event via the tracker:
-
-```
-tracker.sendEvent(event);
-```
-
 
 Below are the brief description for various parameters:
 
