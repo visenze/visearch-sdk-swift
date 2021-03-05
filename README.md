@@ -778,5 +778,5 @@ The SDK requires ViSenze Tracking library as a dependency [https://github.com/vi
 # first update version within Cartfile
 
 # pull latest changes and build framework
-carthage update --platform ios
+carthage update --use-xcframeworks
 ```
