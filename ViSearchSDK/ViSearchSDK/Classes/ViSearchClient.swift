@@ -42,7 +42,7 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
     public var requestSerialization: ViRequestSerialization
     
     public var userAgent : String = "visearch-swift-sdk/1.4.3"
-    private static let userAgentHeader : String = "X-Requested-With"
+    public static let userAgentHeader : String = "X-Requested-With"
     
     // whether to authenticate by appkey or by access/secret key point
     public var isAppKeyEnabled : Bool = true
@@ -234,7 +234,6 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         return makeGetApiRequest(params: params, apiEndPoint: .REC_SEARCH, successHandler: successHandler, failureHandler: failureHandler)
     }
     
-
     // MARK: http requests internal
     
     // make API call and also send a tracking request immediately if successful
@@ -379,7 +378,7 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         return task
     }
     
-    private func getUserAgentValue() -> String{
+    public func getUserAgentValue() -> String{
         return userAgent ;
     }
     
