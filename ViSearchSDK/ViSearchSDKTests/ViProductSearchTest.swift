@@ -38,6 +38,10 @@ class ViProductSearchTest: XCTestCase {
     }
     
     func testSearch() {
+        if sbiKey.isEmpty {
+             return
+        }
+        
         var productId : String = ""
         var sdk = createSdk(appKey: sbiKey, placement: sbiPlacement)
         var params = ViSearchByImageParam(imUrl: imageUrl)!
@@ -104,6 +108,10 @@ class ViProductSearchTest: XCTestCase {
     }
     
     func testSearchUsingFile() {
+        if imageFile.isEmpty || sbiKey.isEmpty {
+             return
+        }
+        
         let image = UIImage(contentsOfFile: imageFile)
         let sdk = createSdk(appKey: sbiKey, placement: sbiPlacement)
         let params = ViSearchByImageParam(image: image!)
