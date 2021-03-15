@@ -7,26 +7,25 @@
 
 import Foundation
 
+/// When grouping of results is enabled in the search parameters, this class contains the grouping results
 open class ViGroupResult : NSObject {
     
-    public var groupByValue : String? = nil
+    public var groupByValue : String
     
-    public var results: [[String:String]] = []
+    public var results: [ViImageResult] = []
     
-    public init(jsonData: [String:Any]) {
-        super.init()
+    /// Constructor, every ViGroupResult should have a value that it is grouped by
+    ///
+    /// - parameter group: What this group result is grouped by
+    ///
+    /// - returns: Nil if group is empty
+    public init?(group: String) {
+        groupByValue = group
         
-        groupByValue = jsonData["group_by_value"] as? String
-        
-        if let resArr = jsonData["results"] as? [Any] {
-            for jsonItem in resArr {
-                if let dict = jsonItem as? [String:String] {
-                    results.append(dict)
-                }
-            }
+        if groupByValue.isEmpty {
+            return nil
         }
     }
-    
 }
 
 

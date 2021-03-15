@@ -7,21 +7,11 @@
 
 import Foundation
 
+/// Error message received from server
 open class ViErrorMsg {
     
     public var code : Int? = nil
     
     public var message : String? = nil
-    
-    public init(jsonString: [String:Any]?) {
-        if let string = jsonString {
-            if let c = string["code"] as? Int {
-                code = c
-            }
-            if let msg = string["message"] as? String {
-                message = msg
-            }
-        }
-    }
     
 }

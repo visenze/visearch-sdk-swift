@@ -10,7 +10,6 @@ import ViSenzeAnalytics
 
 /// Singleton/Shared instance wrapper for various APIs
 open class ViProductSearch : NSObject {
-    
     public static let BASE_URL = "https://search.visenze.com"
     public static let SBI_ENDPOINT = "/v1/product/search_by_image"
     public static let VSR_ENDPOINT = "/v1/product/search_by_id"
@@ -23,15 +22,18 @@ open class ViProductSearch : NSObject {
     /// Placement ID
     private var placementId : Int? = nil
     
-    /// HTTP client gateway/wrapper
     private var client : ViProductSearchClient? = nil
     
+    /// Default Constructor
     private override init() {
         super.init()
     }
     
     /// Set up the SDK with the proper authentications, needs to be called first prior to any other SDK
     /// functions
+    ///
+    /// - parameter appKey: App key
+    /// - parameter placementId: Placement ID
     public func setUp(appKey:String, placementId:Int) -> Void {
         self.appKey = appKey
         self.placementId = placementId
@@ -42,15 +44,21 @@ open class ViProductSearch : NSObject {
     
     /// Set up the SDK with the proper authentications, needs to be called first prior to any other SDK
     /// functions
+    ///
+    /// - parameter appKey: App key
+    /// - parameter placementId: Placement ID
+    /// - parameter baseUrl: Overrides the default BASE_URL to call API from
     public func setUp(appKey:String, placementId:Int, baseUrl:String) -> Void {
         self.appKey = appKey
         self.placementId = placementId
-        if client == nil {
-            client = ViProductSearchClient(baseUrl: baseUrl, appKey: self.appKey!)
-        }
+        self.client = ViProductSearchClient(baseUrl: baseUrl, appKey: self.appKey!)
     }
     
-    /// Returns a tracker
+    /// Returns a tracker meant for ProductSearch
+    ///
+    /// - parameter forCn: If the tracker is meant for cn
+    ///
+    /// - returns: ViSenzeTracker
     public func newTracker(forCn: Bool) -> ViSenzeTracker {
         return ViSearch.sharedInstance.newTracker(
             code: "\(appKey!):\(placementId!)",
@@ -58,7 +66,14 @@ open class ViProductSearch : NSObject {
         )
     }
     
-    /// API for Search by Image
+    /// API for Search by Image, it is non-blocking (async func), need to wait for task to end or either
+    /// handlers to execute
+    ///
+    /// - parameter params: Parameters to pass to the API request
+    /// - parameter successHandler: Callback function for successful request
+    /// - parameter failureHandler: Callback function for failed request
+    ///
+    /// - returns: URLSessionTask
     @discardableResult
     public func imageSearch(
         params:ViSearchByImageParam,
@@ -76,7 +91,14 @@ open class ViProductSearch : NSObject {
         )
     }
     
-    /// API for Search By ID
+    /// API for Search By ID, it is non-blocking (async func), need to wait for task to end or either
+    /// handlers to execute
+    ///
+    /// - parameter params: Parameters to pass to the API request
+    /// - parameter successHandler: Callback function for successful request
+    /// - parameter failureHandler: Callback function for failed request
+    ///
+    /// - returns: URLSessionTask
     @discardableResult
     public func visualSimilarSearch(
         params:ViSearchByIdParam,
@@ -94,6 +116,10 @@ open class ViProductSearch : NSObject {
     }
     
     /// Internally appends the authentication key (which is App Key and Placement ID) to the param map
+    ///
+    /// - parameter dict: Dictionary to append authentication fields to
+    ///
+    /// - returns: A dictionary copy of the param "dict" with additional authentication fields
     private func addAuth(dict:[String:Any]) -> [String:Any] {
         var result = dict
         if let k = appKey{
@@ -106,6 +132,10 @@ open class ViProductSearch : NSObject {
     }
     
     /// Fills in all automatically detected Analytics fields that are not yet specified
+    ///
+    /// - parameter dict: Dictionary to append analytics fields to
+    ///
+    /// - returns: A dictionary copy of the param "dict" with additional analytics fields
     private func addAnalytics(dict:[String:Any]) -> [String:Any] {
         var result = dict
         

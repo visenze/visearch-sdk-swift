@@ -30,7 +30,11 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
     
     // public var point: [Int]? = nil
     
-    /// Constructor using imUrl
+    /// Constructor using image URL
+    ///
+    /// - parameter imUrl: URL to an image
+    ///
+    /// - returns: Nil if paramter is an empty string
     public init?(imUrl: String){
         self.imUrl = imUrl
         
@@ -40,7 +44,11 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
         }
     }
     
-    /// Constructor using imId
+    /// Constructor using image ID
+    ///
+    /// - parameter imId: Image ID can be found in any image retrieved from the server
+    ///
+    /// - returns: Nil if paramter is an empty string
     public init?(imId: String){
         self.imId = imId
         
@@ -50,12 +58,16 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
         }
     }
     
-    /// Constructor using image
+    /// Constructor using image file
+    ///
+    /// - parameter image: Loaded image data
     public init(image: UIImage){
         self.image = image
     }
     
-    /// return the compressed/resize image data before uploading
+    /// Get the compressed/resize image data
+    ///
+    /// - returns: Compressed jpegData
     public func getImageData() -> Data? {
         if let image = image {
             return image.jpegData(compressionQuality: 0.97)
@@ -63,9 +75,10 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
         return nil
     }
     
-    /// Returns a  dictionary containing all the parameters
+    /// Get a dictionary containing all of this class' member variables as keys and their corresponding values
+    ///
+    /// - returns: A dictionary representing this class
     public override func toDict() -> [String: Any] {
-        
         var dict = super.toDict()
         
         if imUrl != nil {

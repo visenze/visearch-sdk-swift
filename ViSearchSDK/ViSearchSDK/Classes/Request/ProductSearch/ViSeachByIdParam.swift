@@ -15,6 +15,10 @@ open class ViSearchByIdParam : ViBaseProductSearchParam {
     public var productId : String? = nil
     
     /// Constructor, checks for non-empty productId
+    ///
+    /// - parameter productId: Product's ID, retrieved from ViProduct if prior search was made
+    ///
+    /// - returns: Nil if paramter is an empty string
     public init?(productId: String){
         self.productId = productId
         
@@ -24,7 +28,9 @@ open class ViSearchByIdParam : ViBaseProductSearchParam {
         }
     }
     
-    /// Returns a  dictionary containing all the parameters
+    /// Get a dictionary containing all of this class' member variables as keys and their corresponding values
+    ///
+    /// - returns: A dictionary representing this class
     public override func toDict() -> [String: Any] {
         return super.toDict()
     }

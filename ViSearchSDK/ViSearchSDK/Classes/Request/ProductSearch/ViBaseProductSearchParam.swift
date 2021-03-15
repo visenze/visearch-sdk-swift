@@ -12,8 +12,6 @@ import ViSenzeAnalytics
 /// to be called directly.
 open class ViBaseProductSearchParam : ViSearchParamsProtocol {
     
-    // General
-    
     public var page : Int? = nil
     
     public var limit : Int? = nil
@@ -63,7 +61,6 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
     public var customParams : [String:String] = [:]
     
     
-    
     public var vaUid : String? = nil
     
     public var vaSid : String? = nil
@@ -98,19 +95,25 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
 
     public var vaS2 : String? = nil
     
-    /// Takes a dictionary and returns a list of "key:val" strings
+    /// Converts a dictionary of into an array of Strings with a fixed format
+    ///
+    /// - parameter dict: Dictionary of key-values to convert
+    ///
+    /// - returns: An arrary of Strings of format ["key1:value1", "key2:value2", ...]
     private func toStringArr(dict : [String:Any]) -> [String] {
         var list : [String] = []
+        
         for (k,v) in dict {
             let s = "\(k):\(v)"
             list.append(s)
         }
+        
         return list.sorted(by: <)
     }
     
-    // Protocol
-    
-    /// Returns a  dictionary containing all the parameters
+    /// Get a dictionary containing all of this class' member variables as keys and their corresponding values
+    ///
+    /// - returns: A dictionary representing this class
     public func toDict() -> [String : Any] {
         var dict : [String:Any] = [:]
         

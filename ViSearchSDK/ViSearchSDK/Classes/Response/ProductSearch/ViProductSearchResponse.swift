@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Response parameters from the search requests made
 open class ViProductSearchResponse : NSObject {
     
     public var requestId : String? = nil
@@ -41,6 +42,10 @@ open class ViProductSearchResponse : NSObject {
     
     public var querySysMeta : [String:String] = [:]
     
+    /// Constructor, uses the raw response from the URL query and parses it into the relevant data fields
+    ///
+    /// - parameter response: Response gotten from the URL request
+    /// - parameter data: Data attached to the response from the server
     public init(response: URLResponse, data: Data) {
         super.init()
         
@@ -54,8 +59,8 @@ open class ViProductSearchResponse : NSObject {
             limit     = json["limit"]  as? Int
             total     = json["total"]  as? Int
             
-            if let err = json["error"] as? String {
-                error = ViErrorMsg(jsonString: ViProductSearchResponse.convertStringToDictionary(text: err))
+            if let err = json["error"] as? [String:Any] {
+                error = ViProductSearchResponse.parseErrorMsg(err: err)
             }
             
             if let pTypesJson = json["product_types"] as? [Any] {
@@ -100,37 +105,101 @@ open class ViProductSearchResponse : NSObject {
 
     }
     
-    private static func convertStringToDictionary(text: String) -> [String:Any]? {
-        if let data = text.data(using: .utf8) {
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any]
-                return json
-            } catch {
-                print("Something went wrong")
-            }
-        }
-        return nil
-    }
+    /// Returns a ViErrorMsg class that is parsed from a json-converted dictionary
+    ///
+    /// - parameter err: Json converted dictionary for the "error" field
+    ///
+    /// - returns: ViErrorMsg
+    private static func parseErrorMsg(err: [String:Any]) -> ViErrorMsg {
+        let result = ViErrorMsg()
         
+        if let code = err["code"] as? Int {
+            result.code = code
+        }
+        
+        if let message = err["message"] as? String {
+            result.message = message
+        }
+        
+        return result
+    }
+     
+    /// Returns an array of ViProduct that is parsed from an array of json object
+    ///
+    /// - parameter arr: An array of json object for the "result" field
+    ///
+    /// - returns: An array of ViProducts found by the server
     private static func parseProductResults(_ arr: [Any]) -> [ViProduct] {
         var results : [ViProduct] = []
+        // iterate through each json object
         for jsonItem in arr {
+            // convert from json object to dictionary and then parse the data
             if let dict = jsonItem as? [String:Any] {
-                let item = ViProduct(jsonData: dict)
+                
+                let item = ViProduct()
+                
+                if let productId = dict["product_id"] as? String {
+                    item.productId = productId
+                }
+                
+                if let mainImageUrl = dict["main_image_url"] as? String {
+                    item.mainImageUrl = mainImageUrl
+                }
+                
+                if let data = dict["data"] as? [String:Any] {
+                    item.data = data
+                }
+                
+                if let score = dict["score"] as? Float {
+                    item.score = score
+                }
+                
+                if let imageS3Url = dict["image_s3_url"] as? String {
+                    item.imageS3Url = imageS3Url
+                }
+                
+                if let detect = dict["detect"] as? String {
+                    item.detect = detect
+                }
+                
+                if let keyword = dict["keyword"] as? String {
+                    item.keyword = keyword
+                }
+                
+                if let box = dict["box"] as? [Int] {
+                    item.box = ViBox(x1: box[0], y1: box[1], x2: box[2], y2: box[3])
+                }
+                
                 results.append(item)
             }
         }
         return results
     }
     
+    /// Returns an array of ViGroupResult that is parsed from an array of json object
+    ///
+    /// - parameter arr: An array of json object for the "group_results" field
+    ///
+    /// - returns: An array of ViGroupResult grouped by the server
     private static func parseGroupResults(_ arr: [Any]) -> [ViGroupResult] {
         var results: [ViGroupResult] = []
+        // iterate through each json object
         for jsonItem in arr {
+            // convert from json object to dictionary and then parse the data
             if let dict = jsonItem as? [String:Any] {
-                let item = ViGroupResult(jsonData: dict)
+                
+                let group = dict["group_by_value"] as! String
+                
+                let item = ViGroupResult(group: group)!
+                
+                if let imageResults = dict["results"] as? [Any] {
+                    item.results = ViResponseData.parseResults(imageResults)
+                }
+                
                 results.append(item)
             }
         }
+        
         return results
     }
     

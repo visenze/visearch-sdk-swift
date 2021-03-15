@@ -14,10 +14,25 @@ open class ViProductSearchClient : ViSearchClient {
     public typealias ProductSearchSuccess = (ViProductSearchResponse?) -> ()
     public typealias ProductSearchFailure = (Error) -> ()
     
+    /// Constructor, requires a base URL for endpoint and app key
+    ///
+    /// - parameter baseUrl: Base URL for the endpoints
+    /// - parameter appKey: App key
+    ///
+    /// - returns: Nil if either params are empty
     public override init?(baseUrl: String, appKey: String) {
         super.init(baseUrl: baseUrl, appKey: appKey)
     }
     
+    /// POST API, forms the request to execute, results in starting an async URL data task
+    ///
+    /// - parameter path: Base URL for the endpoints
+    /// - parameter params: App key
+    /// - parameter imageData: Data of a loaded image
+    /// - parameter successHandler: Callback on success
+    /// - parameter failureHandler: Callback on failure
+    ///
+    /// - returns: URLSessionTask
     @discardableResult
     public func post(path:String, params:[String:Any], imageData:Data?, 
                           successHandler: @escaping ProductSearchSuccess,
@@ -49,7 +64,15 @@ open class ViProductSearchClient : ViSearchClient {
             failureHandler: failureHandler
         )
     }
-    
+     
+    /// GET API, forms the request to execute, results in starting an async URL data task
+    ///
+    /// - parameter path: Base URL for the endpoints
+    /// - parameter params: App key
+    /// - parameter successHandler: Callback on success
+    /// - parameter failureHandler: Callback on failure
+    ///
+    /// - returns: URLSessionTask
     @discardableResult
     public func get(path:String, params:[String:Any],
                     successHandler: @escaping ProductSearchSuccess,
@@ -75,6 +98,14 @@ open class ViProductSearchClient : ViSearchClient {
         )
     }
     
+    /// Creates the http request, and prepare it as an async URL data task
+    ///
+    /// - parameter method: Which API method to use, POST/GET
+    /// - parameter request: The formed request to send
+    /// - parameter successHandler: Callback on success
+    /// - parameter failureHandler: Callback on failure
+    ///
+    /// - returns: URLSessionTask
     private func httpRequest(method: ViHttpMethod,
                              request: NSMutableURLRequest,
                              successHandler: @escaping ProductSearchSuccess,
@@ -91,6 +122,13 @@ open class ViProductSearchClient : ViSearchClient {
         return task
     }
     
+    /// Executing an the request
+    ///
+    /// - parameter request: The http request to send
+    /// - parameter successHandler: Callback on success
+    /// - parameter failureHandler: Callback on failure
+    ///
+    /// - returns: URLSessionTask
     private func createSessionTaskWithRequest(request: NSMutableURLRequest,
                                               successHandler: @escaping ProductSearchSuccess,
                                               failureHandler: @escaping ProductSearchFailure) -> URLSessionTask {
