@@ -26,6 +26,31 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
     
     public var detectionSensitivity : String? = nil
     
+    /// Constructor using imUrl
+    public init?(imUrl: String){
+        self.imUrl = imUrl
+        
+        if imUrl.isEmpty {
+            print("\(type(of: self)).\(#function)[line:\(#line)] - error: imUrl is missing")
+            return nil
+        }
+    }
+    
+    /// Constructor using imId
+    public init?(imId: String){
+        self.imId = imId
+        
+        if imId.isEmpty {
+            print("\(type(of: self)).\(#function)[line:\(#line)] - error: imId is missing")
+            return nil
+        }
+    }
+    
+    /// Constructor using image
+    public init(image: UIImage){
+        self.image = image
+    }
+    
     /// return the compressed/resize image data before uploading
     public func getImageData() -> Data? {
         if let image = image {
@@ -40,7 +65,7 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
         var dict = super.toDict()
         
         if imUrl != nil {
-            dict["IM_URL"] = imUrl
+            dict["im_url"] = imUrl
         }
         
         if imId != nil {

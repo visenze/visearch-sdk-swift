@@ -14,9 +14,9 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
     
     // General
     
-    public var page : Int = 1
+    public var page : Int? = nil
     
-    public var limit : Int = 10
+    public var limit : Int? = nil
     
     public var filters : [String:String] = [:]
     
@@ -26,7 +26,7 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
     
     public var facets : [String] = []
     
-    public var facetsLimit : Int = 10
+    public var facetsLimit : Int? = nil
     
     public var facetsShowCount : Bool = true
     
@@ -34,21 +34,27 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
     
     public var groupBy : String? = nil
     
-    public var groupLimit : Int = 1
+    public var groupLimit : Int? = nil
     
     public var sortGroupBy : String? = nil
     
     public var sortGroupStrategy : String? = nil
     
-    public var score : Bool = true
+    public var score : Bool? = nil
     
-    public var scoreMin : Float = 0.0
+    public var scoreMin : Float? = nil
 
-    public var scoreMax : Float = 1.0
+    public var scoreMax : Float? = nil
     
-    public var returnFieldsMapping : Bool = true
+    public var colorRelWeight : Float? = nil
     
-    public var returnImageS3Url : Bool = true
+    public var returnFieldsMapping : Bool? = nil
+    
+    public var returnImageS3Url : Bool? = nil
+    
+    public var dedup : Bool? = nil
+    
+    public var dedupScoreThreshold : Float? = nil
     
     public var customParams : [String:String] = [:]
     
@@ -95,7 +101,7 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
             let s = "\(k):\(v)"
             list.append(s)
         }
-        return list
+        return list.sorted(by: <)
     }
     
     // Protocol
@@ -104,11 +110,11 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
     public func toDict() -> [String : Any] {
         var dict : [String:Any] = [:]
         
-        if page > 0 {
+        if let page = page {
             dict["page"] = String(page)
         }
         
-        if limit > 0 {
+        if let limit = limit {
             dict["limit"] = String(limit)
         }
         
@@ -132,56 +138,107 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
             dict["facets_show_count"] = facetsShowCount ? "true" : "false"
         }
         
-        if sortBy != nil {
-            dict["sort_by"] = sortBy
+        if let sort = sortBy {
+            dict["sort_by"] = sort
         }
         
-        if groupBy != nil {
-            dict["group_by"] = groupBy
+        if let group = groupBy {
+            dict["group_by"] = group
         }
         
-        dict["group_limit"] = String(groupLimit)
-        
-        if sortGroupBy != nil {
-            dict["sort_group_by"] = sortGroupBy
+        if let limit = groupLimit {
+            dict["group_limit"] = String(limit)
         }
         
-        if sortGroupStrategy != nil {
-            dict["sort_group_strategy"] = sortGroupStrategy
+        if let sort = sortGroupBy {
+            dict["sort_group_by"] = sort
         }
         
-        dict["score"] = score ? "true" : "false"
+        if let sort = sortGroupStrategy{
+            dict["sort_group_strategy"] = sort
+        }
         
-        dict["score_min"] = String(scoreMin)
+        if let score = score {
+            dict["score"] = score ? "true" : "false"
+        }
         
-        dict["score_max"] = String(scoreMax)
+        if let score = scoreMin {
+            dict["score_min"] = String(score)
+        }
         
-        dict["return_fields_mapping"] = returnFieldsMapping ? "true" : "false"
+        if let score = scoreMax {
+            dict["score_max"] = String(score)
+        }
         
-        dict["return_image_s3_url"] = returnImageS3Url ? "true" : "false"
-
+        if let weight = colorRelWeight {
+            dict["color_rel_weight"] = String(weight)
+        }
+        
+        if let mapping = returnFieldsMapping {
+            dict["return_fields_mapping"] = mapping ? "true" : "false"
+        }
+        
+        if let returnS3 = returnImageS3Url {
+            dict["return_image_s3_url"] = returnS3 ? "true" : "false"
+        }
+        
+        if let dedup = dedup {
+            dict["dedup"] = dedup ? "true" : "false"
+        }
+        
+        if let score = dedupScoreThreshold {
+            dict["dedup_score_threshold"] = String(score)
+        }
+        
         if !customParams.isEmpty {
             for (k,v) in customParams {
                 dict[k] = v
             }
         }
         
+        if let val = vaUid {
+            dict["va_uid"] = val
+        }
         
+        if let val = vaSid {
+            dict["va_sid"] = val
+        }
         
-        let sessionManager = VaSessionManager.sharedInstance
-        let deviceData = VaDeviceData.sharedInstance
+        if let val = vaSdk {
+            dict["va_sdk"] = val
+        }
         
-        dict["va_uid"] = vaUid != nil ? vaUid : sessionManager.getUid()
-        dict["va_sid"] = vaSid != nil ? vaSid : sessionManager.getSessionId()
-        dict["va_sdk"] = vaSdk != nil ? vaSdk : deviceData.sdk
-        dict["va_sdk_version"] = vaSdkVersion != nil ? vaSdkVersion : deviceData.sdkVersion
-        dict["va_os"] = vaOs != nil ? vaOs : deviceData.os
-        dict["va_osv"] = vaOsv != nil ? vaOsv : deviceData.osv
-        dict["va_device_brand"] = vaDeviceBrand != nil ? vaDeviceBrand : deviceData.deviceBrand
-        dict["va_device_model"] = vaDeviceModel != nil ? vaDeviceModel : deviceData.deviceModel
-        dict["va_app_bundle_id"] = vaAppBundleId != nil ? vaAppBundleId : deviceData.appBundleId
-        dict["va_app_name"] = vaAppName != nil ? vaAppName : deviceData.appName
-        dict["va_app_version"] = vaAppVersion != nil ? vaAppVersion : deviceData.appVersion
+        if let val = vaSdkVersion {
+            dict["va_sdk_version"] = val
+        }
+        
+        if let val = vaOs {
+            dict["va_os"] = val
+        }
+        
+        if let val = vaOsv {
+            dict["va_osv"] = val
+        }
+        
+        if let val = vaDeviceBrand {
+            dict["va_device_brand"] = val
+        }
+        
+        if let val = vaDeviceModel {
+            dict["va_device_model"] = val
+        }
+        
+        if let val = vaAppBundleId {
+            dict["va_app_bundle_id"] = val
+        }
+        
+        if let val = vaAppName {
+            dict["va_app_name"] = val
+        }
+        
+        if let val = vaAppVersion {
+            dict["va_app_version"] = val
+        }
         
         if vaAaid != nil {
             dict["va_aaid"] = vaAaid
