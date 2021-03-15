@@ -37,12 +37,12 @@ class ViProductSearchTest: XCTestCase {
     
     func testSearchClientSBI() {
         let sdk = createSdk()
-        var params = ViSearchByImageParam(imUrl: imageUrl)
+        var params = ViSearchByImageParam(imUrl: imageUrl)!
         
         self.semaphore.wait()
         
         sdk.imageSearch(
-            params: params!,
+            params: params,
             successHandler: {
                 (response: ViProductSearchResponse?) in
                 self.imageId = response?.imageId
@@ -56,9 +56,9 @@ class ViProductSearchTest: XCTestCase {
         
         self.semaphore.wait()
         
-        params = ViSearchByImageParam(imId: self.imageId!)
+        params = ViSearchByImageParam(imId: self.imageId!)!
         sdk.imageSearch(
-            params: params!,
+            params: params,
             successHandler: {
                 (response: ViProductSearchResponse?) in
                 self.semaphore.signal()

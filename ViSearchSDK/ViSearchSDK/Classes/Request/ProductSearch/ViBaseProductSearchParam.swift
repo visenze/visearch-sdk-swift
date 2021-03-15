@@ -50,11 +50,15 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
     
     public var returnFieldsMapping : Bool? = nil
     
-    public var returnImageS3Url : Bool? = nil
+    public var returnQuerySysMeta : Bool? = nil
     
     public var dedup : Bool? = nil
     
     public var dedupScoreThreshold : Float? = nil
+
+    public var returnImageS3Url : Bool? = nil
+    
+    public var debug : Bool? = nil
     
     public var customParams : [String:String] = [:]
     
@@ -178,8 +182,8 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
             dict["return_fields_mapping"] = mapping ? "true" : "false"
         }
         
-        if let returnS3 = returnImageS3Url {
-            dict["return_image_s3_url"] = returnS3 ? "true" : "false"
+        if let queryMeta = returnQuerySysMeta {
+            dict["return_query_sys_meta"] = queryMeta ? "true" : "false"
         }
         
         if let dedup = dedup {
@@ -188,6 +192,14 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
         
         if let score = dedupScoreThreshold {
             dict["dedup_score_threshold"] = String(score)
+        }
+        
+        if let returnS3 = returnImageS3Url {
+            dict["return_image_s3_url"] = returnS3 ? "true" : "false"
+        }
+        
+        if let debug = debug {
+            dict["debug"] = debug ? "true" : "false"
         }
         
         if !customParams.isEmpty {

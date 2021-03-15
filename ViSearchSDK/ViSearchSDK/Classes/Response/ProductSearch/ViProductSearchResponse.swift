@@ -33,14 +33,13 @@ open class ViProductSearchResponse : NSObject {
     
     public var productInfo : [String:Any] = [:]
     
-    public var objects : Any? = nil
+    public var objects : [ViObjectResult] = []
     
-    public var groupResults : Any? = nil
+    public var groupResults : [ViGroupResult] = []
     
-    public var groupByKey : Any? = nil
+    public var groupByKey : String? = nil
     
-    public var querySysMeta : Any? = nil
-    
+    public var querySysMeta : [String:String] = [:]
     
     public init(response: URLResponse, data: Data) {
         super.init()
@@ -72,8 +71,27 @@ open class ViProductSearchResponse : NSObject {
             }
             
             if let facetListJson = json["facets"] as? [Any] {
-                self.facets = ViResponseData.parseFacets(facetListJson)
+                facets = ViResponseData.parseFacets(facetListJson)
             }
+            
+            if let prodInfo = json["product_info"] as? [String:Any] {
+                productInfo = prodInfo
+            }
+            
+            if let objs = json["objects"] as? [Any] {
+                objects = ViResponseData.parseObjectResults(objs)
+            }
+            
+            if let groups = json["group_results"] as? [Any] {
+                groupResults = ViProductSearchResponse.parseGroupResults(groups)
+            }
+            
+            groupByKey = json["group_by_key"] as? String
+            
+            if let sysMeta = json["query_sys_meta"] as? [String:String] {
+                querySysMeta = sysMeta
+            }
+            
         }
         catch {
             print("\(type(of: self)).\(#function)[line:\(#line)] - error: Json response might be invalid. Error during processing:")
@@ -99,6 +117,17 @@ open class ViProductSearchResponse : NSObject {
         for jsonItem in arr {
             if let dict = jsonItem as? [String:Any] {
                 let item = ViProduct(jsonData: dict)
+                results.append(item)
+            }
+        }
+        return results
+    }
+    
+    private static func parseGroupResults(_ arr: [Any]) -> [ViGroupResult] {
+        var results: [ViGroupResult] = []
+        for jsonItem in arr {
+            if let dict = jsonItem as? [String:Any] {
+                let item = ViGroupResult(jsonData: dict)
                 results.append(item)
             }
         }

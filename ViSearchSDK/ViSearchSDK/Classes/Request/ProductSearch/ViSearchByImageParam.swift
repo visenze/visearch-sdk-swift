@@ -26,6 +26,10 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
     
     public var detectionSensitivity : String? = nil
     
+    public var searchAllObjects : Bool = false
+    
+    // public var point: [Int]? = nil
+    
     /// Constructor using imUrl
     public init?(imUrl: String){
         self.imUrl = imUrl
@@ -91,6 +95,8 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
         if detectionSensitivity != nil {
             dict["detection_sensitivity"] = detectionSensitivity
         }
+        
+        dict["search_all_objects"] = searchAllObjects
         
         return dict
     }
