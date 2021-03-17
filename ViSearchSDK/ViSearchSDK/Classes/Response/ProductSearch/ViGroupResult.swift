@@ -12,7 +12,7 @@ open class ViGroupResult : NSObject {
     
     public var groupByValue : String
     
-    public var results: [ViImageResult] = []
+    public var results: [ViProduct] = []
     
     /// Constructor, every ViGroupResult should have a value that it is grouped by
     ///

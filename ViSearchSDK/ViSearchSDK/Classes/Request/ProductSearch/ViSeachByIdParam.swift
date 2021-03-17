@@ -14,6 +14,8 @@ open class ViSearchByIdParam : ViBaseProductSearchParam {
     /// Product ID is actually used as part of the query path and not a normal parameter variable
     public var productId : String? = nil
     
+    public var returnProductInfo : Bool? = nil
+    
     /// Constructor, checks for non-empty productId
     ///
     /// - parameter productId: Product's ID, retrieved from ViProduct if prior search was made
@@ -32,7 +34,11 @@ open class ViSearchByIdParam : ViBaseProductSearchParam {
     ///
     /// - returns: A dictionary representing this class
     public override func toDict() -> [String: Any] {
-        return super.toDict()
+        var dict = super.toDict()
+        if let returnProductInfo = returnProductInfo {
+            dict["return_product_info"] = returnProductInfo ? "true" : "false"
+        }
+        return dict
     }
 }
 

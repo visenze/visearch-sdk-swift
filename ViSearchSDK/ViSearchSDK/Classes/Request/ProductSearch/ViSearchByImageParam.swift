@@ -22,11 +22,13 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
     
     public var detection : String? = nil
     
-    public var detectionLimit : Int = 0
+    public var detectionLimit : Int? = nil
     
     public var detectionSensitivity : String? = nil
     
-    public var searchAllObjects : Bool = false
+    public var searchAllObjects : Bool? = nil
+    
+    public var imgSettings : ViImageSettings = ViImageSettings()
     
     // public var point: [Int]? = nil
     
@@ -68,9 +70,47 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
     /// Get the compressed/resize image data
     ///
     /// - returns: Compressed jpegData
-    public func getImageData() -> Data? {
+    public func getCompressedImageData() -> Data? {
         if let image = image {
-            return image.jpegData(compressionQuality: 0.97)
+        
+            let quality = imgSettings.quality;
+            
+            // maxWidth should not larger than 1024 pixels
+            let maxWidth = CGFloat(min(imgSettings.maxWidth, 1024));
+            
+            var actualHeight : CGFloat = image.size.height * image.scale;
+            var actualWidth  : CGFloat = image.size.width * image.scale;
+            let maxHeight : CGFloat = maxWidth
+            var imgRatio  : CGFloat = actualWidth/actualHeight;
+            let maxRatio  : CGFloat = maxWidth/maxHeight;
+            
+            if (actualHeight > maxHeight || actualWidth > maxWidth) {
+                if(imgRatio < maxRatio) {
+                    // adjust width according to maxHeight
+                    imgRatio = maxHeight / actualHeight;
+                    actualWidth = imgRatio * actualWidth;
+                    actualHeight = maxHeight;
+                }
+                else if(imgRatio > maxRatio) {
+                    // adjust height according to maxWidth
+                    imgRatio = CGFloat(imgSettings.maxWidth) / actualWidth;
+                    actualHeight = imgRatio * actualHeight;
+                    actualWidth = maxWidth;
+                }
+                else {
+                    actualHeight = maxHeight;
+                    actualWidth = maxWidth;
+                }
+            }
+            
+            let rect : CGRect = CGRect(x: 0.0, y: 0.0, width: actualWidth, height: actualHeight);
+            UIGraphicsBeginImageContextWithOptions(rect.size, false, 1.0);
+            image.draw(in: rect)
+            let img = UIGraphicsGetImageFromCurrentImageContext();
+            let imageData : Data = img!.jpegData(compressionQuality: CGFloat(quality))!;
+            UIGraphicsEndImageContext();
+            
+            return imageData
         }
         return nil
     }
@@ -81,35 +121,33 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
     public override func toDict() -> [String: Any] {
         var dict = super.toDict()
         
-        if imUrl != nil {
+        if let imUrl = imUrl {
             dict["im_url"] = imUrl
         }
         
-        if imId != nil {
+        if let imId = imId {
             dict["im_id"] = imId
-        }
-        
-        if image != nil {
-            dict["image"] = getImageData()
         }
         
         if let b = box {
             dict["box"] = "\(b.x1),\(b.y1),\(b.x2),\(b.y2)"
         }
         
-        if detection != nil {
+        if let detection = detection {
             dict["detection"] = detection
         }
         
-        if detectionLimit > 0 {
-            dict["detection_limit"] = detectionLimit
+        if let detectionLimit = detectionLimit {
+            dict["detection_limit"] = String(detectionLimit)
         }
         
-        if detectionSensitivity != nil {
+        if let detectionSensitivity = detectionSensitivity {
             dict["detection_sensitivity"] = detectionSensitivity
         }
         
-        dict["search_all_objects"] = searchAllObjects
+        if let searchAllObjects = searchAllObjects {
+            dict["search_all_objects"] = searchAllObjects ? "true" : "false"
+        }
         
         return dict
     }

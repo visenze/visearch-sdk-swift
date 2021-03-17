@@ -10,130 +10,167 @@ import XCTest
 
 class ViProductSearchTest: XCTestCase {
     
-    private let sbiKey : String = ""
-    private let vsrKey : String = ""
-    private let sbiPlacement : Int = 1000
-    private let vsrPlacement : Int = 1002
-    private let imageUrl : String = "https://img.ltwebstatic.com/images2_pi/2019/09/09/15679978193855617200_thumbnail_900x1199.jpg"
-    private let imageFile : String = ""
+    private let sbiKey      : String = ""
+    private let vsrKey      : String = ""
+    private let sbiPlacement: Int = 1000
+    private let vsrPlacement: Int = 1002
+    private let imageUrl    : String = "https://img.ltwebstatic.com/images2_pi/2019/09/09/15679978193855617200_thumbnail_900x1199.jpg"
+    private let imageFile   : String = ""
     
-    private var imageId : String? = nil
+    private var imageId     : String? = nil
     
     private let semaphore = DispatchSemaphore(value: 1)
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func createSdk(appKey: String, placement: Int) -> ViProductSearch {
+    private func createSdk(appKey: String, placement: Int) -> ViProductSearch {
         let sdk = ViProductSearch.sharedInstance
-        sdk.setUp(appKey: appKey, placementId: placement, baseUrl:"https://search-dev.visenze.com")
+        sdk.setUp(appKey: appKey, placementId: placement, baseUrl: "https://search-dev.visenze.com")
         return sdk
     }
     
-    func testSearch() {
+    private func getCatalogFields(response: ViProductSearchResponse) -> [String] {
+        return Array(response.catalogFieldsMapping.values)
+    }
+    
+    private func verifyResponse(response: ViProductSearchResponse?) -> Void {
+        if response == nil || response!.status == "fail" {
+            XCTFail("response failure")
+        }
+    }
+    
+    private func onRequestFailure(err: Error) -> Void {
+        XCTFail(err.localizedDescription)
+    }
+    
+    private func runSearchImage(sdk: ViProductSearch,
+                                params: ViSearchByImageParam,
+                                imUrl: String, imFile: String,
+                                successUrlCallback: @escaping ViProductSearchClient.ProductSearchSuccess,
+                                successFileCallback: @escaping ViProductSearchClient.ProductSearchSuccess) {
+        
+        self.semaphore.wait()
+        
+        // by Image URL - imUrl
+        params.imUrl = imUrl
+        params.image = nil
+        
+        sdk.imageSearch(
+            params: params,
+            successHandler: { (response: ViProductSearchResponse?) in
+                self.verifyResponse(response: response)
+                successUrlCallback(response)
+                self.semaphore.signal()
+            },
+            failureHandler: self.onRequestFailure
+        )
+        
+        self.semaphore.wait()
+        
+        // by Image File - image
+        params.imUrl = nil
+        params.image = UIImage(contentsOfFile: imFile)
+        
+        sdk.imageSearch(
+            params: params,
+            successHandler: { (response: ViProductSearchResponse?) in
+                self.verifyResponse(response: response)
+                successFileCallback(response)
+                self.semaphore.signal()
+            },
+            failureHandler: self.onRequestFailure
+        )
+        
+        self.semaphore.wait()
+    }
+    
+    public func testSearchByImageFacets() {
         if sbiKey.isEmpty {
              return
         }
         
-        var productId : String = ""
-        var sdk = createSdk(appKey: sbiKey, placement: sbiPlacement)
-        var params = ViSearchByImageParam(imUrl: imageUrl)!
+        let sdk = createSdk(appKey: sbiKey, placement: sbiPlacement)
+        let params = ViSearchByImageParam(imUrl: imageUrl)!
+        // look into catalogFieldsMapping to know what values you can use
+        // params.returnFieldsMapping = true
+        params.facets = ["brand_name", "merchant_category"]
+        params.facetsLimit = 10
+        params.facetsShowCount = true
         
-        self.semaphore.wait()
-        
-        sdk.imageSearch(
-            params: params,
-            successHandler: {
+        runSearchImage(
+            sdk: sdk, params: params, imUrl: imageUrl, imFile: imageFile,
+            successUrlCallback: {
                 (response: ViProductSearchResponse?) in
-                self.imageId = response!.imageId
-                if response!.result.count > 0 {
-                    productId = response!.result[0].productId!
+                if response!.facets.count != params.facets.count {
+                    XCTFail("Facets count mismatch")
                 }
-                if response!.status == "fail" {
-                    XCTFail("response status: fail")
-                }
-                self.semaphore.signal()
             },
-            failureHandler: {
-                (err : Error) in
-                XCTFail(err.localizedDescription)
+            successFileCallback: {
+                (response: ViProductSearchResponse?) in
+                if response!.facets.count != params.facets.count {
+                    XCTFail("Facets count mismatch")
+                }
             }
         )
-        
-        self.semaphore.wait()
-        
-        params = ViSearchByImageParam(imId: self.imageId!)!
-        sdk.imageSearch(
-            params: params,
-            successHandler: {
-                (response: ViProductSearchResponse?) in
-                if response!.status == "fail" {
-                    XCTFail("response status: fail")
-                }
-                self.semaphore.signal()
-            },
-            failureHandler: {
-                (err : Error) in
-                XCTFail(err.localizedDescription)
-            }
-        )
-        
-        self.semaphore.wait()
-        
-        let vsrParam = ViSearchByIdParam(productId: productId)!
-        sdk = createSdk(appKey: vsrKey, placement: vsrPlacement)
-        sdk.visualSimilarSearch(
-            params: vsrParam,
-            successHandler: {
-                (response: ViProductSearchResponse?) in
-                if response!.status == "fail" {
-                    XCTFail("response status: fail")
-                }
-                self.semaphore.signal()
-            },
-            failureHandler: {
-                (err : Error) in
-                XCTFail(err.localizedDescription)
-            }
-        )
-        
-        self.semaphore.wait()
     }
     
-    func testSearchUsingFile() {
-        if imageFile.isEmpty || sbiKey.isEmpty {
+    public func testSearchByImageObjects() {
+        if sbiKey.isEmpty {
              return
         }
         
-        let image = UIImage(contentsOfFile: imageFile)
         let sdk = createSdk(appKey: sbiKey, placement: sbiPlacement)
-        let params = ViSearchByImageParam(image: image!)
+        let params = ViSearchByImageParam(imUrl: imageUrl)!
         
-        self.semaphore.wait()
+        params.searchAllObjects = true
+        params.detectionLimit = 10
+        params.detection = "all"
         
-        sdk.imageSearch(
-            params: params,
-            successHandler: {
+        runSearchImage(
+            sdk: sdk, params: params, imUrl: imageUrl, imFile: imageFile,
+            successUrlCallback: {
                 (response: ViProductSearchResponse?) in
-                if response!.status == "fail" {
-                    XCTFail("response status: fail")
+                if response!.objects.count == 0 {
+                    XCTFail("Failed to search via all objects")
                 }
-                self.semaphore.signal()
             },
-            failureHandler: {
-                (err : Error) in
-                XCTFail(err.localizedDescription)
+            successFileCallback: {
+                (response: ViProductSearchResponse?) in
+                if response!.objects.count == 0 {
+                    XCTFail("Failed to search via all objects")
+                }
             }
         )
-        
-        self.semaphore.wait()
     }
+    
+    public func testSearchByImageGroups() {
+        if sbiKey.isEmpty {
+             return
+        }
+        
+        let sdk = createSdk(appKey: sbiKey, placement: sbiPlacement)
+        let params = ViSearchByImageParam(imUrl: imageUrl)!
+        // look into catalogFieldsMapping to know what values you can use
+        // params.returnFieldsMapping = true
+        params.groupBy = "brand_name"
+        params.groupLimit = 10
+        
+        runSearchImage(
+            sdk: sdk, params: params, imUrl: imageUrl, imFile: imageFile,
+            successUrlCallback: {
+                (response: ViProductSearchResponse?) in
+                if response!.groupResults.count == 0 {
+                    XCTFail("Failed search by group objects")
+                }
+            },
+            successFileCallback: {
+                (response: ViProductSearchResponse?) in
+                if response!.groupResults.count == 0 {
+                    XCTFail("Failed search by group objects")
+                }
+            }
+        )
+    }
+    
+    
+    
 }
 

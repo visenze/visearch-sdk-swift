@@ -87,9 +87,9 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
 
     public var vaDidmd5 : String? = nil
 
-    public var vaN1 : Int? = nil
+    public var vaN1 : Double? = nil
 
-    public var vaN2 : Int? = nil
+    public var vaN2 : Double? = nil
 
     public var vaS1 : String? = nil
 
@@ -140,7 +140,9 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
         if facets.count > 0 {
             dict["facets"] = facets
             
-            dict["facets_limit"] = facetsLimit
+            if let facetsLimit = facetsLimit {
+                dict["facets_limit"] = String(facetsLimit)
+            }
             
             dict["facets_show_count"] = facetsShowCount ? "true" : "false"
         }
@@ -205,12 +207,6 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
             dict["debug"] = debug ? "true" : "false"
         }
         
-        if !customParams.isEmpty {
-            for (k,v) in customParams {
-                dict[k] = v
-            }
-        }
-        
         if let val = vaUid {
             dict["va_uid"] = val
         }
@@ -255,28 +251,36 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
             dict["va_app_version"] = val
         }
         
-        if vaAaid != nil {
+        if let vaAaid = vaAaid {
             dict["va_aaid"] = vaAaid
         }
         
-        if vaDidmd5 != nil {
+        if let vaDidmd5 = vaDidmd5 {
             dict["va_didmd5"] = vaDidmd5
         }
         
-        if vaN1 != nil {
-            dict["va_n1"] = vaN1
+        if let vaN1 = vaN1 {
+            dict["va_n1"] = String(vaN1)
         }
         
-        if vaN2 != nil {
-            dict["va_n2"] = vaN2
+        if let vaN2 = vaN2 {
+            dict["va_n2"] = String(vaN2)
         }
         
-        if vaS1 != nil {
+        if let vaS1 = vaS1 {
             dict["va_s1"] = vaS1
         }
         
-        if vaS2 != nil {
+        if let vaS2 = vaS2 {
             dict["va_s2"] = vaS2
+        }
+        
+    
+        
+        if !customParams.isEmpty {
+            for (k,v) in customParams {
+                dict[k] = v
+            }
         }
         
         return dict

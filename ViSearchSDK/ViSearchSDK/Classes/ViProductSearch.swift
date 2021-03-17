@@ -35,11 +35,7 @@ open class ViProductSearch : NSObject {
     /// - parameter appKey: App key
     /// - parameter placementId: Placement ID
     public func setUp(appKey:String, placementId:Int) -> Void {
-        self.appKey = appKey
-        self.placementId = placementId
-        if client == nil {
-            client = ViProductSearchClient(baseUrl: ViProductSearch.BASE_URL, appKey: self.appKey!)
-        }
+        setUp(appKey: appKey, placementId: placementId, baseUrl: ViProductSearch.BASE_URL)
     }
     
     /// Set up the SDK with the proper authentications, needs to be called first prior to any other SDK
@@ -85,7 +81,7 @@ open class ViProductSearch : NSObject {
         return client!.post(
             path: ViProductSearch.SBI_ENDPOINT,
             params: parameters,
-            imageData: params.getImageData(),
+            imageData: params.getCompressedImageData(),
             successHandler: successHandler,
             failureHandler: failureHandler
         )

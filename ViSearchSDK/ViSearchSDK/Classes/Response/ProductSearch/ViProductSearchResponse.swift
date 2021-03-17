@@ -34,7 +34,7 @@ open class ViProductSearchResponse : NSObject {
     
     public var productInfo : [String:Any] = [:]
     
-    public var objects : [ViObjectResult] = []
+    public var objects : [ViProductObjectResult] = []
     
     public var groupResults : [ViGroupResult] = []
     
@@ -84,7 +84,7 @@ open class ViProductSearchResponse : NSObject {
             }
             
             if let objs = json["objects"] as? [Any] {
-                objects = ViResponseData.parseObjectResults(objs)
+                objects = ViProductSearchResponse.parseObjectResults(objs)
             }
             
             if let groups = json["group_results"] as? [Any] {
@@ -167,10 +167,55 @@ open class ViProductSearchResponse : NSObject {
                 }
                 
                 if let box = dict["box"] as? [Int] {
-                    item.box = ViBox(x1: box[0], y1: box[1], x2: box[2], y2: box[3])
+                    if box.count >= 4 {
+                        item.box = ViBox(x1: box[0], y1: box[1], x2: box[2], y2: box[3])
+                    }
                 }
                 
                 results.append(item)
+            }
+        }
+        return results
+    }
+    
+    ///
+    /// - parameter arr:
+    ///
+    /// - returns:
+    private static func parseObjectResults(_ arr: [Any]) -> [ViProductObjectResult] {
+        var results : [ViProductObjectResult] = []
+        for jsonItem in arr {
+            if let dict = jsonItem as? [String:Any] {
+                
+                let object = ViProductObjectResult()
+                
+                if let type = dict["type"] as? String {
+                    object.type = type
+                }
+                
+                if let score = dict["score"] as? Float {
+                    object.score = score
+                }
+                
+                if let box = dict["box"] as? [Int] {
+                    if box.count >= 4 {
+                        object.box = ViBox(x1: box[0], y1: box[1], x2: box[2], y2: box[3])
+                    }
+                }
+                
+                if let attributes = dict["attributes"] as? [String:Any] {
+                    object.attributes = attributes
+                }
+                
+                if let total = dict["total"] as? Int {
+                    object.total = total
+                }
+                
+                if let res = dict["result"] as? [Any] {
+                    object.result = ViProductSearchResponse.parseProductResults(res)
+                }
+                
+                results.append(object)
             }
         }
         return results
@@ -192,8 +237,8 @@ open class ViProductSearchResponse : NSObject {
                 
                 let item = ViGroupResult(group: group)!
                 
-                if let imageResults = dict["results"] as? [Any] {
-                    item.results = ViResponseData.parseResults(imageResults)
+                if let groupedResults = dict["result"] as? [Any] {
+                    item.results = ViProductSearchResponse.parseProductResults(groupedResults)
                 }
                 
                 results.append(item)
