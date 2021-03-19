@@ -47,6 +47,9 @@
 		BDC0963C1DA34FC0002166B4 /* ViSearchParamsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC0963B1DA34FC0002166B4 /* ViSearchParamsTests.swift */; };
 		BDCA2E3E1DA3A7F0004C2EF7 /* ViSearchClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA2E3D1DA3A7F0004C2EF7 /* ViSearchClient.swift */; };
 		BDCA2E401DA3AD39004C2EF7 /* ViSearchClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA2E3F1DA3AD39004C2EF7 /* ViSearchClientTests.swift */; };
+		BDEA8FA1260453710002DD96 /* ViProductTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEA8FA0260453710002DD96 /* ViProductTest.swift */; };
+		BDEA8FA4260453890002DD96 /* ViProductObjectResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEA8FA3260453890002DD96 /* ViProductObjectResultTest.swift */; };
+		BDEA8FA7260453970002DD96 /* ViGroupResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEA8FA6260453970002DD96 /* ViGroupResultTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +119,9 @@
 		BDC0963B1DA34FC0002166B4 /* ViSearchParamsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViSearchParamsTests.swift; sourceTree = "<group>"; };
 		BDCA2E3D1DA3A7F0004C2EF7 /* ViSearchClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViSearchClient.swift; sourceTree = "<group>"; };
 		BDCA2E3F1DA3AD39004C2EF7 /* ViSearchClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViSearchClientTests.swift; sourceTree = "<group>"; };
+		BDEA8FA0260453710002DD96 /* ViProductTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViProductTest.swift; sourceTree = "<group>"; };
+		BDEA8FA3260453890002DD96 /* ViProductObjectResultTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViProductObjectResultTest.swift; sourceTree = "<group>"; };
+		BDEA8FA6260453970002DD96 /* ViGroupResultTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViGroupResultTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +206,9 @@
 				BD6540561DA6302D00E10162 /* ViUploadSearchParamsTests.swift */,
 				BD5BE9FD25F62CDD004995D0 /* ViProductSearchTest.swift */,
 				BD5BEA0025F63018004995D0 /* ViProductSearchParamTest.swift */,
+				BDEA8FA0260453710002DD96 /* ViProductTest.swift */,
+				BDEA8FA3260453890002DD96 /* ViProductObjectResultTest.swift */,
+				BDEA8FA6260453970002DD96 /* ViGroupResultTest.swift */,
 			);
 			path = ViSearchSDKTests;
 			sourceTree = "<group>";
@@ -440,11 +449,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDCA2E401DA3AD39004C2EF7 /* ViSearchClientTests.swift in Sources */,
+				BDEA8FA7260453970002DD96 /* ViGroupResultTest.swift in Sources */,
 				BD5BEA0125F63018004995D0 /* ViProductSearchParamTest.swift in Sources */,
 				BDC0963C1DA34FC0002166B4 /* ViSearchParamsTests.swift in Sources */,
 				BD7DED911DA2AFCF00CDF6DE /* ViSearchSDKTests.swift in Sources */,
 				BD7DEDAD1DA2B81C00CDF6DE /* ViColorSearchParamsTests.swift in Sources */,
 				BD5BE9FE25F62CDD004995D0 /* ViProductSearchTest.swift in Sources */,
+				BDEA8FA4260453890002DD96 /* ViProductObjectResultTest.swift in Sources */,
+				BDEA8FA1260453710002DD96 /* ViProductTest.swift in Sources */,
 				BD6540571DA6302D00E10162 /* ViUploadSearchParamsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

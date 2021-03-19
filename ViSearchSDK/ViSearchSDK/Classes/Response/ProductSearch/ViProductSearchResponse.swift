@@ -150,7 +150,7 @@ open class ViProductSearchResponse : NSObject {
                     item.data = data
                 }
                 
-                if let score = dict["score"] as? Float {
+                if let score = dict["score"] as? Double {
                     item.score = score
                 }
                 
@@ -193,7 +193,7 @@ open class ViProductSearchResponse : NSObject {
                     object.type = type
                 }
                 
-                if let score = dict["score"] as? Float {
+                if let score = dict["score"] as? Double {
                     object.score = score
                 }
                 

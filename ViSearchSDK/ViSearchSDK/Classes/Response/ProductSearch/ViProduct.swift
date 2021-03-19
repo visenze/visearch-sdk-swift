@@ -16,7 +16,7 @@ open class ViProduct {
     
     public var data : [String:Any] = [:]
     
-    public var score : Float? = nil
+    public var score : Double? = nil
     
     public var imageS3Url : String? = nil
     

@@ -11,7 +11,7 @@ open class ViProductObjectResult {
     
     public var type: String? = nil
     
-    public var score: Float? = nil
+    public var score: Double? = nil
     
     public var box : ViBox? = nil
     
