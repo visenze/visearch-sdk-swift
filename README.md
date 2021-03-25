@@ -49,9 +49,7 @@ This SDK contains two sets of APIs that provide accurate, reliable and scalable 
 
 For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-swift).
 
-> Current stable version: `1.5.0` (Swift 5+)
-> 
-> For Swift 3.0 please use version `1.3.0`.
+> Current stable version: `1.6.0` (Swift 5+)
 >
 > Supported iOS version: iOS 8.x and higher
 
