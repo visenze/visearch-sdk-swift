@@ -76,12 +76,16 @@ open class ViProductSearch : NSObject {
         successHandler: @escaping ViProductSearchClient.ProductSearchSuccess,
         failureHandler: @escaping ViProductSearchClient.ProductSearchFailure) -> URLSessionTask {
         
+        // important: this method must be before params.toDict
+        // this will resize image and generate the resized box
+        let imageData = params.getCompressedImageData()
+        
         var parameters = addAuth(dict: params.toDict())
         parameters = addAnalytics(dict: parameters)
         return client!.post(
             path: ViProductSearch.SBI_ENDPOINT,
             params: parameters,
-            imageData: params.getCompressedImageData(),
+            imageData: imageData,
             successHandler: successHandler,
             failureHandler: failureHandler
         )

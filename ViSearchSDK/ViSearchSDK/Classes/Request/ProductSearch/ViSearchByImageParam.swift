@@ -32,6 +32,7 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
     
     public var point : [String] = []
     
+    public var compress_box: String? = nil
     
     /// Constructor using image URL
     ///
@@ -111,6 +112,23 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
             let imageData : Data = img!.jpegData(compressionQuality: CGFloat(quality))!;
             UIGraphicsEndImageContext();
             
+            // if there is a box, we need to generate a compress box
+            if let box = box , let compressed_image = UIImage(data: imageData) {
+                let scale : CGFloat =
+                    (compressed_image.size.height > compressed_image.size.width) ?
+                        compressed_image.size.height * compressed_image.scale / (image.size.height * image.scale)
+                    : compressed_image.size.width * compressed_image.scale / (image.size.width * image.scale);
+                
+                let scaleX1 = Int(scale * CGFloat(box.x1) )
+                let scaleX2 = Int(scale * CGFloat(box.x2) )
+                let scaleY1 = Int(scale * CGFloat(box.y1) )
+                let scaleY2 = Int(scale * CGFloat(box.y2) )
+                    
+                self.compress_box = "\(scaleX1),\(scaleY1),\(scaleX2),\(scaleY2)"
+            } else {
+                self.compress_box = nil
+            }
+            
             return imageData
         }
         return nil
@@ -131,7 +149,11 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
         }
         
         if let b = box {
-            dict["box"] = "\(b.x1),\(b.y1),\(b.x2),\(b.y2)"
+            if let compress_box = self.compress_box {
+                dict["box"] = compress_box
+            } else {
+                dict["box"] = "\(b.x1),\(b.y1),\(b.x2),\(b.y2)"
+            }
         }
         
         if let detection = detection {
