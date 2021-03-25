@@ -198,7 +198,20 @@ import ViSearchSDK
 
 // initialize ProductSearch API using app key and placement id
 ViProductSearch.sharedInstance.setup(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID)
+
+// custom search endpoint
+ViProductSearch.sharedInstance.setup(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID, baseUrl:"https://custom-search.yourdomain.com")
+
+// configure timeout to 30s example. By default timeout is set 10s.
+ViProductSearch.sharedInstance.client?.timeoutInterval = 30
+ViProductSearch.sharedInstance.client?.sessionConfig.timeoutIntervalForRequest = 30
+ViProductSearch.sharedInstance.client?.sessionConfig.timeoutIntervalForResource = 30
+ViProductSearch.sharedInstance.client?.session = URLSession(configuration: (ViProductSearch.sharedInstance.client?.sessionConfig)!)
+
+
 ```
+
+
 
 ## 4. Solution APIs
 
