@@ -518,7 +518,7 @@ let params = ViSearchByImageParam(image: UIImage(contentsOfFile: "IMAGE_FILEPATH
 Running the search:
 
 ```swift
-ViProductSearch.sharedInstance.imageSearch(
+ViProductSearch.sharedInstance.searchByImage(
     params: params,
     successHandler: { 
         (response: ViProductSearchResponse?) -> Void in
@@ -540,7 +540,7 @@ import ViSearchSDK
 ...
 let params = ViSearchByIdParam(productId: "PRODUCT_ID")
 
-ViProductSearch.sharedInstance.visualSimilarSearch(
+ViProductSearch.sharedInstance.searchById(
     successHandler: { 
         (response: ViProductSearchResponse?) -> Void in
         // your function to process response

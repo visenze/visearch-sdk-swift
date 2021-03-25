@@ -71,7 +71,7 @@ open class ViProductSearch : NSObject {
     ///
     /// - returns: URLSessionTask
     @discardableResult
-    public func imageSearch(
+    public func searchByImage(
         params:ViSearchByImageParam,
         successHandler: @escaping ViProductSearchClient.ProductSearchSuccess,
         failureHandler: @escaping ViProductSearchClient.ProductSearchFailure) -> URLSessionTask {
@@ -100,7 +100,7 @@ open class ViProductSearch : NSObject {
     ///
     /// - returns: URLSessionTask
     @discardableResult
-    public func visualSimilarSearch(
+    public func searchById(
         params:ViSearchByIdParam,
         successHandler: @escaping ViProductSearchClient.ProductSearchSuccess,
         failureHandler: @escaping ViProductSearchClient.ProductSearchFailure) -> URLSessionTask {

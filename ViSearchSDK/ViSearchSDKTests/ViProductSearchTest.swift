@@ -53,7 +53,7 @@ class ViProductSearchTest: XCTestCase {
         params.imUrl = imUrl
         params.image = nil
         
-        sdk.imageSearch(
+        sdk.searchByImage(
             params: params,
             successHandler: { (response: ViProductSearchResponse?) in
                 self.verifyResponse(response: response)
@@ -69,7 +69,7 @@ class ViProductSearchTest: XCTestCase {
         params.imUrl = nil
         params.image = UIImage(contentsOfFile: imFile)
         
-        sdk.imageSearch(
+        sdk.searchByImage(
             params: params,
             successHandler: { (response: ViProductSearchResponse?) in
                 self.verifyResponse(response: response)
