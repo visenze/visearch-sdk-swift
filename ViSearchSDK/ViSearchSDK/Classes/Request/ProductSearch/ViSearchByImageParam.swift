@@ -30,7 +30,7 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
     
     public var imgSettings : ViImageSettings = ViImageSettings()
     
-    public var point : [String] = []
+    public var points: [ViPoint] = []
     
     public var compress_box: String? = nil
     
@@ -172,8 +172,14 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
             dict["search_all_objects"] = searchAllObjects ? "true" : "false"
         }
         
-        if !point.isEmpty {
-            dict["point"] = point
+        if points.count > 0 {
+            var pointArr : [String] = []
+            for point in points {
+                let pointComma = "\(point.x),\(point.y)"
+                pointArr.append(pointComma)
+            }
+            
+            dict["point"] = pointArr
         }
         
         return dict
