@@ -40,12 +40,12 @@
 
 ## 1. Overview
 
-This SDK contains two API that provides accurate, reliable and scalable search. It is an open source software to provide easy integration of ViSearch API and ProductSearch API with your iOS applications. See the table below for more API specific information:
+This SDK contains two sets of APIs that provide accurate, reliable and scalable search. It is an open source software to provide easy integration of ViSearch APIs and ProductSearch APIs with your iOS applications. See the table below for more API specific information:
 
 |API|Description|
 |---|---|
-|**ViSearch**|The ViSearch API provides two services (Data API and Search API) to let developers prepare image database and perform image searches efficiently. ViSearch API can be easily integrated into your web and mobile applications. It provides four search methods based on the ViSearch Solution APIs - [*Find Similar*](), [*You May Also Like*](), [*Search By Image*]() and [*Search By Color*](). For more details, see [ViSearch API Documentation](http://www.visenze.com/docs/overview/introduction).|
-|**ProductSearch**|With the release of Catalog system, the ProductSearch API provides a new set of product-based APIs that ideally can Select the right product image for indexing for best search performance, Aggregate search results on a product level instead of image level, Consistent data type in API response with catalog's schema. In the SDK, ProductSearch API is refered to as `ViProductSearch`.|
+|**ViSearch**| Four search methods are provided based on the ViSearch Solution APIs - [*Find Similar*](), [*You May Also Like*](), [*Search By Image*]() and [*Search By Color*](). For more details, see [ViSearch API Documentation](http://www.visenze.com/docs/overview/introduction).|
+|**ProductSearch**| ViSenze Discovery Suite provides your customers a better and more intuitive product search and discovery experience by helping them search, navigate and interact with products more easily. The ProductSearch API provides a new set of product-based APIs that work with ViSenze Catalog Manager. In the SDK, ProductSearch API is refered to as `ViProductSearch`.|
 
 For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-swift).
 
@@ -193,13 +193,13 @@ ViSearch.sharedInstance.client?.session = URLSession(configuration: (ViSearch.sh
 
 ### 3.2 ProductSearch
 
-`ProductSearch` **must** be initialized with an `appKey` and `placementId` **before** it can be used. Setting up configurations are the same as `ViSearch`.
+`ProductSearch` **must** be initialized with an `appKey` and `placementId` **before** it can be used. 
 
 ```swift
 import ViSearchSDK
 
 // initialize ProductSearch API using app key and placement id
-ViProductSearch.sharedInstance.setup(appKey: "YOUR_KEY", placementId: YOUR_ID)
+ViProductSearch.sharedInstance.setup(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID)
 ```
 
 ## 4. Solution APIs
