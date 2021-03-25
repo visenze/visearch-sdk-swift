@@ -27,7 +27,7 @@ open class ViProductSearchClient : ViSearchClient {
     /// POST API, forms the request to execute, results in starting an async URL data task
     ///
     /// - parameter path: Base URL for the endpoints
-    /// - parameter params: App key
+    /// - parameter params: query string parameters
     /// - parameter imageData: Data of a loaded image
     /// - parameter successHandler: Callback on success
     /// - parameter failureHandler: Callback on failure
@@ -49,6 +49,7 @@ open class ViProductSearchClient : ViSearchClient {
             cachePolicy: .useProtocolCachePolicy,
             timeoutInterval: timeoutInterval
         )
+        
         // if an image data is provided, then the request will use multi-part
         // form to send the image data, else the fallback is looking at imageUrl
         if let data = imageData {
@@ -56,7 +57,7 @@ open class ViProductSearchClient : ViSearchClient {
             request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
             request.httpBody = ViMultipartFormData.encode(imageData: data, boundary: boundary);
         }
-        // make tracking call to record the action
+        
         return httpRequest(
             method: ViHttpMethod.POST,
             request: request,
@@ -68,7 +69,7 @@ open class ViProductSearchClient : ViSearchClient {
     /// GET API, forms the request to execute, results in starting an async URL data task
     ///
     /// - parameter path: Base URL for the endpoints
-    /// - parameter params: App key
+    /// - parameter params: Query string parameters
     /// - parameter successHandler: Callback on success
     /// - parameter failureHandler: Callback on failure
     ///
@@ -83,13 +84,14 @@ open class ViProductSearchClient : ViSearchClient {
             apiEndPoint: path,
             searchParams: params
         )
+        
         // make request
         let request = NSMutableURLRequest(
             url: URL(string: url)!,
             cachePolicy: .useProtocolCachePolicy,
             timeoutInterval: timeoutInterval
         )
-        // make tracking call to record the action
+        
         return httpRequest(
             method: ViHttpMethod.GET,
             request: request,
