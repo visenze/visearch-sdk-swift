@@ -60,7 +60,7 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
     
     public var customParams : [String:String] = [:]
     
-    
+    // analytics related parameters
     public var vaUid : String? = nil
     
     public var vaSid : String? = nil

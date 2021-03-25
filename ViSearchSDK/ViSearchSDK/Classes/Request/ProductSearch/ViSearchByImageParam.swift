@@ -30,7 +30,8 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
     
     public var imgSettings : ViImageSettings = ViImageSettings()
     
-    // public var point: [Int]? = nil
+    public var point : [String] = []
+    
     
     /// Constructor using image URL
     ///
@@ -147,6 +148,10 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
         
         if let searchAllObjects = searchAllObjects {
             dict["search_all_objects"] = searchAllObjects ? "true" : "false"
+        }
+        
+        if !point.isEmpty {
+            dict["point"] = point
         }
         
         return dict
