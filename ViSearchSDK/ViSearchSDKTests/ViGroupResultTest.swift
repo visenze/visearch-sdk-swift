@@ -11,7 +11,7 @@ import XCTest
 class ViGroupResultTest: XCTestCase {
     
     private let RESPONSE: String = """
-    {
+    [{
         "group_by_value": "Pomelo",
         "result": [
         {
@@ -39,7 +39,7 @@ class ViGroupResultTest: XCTestCase {
             }
         }
         ]
-    }
+    }]
     """;
     
     override func setUp() {
@@ -51,13 +51,14 @@ class ViGroupResultTest: XCTestCase {
     }
     
     func testParse() {
-        let groupObject = parseMethod(text: RESPONSE)
+        let groupObjects = ViProductSearchResponse.parseGroupResults(RESPONSE)
         
-        XCTAssertNotNil(groupObject)
-        XCTAssertEqual(groupObject!.groupByValue, "Pomelo")
-        XCTAssertEqual(groupObject!.results.count, 2)
+        XCTAssertEqual(groupObjects.isEmpty, false)
+        XCTAssertNotNil(groupObjects[0])
+        XCTAssertEqual(groupObjects[0].groupByValue, "Pomelo")
+        XCTAssertEqual(groupObjects[0].results.count, 2)
         
-        let result = groupObject!.results[1]
+        let result = groupObjects[0].results[1]
         
         XCTAssertEqual(result.productId, "POMELO2-AF-SG_43d7a0fb6e12d1f1079e6efb38b9d392fa135cdd")
         XCTAssertEqual(result.mainImageUrl, "http://d3vhkxmeglg6u9.cloudfront.net/img/p/1/6/2/3/2/1/162321.jpg")
@@ -78,68 +79,5 @@ class ViGroupResultTest: XCTestCase {
         let value = price["value"]
         XCTAssertEqual(value, "54.0")
     }
-    
-    func parseMethod(text: String) -> ViGroupResult? {
-        do {
-            let data = text.data(using: .utf8)!
-            let dict = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! Dictionary<String, Any>
-            
-            let group = dict["group_by_value"] as! String
-            
-            let object = ViGroupResult(group: group)!
-            
-            if let res = dict["result"] as? [Any] {
-                object.results = [ViProduct]()
-                for jsonItem in res {
-                    if let dict = jsonItem as? [String:Any] {
-                        
-                        let item = ViProduct()
-                        
-                        if let productId = dict["product_id"] as? String {
-                            item.productId = productId
-                        }
-                        
-                        if let mainImageUrl = dict["main_image_url"] as? String {
-                            item.mainImageUrl = mainImageUrl
-                        }
-                        
-                        if let data = dict["data"] as? [String:Any] {
-                            item.data = data
-                        }
-                        
-                        if let score = dict["score"] as? Double {
-                            item.score = score
-                        }
-                        
-                        if let imageS3Url = dict["image_s3_url"] as? String {
-                            item.imageS3Url = imageS3Url
-                        }
-                        
-                        if let detect = dict["detect"] as? String {
-                            item.detect = detect
-                        }
-                        
-                        if let keyword = dict["keyword"] as? String {
-                            item.keyword = keyword
-                        }
-                        
-                        if let box = dict["box"] as? [Int] {
-                            if box.count >= 4 {
-                                item.box = ViBox(x1: box[0], y1: box[1], x2: box[2], y2: box[3])
-                            }
-                        }
-                        object.results.append(item)
-                    }
-                }
-            }
-            return object
-        }
-        catch {
-            print("\(type(of: self)).\(#function)[line:\(#line)] - error: Json response might be invalid. Error during processing:")
-            print ("\(error)\n")
-        }
-        return nil
-    }
-    
 }
 

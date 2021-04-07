@@ -123,6 +123,24 @@ open class ViProductSearchResponse : NSObject {
         
         return result
     }
+    
+   /// Returns an array of ViProduct that is parsed from a json array format string
+   ///
+   /// - parameter jsonString: The json formatted string containing an array of ViProducts
+   ///
+   /// - returns: An array of ViProducts
+    public static func parseProductResults(_ jsonString: String) -> [ViProduct] {
+        do{
+            let data = jsonString.data(using: .utf8)!
+            let jsonArray = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [Any]
+            return ViProductSearchResponse.parseProductResults(jsonArray)
+        }
+        catch {
+            print("\(type(of: self)).\(#function)[line:\(#line)] - error: Json response might be invalid. Error during processing:")
+            print ("\(error)\n")
+        }
+        return []
+    }
      
     /// Returns an array of ViProduct that is parsed from an array of json object
     ///
@@ -178,6 +196,24 @@ open class ViProductSearchResponse : NSObject {
         return results
     }
     
+   /// Returns an array of ViProductObjectResult that is parsed from a json array format string
+   ///
+   /// - parameter jsonString: The json formatted string containing an array of ViProductObjectResult
+   ///
+   /// - returns: An array of ViProductObjectResult
+    public static func parseObjectResults(_ jsonString: String) -> [ViProductObjectResult] {
+        do{
+            let data = jsonString.data(using: .utf8)!
+            let jsonArray = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [Any]
+            return ViProductSearchResponse.parseObjectResults(jsonArray)
+        }
+        catch {
+            print("\(type(of: self)).\(#function)[line:\(#line)] - error: Json response might be invalid. Error during processing:")
+            print ("\(error)\n")
+        }
+        return []
+    }
+    
     ///
     /// - parameter arr:
     ///
@@ -219,6 +255,24 @@ open class ViProductSearchResponse : NSObject {
             }
         }
         return results
+    }
+    
+   /// Returns an array of ViGroupResult that is parsed from a json array format string
+   ///
+   /// - parameter jsonString: The json formatted string containing an array of ViGroupResult
+   ///
+   /// - returns: An array of ViGroupResult
+    public static func parseGroupResults(_ jsonString: String) -> [ViGroupResult] {
+        do{
+            let data = jsonString.data(using: .utf8)!
+            let jsonArray = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [Any]
+            return ViProductSearchResponse.parseGroupResults(jsonArray)
+        }
+        catch {
+            print("\(type(of: self)).\(#function)[line:\(#line)] - error: Json response might be invalid. Error during processing:")
+            print ("\(error)\n")
+        }
+        return []
     }
     
     /// Returns an array of ViGroupResult that is parsed from an array of json object
