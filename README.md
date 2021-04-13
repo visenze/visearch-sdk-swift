@@ -5,45 +5,53 @@
 ---
 
 ## Table of Contents
- 1. [Overview](#1-overview)
- 2. [Setup](#2-setup)
-      - 2.1 [Run the Demo](#21-run-the-demo)
-      - 2.2 [Set up Xcode Project](#22-set-up-xcode-project)
-      - 2.3 [Import ViSearch Swift SDK](##23-import-visearch-swift-sdk)
-      - 2.4 [Add Privacy Usage Description](#24-add-privacy-usage-description)
- 3. [Initialization](#3-initialization)
- 4. [Solution APIs](#4-solution-apis)
-    - 4.1 [Visually Similar Recommendations](#41-visually-similar-recommendations)
-    - 4.2 [Search by Image](#42-search-by-image)
-	    - 4.2.1 [Selection Box](#421-selection-box)
-	    - 4.2.2 [Resizing Settings](#422-resizing-settings)
-    - 4.3 [Search by Color](#43-search-by-color)
-    - 4.4 [Multiple Products Search](#44-multiple-products-search)
- 5. [Search Results](#5-search-results)
- 6. [Advanced Search Parameters](#6-advanced-search-parameters)
-	  - 6.1 [Retrieving Metadata](#61-retrieving-metadata)
-	  - 6.2 [Filtering Results](#62-filtering-results)
-	  - 6.3 [Result Score](#63-result-score)
-	  - 6.4 [Automatic Object Recognition Beta](#64-automatic-object-recognition-beta)
-	  - 6.5 [Facets Filtering](#65-facets-filtering)
- 7. [Event Tracking](#7-event-tracking)
- 8. [Developer Notes](#8-developer-notes)
+
+1. [Overview](#1-overview)
+2. [Setup](#2-setup)
+   - 2.1 [Run the Demo](#21-run-the-demo)
+   - 2.2 [Set up Xcode Project](#22-set-up-xcode-project)
+   - 2.3 [Import ViSearch Swift SDK](##23-import-visearch-swift-sdk)
+   - 2.4 [Add Privacy Usage Description](#24-add-privacy-usage-description)
+3. [Initialization](#3-initialization)
+   - 3.1 [ViSearch](#31-visearch)
+   - 3.2 [ProductSearch](#32-viproductsearch)
+4. [Solution APIs](#4-solution-apis)
+   - 4.1 [ViSearch](#41-visearch)
+     - 4.1.1 [Visually Similar Recommendations](#411-visually-similar-recommendations)
+     - 4.1.2 [Search by Image](#412-search-by-image)
+       - 4.1.2.1 [Selection Box](#4121-selection-box)
+       - 4.1.2.2 [Resizing Settings](#4122-resizing-settings)
+     - 4.1.3 [Search by Color](#413-search-by-color)
+     - 4.1.4 [Multiple Products Search](#414-multiple-products-search)
+   - 4.2 [ProductSearch](#42-productsearch)
+5. [Search Results](#5-search-results)
+   - 5.1 [ViSearch](#51-visearch)
+   - 5.2 [ProductSearch](#52-productsearch)
+6. [Advanced Search Parameters](#6-advanced-search-parameters)
+   - 6.1 [Retrieving Metadata](#61-retrieving-metadata)
+   - 6.2 [Filtering Results](#62-filtering-results)
+   - 6.3 [Result Score](#63-result-score)
+   - 6.4 [Automatic Object Recognition Beta](#64-automatic-object-recognition-beta)
+   - 6.5 [Facets Filtering](#65-facets-filtering)
+7. [Event Tracking](#7-event-tracking)
+8. [Developer Notes](#8-developer-notes)
 
 ---
 
-
 ## 1. Overview
 
-ViSearch is an API that provides accurate, reliable and scalable image search. ViSearch API provides two services (Data API and Search API) to let the developers prepare image database and perform image searches efficiently. ViSearch API can be easily integrated into your web and mobile applications. For more details, see [ViSearch API Documentation](http://www.visenze.com/docs/overview/introduction).
+This SDK contains two sets of APIs that provide accurate, reliable and scalable search. It is an open source software to provide easy integration of ViSearch APIs and ProductSearch APIs with your iOS applications. See the table below for more API specific information:
 
-The ViSearch iOS SDK is an open source software to provide easy integration of ViSearch Search API with your iOS applications. It provides four search methods based on the ViSearch Solution APIs - Find Similar, You May Also Like, Search By Image and Search By Color. For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-swift).
+|API|Description|
+|---|---|
+|**ViSearch**| Four search methods are provided based on the ViSearch Solution APIs - [*Find Similar*](), [*You May Also Like*](), [*Search By Image*]() and [*Search By Color*](). For more details, see [ViSearch API Documentation](http://www.visenze.com/docs/overview/introduction).|
+|**ProductSearch**| ViSenze Discovery Suite provides your customers a better and more intuitive product search and discovery experience by helping them search, navigate and interact with products more easily. The ProductSearch API provides a new set of product-based APIs that work with ViSenze Catalog Manager. In the SDK, ProductSearch API is refered to as `ViProductSearch`.|
 
-> Current stable version: `1.5.0` (Swift 5+)
-> 
-> For Swift 3.0 please use version `1.3.0`.
+For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-swift).
 
+> Current stable version: `1.6.0` (Swift 5+)
+>
 > Supported iOS version: iOS 8.x and higher
-
 
 ## 2. Setup
 
@@ -141,6 +149,9 @@ You are done!
 iOS 10 now requires user permission to access camera and photo library. If your app requires these access, please add description for NSCameraUsageDescription, NSPhotoLibraryUsageDescription in the Info.plist. More details can be found [here](https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW24).
 
 ## 3. Initialization
+
+### 3.1 ViSearch
+
 `ViSearch` **must** be initialized with an `appKey` or `accessKey`/`secretKey` pair **before** it can be used.
 
 ```swift
@@ -178,10 +189,35 @@ ViSearch.sharedInstance.client?.session = URLSession(configuration: (ViSearch.sh
     
 ```
 
+### 3.2 ProductSearch
+
+`ProductSearch` **must** be initialized with an `appKey` and `placementId` **before** it can be used. 
+
+```swift
+import ViSearchSDK
+
+// initialize ProductSearch API using app key and placement id
+ViProductSearch.sharedInstance.setup(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID)
+
+// custom search endpoint
+ViProductSearch.sharedInstance.setup(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID, baseUrl:"https://custom-search.yourdomain.com")
+
+// configure timeout to 30s example. By default timeout is set 10s.
+ViProductSearch.sharedInstance.client?.timeoutInterval = 30
+ViProductSearch.sharedInstance.client?.sessionConfig.timeoutIntervalForRequest = 30
+ViProductSearch.sharedInstance.client?.sessionConfig.timeoutIntervalForResource = 30
+ViProductSearch.sharedInstance.client?.session = URLSession(configuration: (ViProductSearch.sharedInstance.client?.sessionConfig)!)
+
+
+```
+
+
 
 ## 4. Solution APIs
 
-### 4.1 Visually Similar Recommendations
+### 4.1 ViSearch
+
+#### 4.1.1 Visually Similar Recommendations
 
 GET /search
 
@@ -208,7 +244,7 @@ ViSearch.sharedInstance.findSimilar( params: params!,
 ...
 ```
 
-### 4.2 Search by Image
+#### 4.1.2 Search by Image
 
 POST /uploadsearch
 
@@ -284,7 +320,9 @@ ViSearch.sharedInstance.uploadSearch(params: params!,
 
 ...
 ```
-#### 4.2.1 Selection Box
+
+##### 4.1.2.1 Selection Box
+
 If the object you wish to search for takes up only a small portion of your image, or other irrelevant objects exists in the same image, chances are the search result could become inaccurate. Use the Box parameter to refine the search area of the image to improve accuracy. The box coordinated is set with respect to the original size of the uploading image. Note: the coordinate system uses pixel as unit instead of point.
 
 ```swift
@@ -303,7 +341,8 @@ params!.box = box
 ...
 ```
 
-#### 4.2.2 Resizing Settings
+##### 4.1.2.2 Resizing Settings
+
 When performing upload search, you may notice the increased search latency with increased image file size. This is due to the increased time spent in network transferring your images to the ViSearch server, and the increased time for processing larger image files in ViSearch.
 
 To reduce upload search latency, by default the uploadSearch method makes a copy of your image file and resizes the copy to 512x512 pixels if one of the original dimensions exceed 512 pixels. This is the optimized size to lower search latency while not sacrificing search accuracy for general use cases:
@@ -337,7 +376,7 @@ params?.img_settings = ViImageSettings(size: CGSize(width: 800, height: 800), qu
         
 ```
 
-### 4.3 Search by Color
+#### 4.1.3 Search by Color
 
 GET /colorsearch
 
@@ -367,7 +406,7 @@ client.colorSearch( params: params!,
 ...
 ```
 
-### 4.4 Multiple Products Search
+#### 4.1.4 Multiple Products Search
 
 POST /discoversearch
 
@@ -444,7 +483,80 @@ ViSearch.sharedInstance.discoverSearch(params: params!,
 ...
 ```
 
+### 4.2 ProductSearch
+
+#### 4.2.1 Search By Image
+
+POST /v1/product/search_by_image
+
+Searching by Image can be done with 3 different parameters - image URL, image ID, image File.
+
+* Using Image URL
+
+```swift
+import ViSearchSDK
+...
+let params = ViSearchByImageParam(imUrl: "IMAGE_URL")
+```
+
+* Using Image ID (the ID can be retrieved from previous search responses)
+
+```swift
+import ViSearchSDK
+...
+let params = ViSearchByImageParam(im_id: "IMAGE_ID")
+```
+
+* Using an Image File (UIImage)
+
+```swift
+import ViSearchSDK
+...
+let params = ViSearchByImageParam(image: UIImage(contentsOfFile: "IMAGE_FILEPATH"))
+```
+
+Running the search:
+
+```swift
+ViProductSearch.sharedInstance.searchByImage(
+    params: params,
+    successHandler: { 
+        (response: ViProductSearchResponse?) -> Void in
+        // your function to process response
+    },
+    failureHandler: {
+        (err: Error) -> Void in 
+        // your function to handle error
+    }
+)
+```
+
+#### 4.2.2 Visual Similar
+
+GET /v1/product/search_by_id/{product-id}
+
+```swift
+import ViSearchSDK
+...
+let params = ViSearchByIdParam(productId: "PRODUCT_ID")
+
+ViProductSearch.sharedInstance.searchById(
+    successHandler: { 
+        (response: ViProductSearchResponse?) -> Void in
+        // your function to process response
+    },
+    failureHandler: {
+        (err: Error) -> Void in 
+        // your function to handle error
+    }
+)
+```
+
 ## 5. Search Results
+
+`ViSearch` and `ProductSearch` each have their own responses, but they share many similarities, more details can be found in this section.
+
+### 5.1 ViSearch
 
 After a successful search request, a list of results are passed to the callback function in the form of **ViResponseData**.  You can use the following properties from the result to fulfill your own purpose.
 
@@ -512,6 +624,29 @@ params.limit = 30;
 // start searching
 ...
 ```
+
+### 5.2 ProductSearch
+
+After a successful search request, the result is passed to the callback function in the form of **ViProductSearchResponse**.  You can use the following properties from the result to fulfill your own purpose.
+
+|Name|Type|Description|
+|---|---|---|
+|requestId|String|Same as ViSearch|
+|status|String|The request status, either “OK”, “warning”, or “fail”|
+|imageId|String|Image ID. Can be used to search again without reuploading|
+|page|Int|The result page number|
+|limit|Int|The number of results per page|
+|total|Int|Total number of search result.|
+|error|ViErrorMsg|Error message and code if the request was not successful i.e. when status is “warning” or “fail”|
+|productTypes|[ViProductType]|Detected product types and their bounding box in (x1,y1,x2,y2) format|
+|result|[ViProduct]|The list of products in the search results. Important fields for first release. If missing, it will be set to blank. Note that we are displaying customer’s original catalog fields in “data” field|
+|catalogFieldsMapping|[String:String]|Original catalog’s fields mapping|
+|facets|[ViFacet]|List of facet fields value and response for filtering|
+|productInfo|[String:Any]|Only applicable for VSR, return query product info|
+|objects|[ViProductObjectResult]| |
+|groupResults|[ViGroupResult]|Only applicable when group_by is set|
+|groupByKey|String|Only applicable when group_by is set|
+|querySysMeta|[String:String]|System meta for query image / product|
 
 ## 6. Advanced Search Parameters
 
