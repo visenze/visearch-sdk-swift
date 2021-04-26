@@ -10,7 +10,7 @@ import XCTest
 
 class ViProductSearchParamTest: XCTestCase {
     public static let SBI_ENDPOINT = "https://search-dev.visenze.com/v1/product/search_by_image?";
-    public static let VSR_ENDPOINT = "https://search-dev.visenze.com/v1/product/search_by_id?";
+    public static let VSR_ENDPOINT = "https://search-dev.visenze.com/v1/product/recommendations?";
     public static let PARAM_DESIRED_SIMPLE = "app_key=APP_KEY&placement_id=1";
     public static let PARAM_DESIRED_COMPLEX = "app_key=APP_KEY&placement_id=1&return_fields_mapping=true&score=true&text_filters=A%3AB&text_filters=C%3AD";
     
