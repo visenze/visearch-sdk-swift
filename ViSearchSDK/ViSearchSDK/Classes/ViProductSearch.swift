@@ -12,7 +12,7 @@ import ViSenzeAnalytics
 open class ViProductSearch : NSObject {
     public static let BASE_URL = "https://search.visenze.com"
     public static let SBI_ENDPOINT = "/v1/product/search_by_image"
-    public static let VSR_ENDPOINT = "/v1/product/search_by_id"
+    public static let VSR_ENDPOINT = "/v1/product/recommendations"
     
     public static let sharedInstance = ViProductSearch();
     
