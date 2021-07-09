@@ -25,4 +25,9 @@ open class ViProduct {
     public var keyword : String? = nil
     
     public var box : ViBox? = nil
+    
+    // recommendation related
+    public var tags: [String: Any]?
+    
+    public var alternatives: [ViProduct] = []
 }
