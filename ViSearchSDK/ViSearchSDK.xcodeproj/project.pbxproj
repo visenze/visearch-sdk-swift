@@ -41,6 +41,7 @@
 		BDB1F7D01DA4EBBC000C5EAA /* ViProductTypeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB1F7CF1DA4EBBC000C5EAA /* ViProductTypeList.swift */; };
 		BDB1F7DC1DA5EB2A000C5EAA /* ViUploadSearchParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB1F7DB1DA5EB2A000C5EAA /* ViUploadSearchParams.swift */; };
 		BDB1F7DE1DA60029000C5EAA /* ViMultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB1F7DD1DA60029000C5EAA /* ViMultipartFormData.swift */; };
+		BDB76A202697F016000C750A /* ViRecParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB76A1F2697F016000C750A /* ViRecParams.swift */; };
 		BDB8B79425F2280E0034DF18 /* ViSenzeAnalytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB8B79025F227F10034DF18 /* ViSenzeAnalytics.xcframework */; };
 		BDB8B79525F2280E0034DF18 /* ViSenzeAnalytics.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BDB8B79025F227F10034DF18 /* ViSenzeAnalytics.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BDC0410F24651DD6008C58D0 /* ViPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC0410E24651DD6008C58D0 /* ViPoint.swift */; };
@@ -114,6 +115,7 @@
 		BDB1F7CF1DA4EBBC000C5EAA /* ViProductTypeList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViProductTypeList.swift; sourceTree = "<group>"; };
 		BDB1F7DB1DA5EB2A000C5EAA /* ViUploadSearchParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViUploadSearchParams.swift; sourceTree = "<group>"; };
 		BDB1F7DD1DA60029000C5EAA /* ViMultipartFormData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViMultipartFormData.swift; sourceTree = "<group>"; };
+		BDB76A1F2697F016000C750A /* ViRecParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViRecParams.swift; sourceTree = "<group>"; };
 		BDB8B79025F227F10034DF18 /* ViSenzeAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ViSenzeAnalytics.xcframework; path = Carthage/Build/ViSenzeAnalytics.xcframework; sourceTree = "<group>"; };
 		BDC0410E24651DD6008C58D0 /* ViPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViPoint.swift; sourceTree = "<group>"; };
 		BDC0963B1DA34FC0002166B4 /* ViSearchParamsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViSearchParamsTests.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				BD7DEDAA1DA2B6C400CDF6DE /* ViColorSearchParams.swift */,
 				BD7DEDAE1DA2C10100CDF6DE /* ViImageSettings.swift */,
 				BD7DEDB01DA2C2C900CDF6DE /* ViSearchParams.swift */,
+				BDB76A1F2697F016000C750A /* ViRecParams.swift */,
 				BD06D1371DA3F59A00EC9B38 /* ViRequestSerialization.swift */,
 				BDB1F7DB1DA5EB2A000C5EAA /* ViUploadSearchParams.swift */,
 				BDB1F7DD1DA60029000C5EAA /* ViMultipartFormData.swift */,
@@ -417,6 +420,7 @@
 				BD06D1381DA3F59A00EC9B38 /* ViRequestSerialization.swift in Sources */,
 				BD5BE9EF25F61D49004995D0 /* ViErrorMsg.swift in Sources */,
 				BDB1F7DC1DA5EB2A000C5EAA /* ViUploadSearchParams.swift in Sources */,
+				BDB76A202697F016000C750A /* ViRecParams.swift in Sources */,
 				BDB1F7DE1DA60029000C5EAA /* ViMultipartFormData.swift in Sources */,
 				BD50FD621DA8B4220035FD78 /* UIColorExtension.swift in Sources */,
 				BD7DEDB11DA2C2C900CDF6DE /* ViSearchParams.swift in Sources */,

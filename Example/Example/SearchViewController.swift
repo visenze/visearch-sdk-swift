@@ -251,7 +251,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SwiftHUEColor
     
         let param = textField.text!.trimmingCharacters(in: .whitespaces)
         
-        let params = ViSearchParams(imName: param)
+        let params = ViRecParams(imName: param)
         params?.score = true // optional: display score in result
         params!.fl = ["im_url"] // retrieve image url. By default the API only return im_name if does not specify fl parameter
         params!.limit = 15 // display 15 results per page

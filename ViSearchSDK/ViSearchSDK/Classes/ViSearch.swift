@@ -115,7 +115,7 @@ open class ViSearch: NSObject {
     }
     
     /// You may also like API
-    @discardableResult public func recommendation(params: ViSearchParams,
+    @discardableResult public func recommendation(params: ViRecParams,
                                                   successHandler: @escaping ViSearchClient.SuccessHandler,
                                                   failureHandler: @escaping ViSearchClient.FailureHandler
         ) -> URLSessionTask?

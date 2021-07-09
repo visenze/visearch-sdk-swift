@@ -12,7 +12,7 @@ public enum ViAPIEndPoints: String {
     case COLOR_SEARCH  = "colorsearch"
     case ID_SEARCH     = "search"
     case UPLOAD_SEARCH = "uploadsearch"
-    case REC_SEARCH    = "recommendation"
+    case REC_SEARCH    = "recommendations"
     case DISCOVER_SEARCH = "discoversearch"
     case TRACK         = "__aq.gif"
 }
@@ -226,7 +226,7 @@ open class ViSearchClient: NSObject, URLSessionDelegate {
         return makeGetApiRequest(params: params, apiEndPoint: .ID_SEARCH, successHandler: successHandler, failureHandler: failureHandler)
     }
     
-    public func recommendation(params: ViSearchParams,
+    public func recommendation(params: ViRecParams,
                             successHandler: @escaping SuccessHandler,
                             failureHandler: @escaping FailureHandler
         ) -> URLSessionTask
