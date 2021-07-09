@@ -22,6 +22,64 @@ class ViSearchSDKTests: XCTestCase {
     }
     
 
+    func testRecommendationResponse() {
+        
+        let urlResponse = URLResponse()
+        
+        let json: String = """
+        {
+          "status": "OK",
+          "method": "recommendations",
+          "algorithm": "VSR",
+          "error": [],
+          "page": 1,
+          "limit": 10,
+          "total": 10,
+          "result": [
+            {
+              "im_name": "top-name-1",
+              "value_map": {
+                "title": "top-name-001"
+              },
+              "tags": {
+                "category": "top"
+              },
+              "alternatives": [
+                {
+                  "im_name": "top-name-2",
+                  "value_map": {
+                    "title": "top-name-002"
+                  }
+                },
+                {
+                  "im_name": "top-name-3",
+                  "value_map": {
+                    "title": "top-name-003"
+                  }
+                }
+              ]
+            }
+          ],
+          "reqid": "1156773933236717419"
+        }
+        """
+        
+        let data = json.data(using: .utf8)!
+    
+        let res = ViResponseData(response: urlResponse, data: data)
+        
+        XCTAssertEqual("VSR", res.algorithm!)
+        XCTAssertEqual("recommendations", res.method)
+        let product = res.result[0]
+        XCTAssertEqual("top-name-1", product.im_name)
+        XCTAssertEqual("top", product.tags!["category"] as! String )
+        XCTAssertEqual(2, product.alternatives.count)
+        XCTAssertEqual("top-name-2", product.alternatives[0].im_name)
+        XCTAssertEqual("top-name-003", product.alternatives[1].metadataDict!["title"] as! String)
+        
+        
+    }
+        
     /*
     func testVSR(){
         let expectation = self.expectation(description: "wait_for_response")
