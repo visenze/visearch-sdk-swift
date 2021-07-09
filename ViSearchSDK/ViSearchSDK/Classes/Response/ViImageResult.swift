@@ -18,6 +18,12 @@ open class ViImageResult: NSObject {
     /// See http://developers.visenze.com/api/?shell#retrieving-metadata for details
     public var metadataDict: [String: Any]?
     
+    /// only applicable for STL recommendations
+    public var alternatives: [ViImageResult] = []
+    
+    /// only applicable for STL recommendations
+    public var tags: [String: Any]?
+    
     public init?(_ im_name: String) {
         if im_name.isEmpty{
             print("\(type(of: self)).\(#function)[line:\(#line)] - error: im_name is missing")

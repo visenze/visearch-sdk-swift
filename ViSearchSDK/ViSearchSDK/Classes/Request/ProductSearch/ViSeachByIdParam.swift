@@ -16,6 +16,9 @@ open class ViSearchByIdParam : ViBaseProductSearchParam {
     
     public var returnProductInfo : Bool? = nil
     
+    // for recommendation
+    public var altLimit : Int? = nil
+    
     /// Constructor, checks for non-empty productId
     ///
     /// - parameter productId: Product's ID, retrieved from ViProduct if prior search was made
@@ -38,6 +41,11 @@ open class ViSearchByIdParam : ViBaseProductSearchParam {
         if let returnProductInfo = returnProductInfo {
             dict["return_product_info"] = returnProductInfo ? "true" : "false"
         }
+        
+        if let altLimit = self.altLimit {
+            dict["alt_limit"] = String(altLimit)
+        }
+        
         return dict
     }
 }

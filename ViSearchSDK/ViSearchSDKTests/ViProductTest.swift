@@ -57,5 +57,91 @@ class ViProductTest: XCTestCase {
         let value = price["value"]
         XCTAssertEqual(value, "44.0")
     }
+    
+    func testProductSearchRecResponse() {
+        let urlResponse = URLResponse()
+        
+        let json: String = """
+        {
+            "reqid": "017a3bb0a050fb56218beb28b9e5ec",
+            "status": "OK",
+            "method": "product/recommendations",
+            "page": 1,
+            "limit": 10,
+            "total": 2,
+            "product_types": [],
+            "result": [
+                {
+                    "product_id": "top-name-1",
+                    "main_image_url": "https://localhost/top-name-1.jpg",
+                    "data": {
+                        "title": "top-name-001"
+                    },
+                    "tags": {
+                        "category": "top"
+                    },
+                    "alternatives": [
+                        {
+                            "product_id": "top-name-2",
+                            "main_image_url": "https://localhost/top-name-2.jpg",
+                            "data": {
+                                "title": "top-name-002"
+                            }
+                        },
+                        {
+                            "product_id": "top-name-3",
+                            "main_image_url": "https://localhost/top-name-3.jpg",
+                            "data": {
+                                "title": "top-name-003"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "product_id": "pants-name-1",
+                    "main_image_url": "https://localhost/pants-name-1.jpg",
+                    "data": {
+                        "title": "pants-name-001"
+                    },
+                    "tags": {
+                        "category": "pants"
+                    },
+                    "alternatives": [
+                        {
+                            "product_id": "pants-name-2",
+                            "main_image_url": "https://localhost/pants-name-2.jpg",
+                            "data": {
+                                "title": "pants-name-002"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "strategy": {
+                "id": 1,
+                "name": "Visually similar",
+                "algorithm": "VSR"
+            },
+            "alt_limit": 5
+        }
+
+        """
+        
+        let data = json.data(using: .utf8)!
+        
+        let res = ViProductSearchResponse(response: urlResponse, data: data)
+        
+        let strategy = res.strategy!
+        XCTAssertEqual(1, strategy.strategyId!)
+        XCTAssertEqual("VSR", strategy.algorithm!)
+        XCTAssertEqual("Visually similar", strategy.name!)
+        XCTAssertEqual("top", res.result[0].tags!["category"] as? String)
+        
+        XCTAssertEqual(2, res.result[0].alternatives.count)
+        XCTAssertEqual("top-name-2", res.result[0].alternatives[0].productId!)
+        XCTAssertEqual("top-name-003", res.result[0].alternatives[1].data["title"] as! String)
+        
+        
+    }
 }
 

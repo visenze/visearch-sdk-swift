@@ -42,6 +42,8 @@ open class ViProductSearchResponse : NSObject {
     
     public var querySysMeta : [String:String] = [:]
     
+    public var strategy: ViStrategy? = nil
+    
     /// Constructor, uses the raw response from the URL query and parses it into the relevant data fields
     ///
     /// - parameter response: Response gotten from the URL request
@@ -61,6 +63,10 @@ open class ViProductSearchResponse : NSObject {
             
             if let err = json["error"] as? [String:Any] {
                 error = ViProductSearchResponse.parseErrorMsg(err: err)
+            }
+            
+            if let strategyDict = json["strategy"] as? [String:Any] {
+                strategy = ViProductSearchResponse.parseStrategy(strategyDict)
             }
             
             if let pTypesJson = json["product_types"] as? [Any] {
@@ -124,6 +130,16 @@ open class ViProductSearchResponse : NSObject {
         return result
     }
     
+    private static func parseStrategy(_ strategyDict:  [String:Any]) -> ViStrategy {
+        let result = ViStrategy()
+        
+        result.strategyId = strategyDict["id"] as? Int
+        result.name = strategyDict["name"] as? String
+        result.algorithm = strategyDict["algorithm"] as? String
+        
+        return result
+    }
+    
    /// Returns an array of ViProduct that is parsed from a json array format string
    ///
    /// - parameter jsonString: The json formatted string containing an array of ViProducts
@@ -166,6 +182,14 @@ open class ViProductSearchResponse : NSObject {
                 
                 if let data = dict["data"] as? [String:Any] {
                     item.data = data
+                }
+                
+                if let tags = dict["tags"] as? [String:Any] {
+                    item.tags = tags
+                }
+                
+                if let alt = dict["alternatives"] as? [Any] {
+                    item.alternatives = ViProductSearchResponse.parseProductResults(alt)
                 }
                 
                 if let score = dict["score"] as? Double {

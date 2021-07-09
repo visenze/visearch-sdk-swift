@@ -28,6 +28,9 @@ open class ViResponseData: NSObject {
     /// request method
     public var method: String?
     
+    /// only applicable for Recommendations endpoint
+    public var algorithm: String?
+    
     /// the unique ID for uploaded image, only visible for uploadsearch / Search By Image API.
     public var im_id: String?
     
@@ -73,17 +76,14 @@ open class ViResponseData: NSObject {
     
     /// MARK: initializer
     public init(response: URLResponse, data: Data) {
-        if let httpResponse = response as? HTTPURLResponse {
-            if let reqId = httpResponse.allHeaderFields["X-Log-ID"] as? String {
-                self.reqId = reqId
-            }
-        }
-        
         do{
             let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! Dictionary<String, Any>
+            
+            reqId = json["reqid"] as? String
             status = json["status"] as! String
             method = json["method"] as? String
             im_id  = json["im_id"] as? String
+            algorithm = json["algorithm"] as? String
             
             if let errorArr = json["error"] as? [String] {
                 self.error = errorArr
@@ -218,17 +218,23 @@ open class ViResponseData: NSObject {
         for jsonItem in arr {
             if let dict = jsonItem as? [String:Any] {
                 let im_name = dict["im_name"] as! String
-                let item = ViImageResult(im_name)
-                if(item != nil)
-                {
-                    item?.score = parseFloat(dict, "score")
+                
+                if let item = ViImageResult(im_name) {
+                    item.score = parseFloat(dict, "score")
                     
-                    item?.metadataDict = dict["value_map"] as? [String: Any]
-                    if(item?.metadataDict != nil){
-                        item?.im_url = item?.metadataDict?["im_url"] as? String
+                    item.metadataDict = dict["value_map"] as? [String: Any]
+                    
+                    if (item.metadataDict != nil) {
+                        item.im_url = item.metadataDict?["im_url"] as? String
                     }
                     
-                    results.append(item!)
+                    item.tags = dict["tags"] as? [String: Any]
+                    
+                    if let alternatives = dict["alternatives"] as? [Any] {
+                        item.alternatives = ViResponseData.parseResults(alternatives)
+                    }
+                    
+                    results.append(item)
                 }
                 else{
                     print("im_name is missing in json result")
