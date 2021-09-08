@@ -15,7 +15,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'ViSenzeAnalytics', '~>0.1.2'
+    pod 'ViSenzeAnalytics', '~>0.1.3'
 end
 ...
 ```
@@ -59,6 +59,11 @@ tracker.sendEvent(transEvent)
 # send Add to Cart Event
 let add2Cart = VaEvent.newAdd2CartEvent(queryId: "ViSearch reqid in API response", pid: "product ID", imgUrl: "product image URL", pos: 3)
 tracker.sendEvent(add2Cart)
+
+# send result load event
+let resLoadEvent = VaEvent.newResultLoadEvent(queryId: "xxx", pid:"your query product id")
+tracker.sendEvent(resLoadEvent)
+
 ```
 
 

@@ -49,7 +49,7 @@ This SDK contains two sets of APIs that provide accurate, reliable and scalable 
 
 For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-swift).
 
-> Current stable version: `1.7.0` (Swift 5+)
+> Current stable version: `1.7.1` (Swift 5+)
 >
 > Supported iOS version: iOS 8.x and higher
 
@@ -865,6 +865,10 @@ tracker.sendEvent(transEvent)
 # send Add to Cart Event
 let add2Cart = VaEvent.newAdd2CartEvent(queryId: "ViSearch reqid in API response", pid: "product ID", imgUrl: "product image URL", pos: 3)
 tracker.sendEvent(add2Cart)
+
+# send result load event
+let resLoadEvent = VaEvent.newResultLoadEvent(queryId: "xxx", pid:"your query product id")
+tracker.sendEvent(resLoadEvent)
  
 ```
 

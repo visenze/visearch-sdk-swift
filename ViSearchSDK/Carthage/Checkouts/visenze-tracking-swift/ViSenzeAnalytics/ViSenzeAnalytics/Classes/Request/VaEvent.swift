@@ -29,6 +29,7 @@ public enum VaEventAction: String {
     case APP_UNINSTALL = "app_uninstall"
     case TRANSACTION = "transaction"
     case ADD_TO_CART = "add_to_cart"
+    case RESULT_LOAD = "result_load"
 }
 
 public class VaEvent: VaParamsProtocol {
@@ -210,6 +211,20 @@ public class VaEvent: VaParamsProtocol {
         transEvnt?.value = String(value)
         
         return transEvnt
+    }
+    
+    public static func newResultLoadEvent(queryId: String, pid: String?) -> VaEvent? {
+        if queryId.isEmpty {
+            print("ViSenze Analytics - queryId is missing for result_load event")
+            return nil
+        }
+        
+    
+        let resultLoadEvt = VaEvent(action: VaEventAction.RESULT_LOAD.rawValue)
+        resultLoadEvt?.queryId = queryId
+        resultLoadEvt?.pid = pid
+        
+        return resultLoadEvt
     }
     
     
