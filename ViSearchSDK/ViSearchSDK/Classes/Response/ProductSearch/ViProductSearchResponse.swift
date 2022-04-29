@@ -44,6 +44,8 @@ open class ViProductSearchResponse : NSObject {
     
     public var strategy: ViStrategy? = nil
     
+    public var experiment: ViExperiment? = nil
+    
     /// Constructor, uses the raw response from the URL query and parses it into the relevant data fields
     ///
     /// - parameter response: Response gotten from the URL request
@@ -67,6 +69,10 @@ open class ViProductSearchResponse : NSObject {
             
             if let strategyDict = json["strategy"] as? [String:Any] {
                 strategy = ViProductSearchResponse.parseStrategy(strategyDict)
+            }
+            
+            if let expDict = json["experiment"] as? [String:Any] {
+                experiment = ViProductSearchResponse.parseExperiment(expDict)
             }
             
             if let pTypesJson = json["product_types"] as? [Any] {
@@ -111,6 +117,15 @@ open class ViProductSearchResponse : NSObject {
 
     }
     
+    // return whether the results are empty due to A/B test setting of returning no recommendations
+    public func experimentNoRecommendation() -> Bool {
+        if let experiment = self.experiment {
+            return experiment.expNoRecommendation
+        }
+        
+        return false
+    }
+    
     /// Returns a ViErrorMsg class that is parsed from a json-converted dictionary
     ///
     /// - parameter err: Json converted dictionary for the "error" field
@@ -136,6 +151,20 @@ open class ViProductSearchResponse : NSObject {
         result.strategyId = strategyDict["id"] as? Int
         result.name = strategyDict["name"] as? String
         result.algorithm = strategyDict["algorithm"] as? String
+        
+        return result
+    }
+    
+    private static func parseExperiment(_ experimentDict: [String:Any]) -> ViExperiment {
+        let result = ViExperiment()
+        
+        result.experimentId = experimentDict["experiment_id"] as? Int
+        result.variantId = experimentDict["variant_id"] as? Int
+        result.variantName = experimentDict["variant_name"] as? String
+        result.strategyId = experimentDict["strategy_id"] as? Int
+        if let expNoRecommendation = experimentDict["experiment_no_recommendation"] as? Bool {
+            result.expNoRecommendation = expNoRecommendation
+        }
         
         return result
     }
@@ -182,6 +211,10 @@ open class ViProductSearchResponse : NSObject {
                 
                 if let data = dict["data"] as? [String:Any] {
                     item.data = data
+                }
+                
+                if let vsData = dict["vs_data"] as? [String:Any] {
+                    item.vsData = vsData
                 }
                 
                 if let tags = dict["tags"] as? [String:Any] {

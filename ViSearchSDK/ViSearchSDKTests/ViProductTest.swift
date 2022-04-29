@@ -141,7 +141,53 @@ class ViProductTest: XCTestCase {
         XCTAssertEqual("top-name-2", res.result[0].alternatives[0].productId!)
         XCTAssertEqual("top-name-003", res.result[0].alternatives[1].data["title"] as! String)
         
+    }
+    
+    func testExperimentResponse() {
+        let urlResponse = URLResponse()
+        
+        let json: String = """
+        {
+            "reqid": "0180602bd8e119333d39b3f7a9fbf3",
+            "status": "OK",
+            "method": "product/recommendations",
+            "page": 1,
+            "limit": 10,
+            "total": 1000,
+            "product_types": [],
+            "result": [
+                
+            ],
+            "strategy": {
+                "id": 215,
+                "name": "test01",
+                "algorithm": "VSR"
+            },
+            "experiment": {
+                "experiment_id": 522,
+                "variant_id": 2019,
+                "variant_name": "a",
+                "strategy_id": 3,
+                "experiment_no_recommendation": true
+            }
+        }
+
+        """
+        
+        let data = json.data(using: .utf8)!
+        
+        let res = ViProductSearchResponse(response: urlResponse, data: data)
+        
+        let experiment = res.experiment!
+        XCTAssertEqual(3, experiment.strategyId!)
+        XCTAssertEqual(522, experiment.experimentId!)
+        XCTAssertEqual(2019, experiment.variantId!)
+        XCTAssertEqual("a", experiment.variantName!)
+        XCTAssertTrue(experiment.expNoRecommendation)
+        XCTAssertTrue(res.experimentNoRecommendation())
         
     }
+    
+    
 }
 
