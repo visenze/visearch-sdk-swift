@@ -6,7 +6,7 @@
 //  Copyright © 2021 Hung. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 open class ViStrategy: NSObject {
     public var strategyId : Int? = nil

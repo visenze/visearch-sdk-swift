@@ -52,6 +52,7 @@
 		BDEA8FA1260453710002DD96 /* ViProductTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEA8FA0260453710002DD96 /* ViProductTest.swift */; };
 		BDEA8FA4260453890002DD96 /* ViProductObjectResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEA8FA3260453890002DD96 /* ViProductObjectResultTest.swift */; };
 		BDEA8FA7260453970002DD96 /* ViGroupResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEA8FA6260453970002DD96 /* ViGroupResultTest.swift */; };
+		BDF87E23281BCD8D0040E0D4 /* ViExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF87E22281BCD8D0040E0D4 /* ViExperiment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +127,7 @@
 		BDEA8FA0260453710002DD96 /* ViProductTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViProductTest.swift; sourceTree = "<group>"; };
 		BDEA8FA3260453890002DD96 /* ViProductObjectResultTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViProductObjectResultTest.swift; sourceTree = "<group>"; };
 		BDEA8FA6260453970002DD96 /* ViGroupResultTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViGroupResultTest.swift; sourceTree = "<group>"; };
+		BDF87E22281BCD8D0040E0D4 /* ViExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViExperiment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 				BD5F70572601F1B100132A1F /* ViProductObjectResult.swift */,
 				BD72A39F25FF0FA1005C8BC0 /* ViGroupResult.swift */,
 				BDB76A2526983C6C000C750A /* ViStrategy.swift */,
+				BDF87E22281BCD8D0040E0D4 /* ViExperiment.swift */,
 			);
 			path = ProductSearch;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				BD7DEDAF1DA2C10100CDF6DE /* ViImageSettings.swift in Sources */,
 				BD7020EF1E49BB99006BAE40 /* ViFacetItem.swift in Sources */,
 				BD6CADF325F5C1C600012929 /* ViSearchByImageParam.swift in Sources */,
+				BDF87E23281BCD8D0040E0D4 /* ViExperiment.swift in Sources */,
 				BD3A860125F22B6400BB71CF /* ViProductSearch.swift in Sources */,
 				BD5F70582601F1B100132A1F /* ViProductObjectResult.swift in Sources */,
 				BDB76A2626983C6C000C750A /* ViStrategy.swift in Sources */,
