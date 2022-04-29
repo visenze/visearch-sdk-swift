@@ -49,7 +49,7 @@ This SDK contains two sets of APIs that provide accurate, reliable and scalable 
 
 For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-swift).
 
-> Current stable version: `1.7.1` (Swift 5+)
+> Current stable version: `1.8.0` (Swift 5+)
 >
 > Supported iOS version: iOS 8.x and higher
 
@@ -110,7 +110,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'ViSearchSDK', '~>1.5.0'
+    pod 'ViSearchSDK', '~>1.8.0'
 end
 ...
 ```

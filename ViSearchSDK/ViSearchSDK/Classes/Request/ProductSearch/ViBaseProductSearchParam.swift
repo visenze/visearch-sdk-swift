@@ -22,6 +22,10 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
     
     public var attributesToGet : [String] = []
     
+    public var vsAttributesToGet : [String] = []
+    
+    public var vsConfig : [String:String] = [:]
+    
     public var facets : [String] = []
     
     public var facetsLimit : Int? = nil
@@ -135,6 +139,14 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
         
         if !attributesToGet.isEmpty {
             dict["attrs_to_get"] = attributesToGet
+        }
+        
+        if !vsAttributesToGet.isEmpty {
+            dict["vs_attrs_to_get"] = vsAttributesToGet
+        }
+        
+        if !vsConfig.isEmpty {
+            dict["vs_config"] = toStringArr(dict: vsConfig)
         }
         
         if facets.count > 0 {
