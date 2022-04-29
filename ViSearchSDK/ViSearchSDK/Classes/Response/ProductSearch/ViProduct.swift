@@ -16,6 +16,8 @@ open class ViProduct {
     
     public var data : [String:Any] = [:]
     
+    public var vsData : [String:Any] = [:]
+    
     public var score : Double? = nil
     
     public var imageS3Url : String? = nil

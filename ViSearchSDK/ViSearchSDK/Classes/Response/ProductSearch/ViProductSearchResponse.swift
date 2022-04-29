@@ -184,6 +184,10 @@ open class ViProductSearchResponse : NSObject {
                     item.data = data
                 }
                 
+                if let vsData = dict["vs_data"] as? [String:Any] {
+                    item.vsData = vsData
+                }
+                
                 if let tags = dict["tags"] as? [String:Any] {
                     item.tags = tags
                 }
