@@ -122,7 +122,7 @@ open class ViProductSearch : NSObject {
     
     /// return session ID
     public func getSid() -> String {
-        return VaSessionManager.sharedInstance.getSessionId()()
+        return VaSessionManager.sharedInstance.getSessionId()
     }
     
     /// Internally appends the authentication key (which is App Key and Placement ID) to the param map
