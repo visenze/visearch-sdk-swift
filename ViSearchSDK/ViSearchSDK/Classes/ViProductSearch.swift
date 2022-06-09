@@ -115,6 +115,16 @@ open class ViProductSearch : NSObject {
         )
     }
     
+    /// return generated uid (va_uid) string for Analytics
+    public func getUid() -> String {
+        return VaSessionManager.sharedInstance.getUid()
+    }
+    
+    /// return session ID
+    public func getSid() -> String {
+        return VaSessionManager.sharedInstance.getSessionId()()
+    }
+    
     /// Internally appends the authentication key (which is App Key and Placement ID) to the param map
     ///
     /// - parameter dict: Dictionary to append authentication fields to
