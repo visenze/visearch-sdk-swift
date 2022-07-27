@@ -46,6 +46,8 @@ open class ViProductSearchResponse : NSObject {
     
     public var experiment: ViExperiment? = nil
     
+    public var excludedPids: [String] = []
+    
     /// Constructor, uses the raw response from the URL query and parses it into the relevant data fields
     ///
     /// - parameter response: Response gotten from the URL request
@@ -89,6 +91,10 @@ open class ViProductSearchResponse : NSObject {
             
             if let facetListJson = json["facets"] as? [Any] {
                 facets = ViResponseData.parseFacets(facetListJson)
+            }
+            
+            if let excludedPidList = json["excluded_pids"] as? [String] {
+                excludedPids = excludedPidList
             }
             
             if let prodInfo = json["product_info"] as? [String:Any] {
@@ -220,6 +226,8 @@ open class ViProductSearchResponse : NSObject {
                 if let tags = dict["tags"] as? [String:Any] {
                     item.tags = tags
                 }
+                
+                item.pinned = dict["pinned"] as? Bool
                 
                 if let alt = dict["alternatives"] as? [Any] {
                     item.alternatives = ViProductSearchResponse.parseProductResults(alt)
