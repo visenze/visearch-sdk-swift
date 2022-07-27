@@ -236,7 +236,9 @@ open class ViResponseData: NSObject {
                     
                     item.tags = dict["tags"] as? [String: Any]
                     
-                    item.pinned = dict["pinned"] as? Bool
+                    if let pinned = dict["pinned"] as? String {
+                        item.pinned = pinned == "true"
+                    }
                     
                     if let alternatives = dict["alternatives"] as? [Any] {
                         item.alternatives = ViResponseData.parseResults(alternatives)

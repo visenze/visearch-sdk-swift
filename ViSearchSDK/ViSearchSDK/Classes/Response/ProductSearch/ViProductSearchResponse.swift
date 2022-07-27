@@ -227,7 +227,9 @@ open class ViProductSearchResponse : NSObject {
                     item.tags = tags
                 }
                 
-                item.pinned = dict["pinned"] as? Bool
+                if let pinned = dict["pinned"] as? String {
+                    item.pinned = pinned == "true"
+                }
                 
                 if let alt = dict["alternatives"] as? [Any] {
                     item.alternatives = ViProductSearchResponse.parseProductResults(alt)
