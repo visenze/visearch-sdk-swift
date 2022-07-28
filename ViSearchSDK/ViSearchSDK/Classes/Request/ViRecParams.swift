@@ -15,6 +15,10 @@ public class ViRecParams: ViSearchParams {
     
     public var dedupBy: String?
     
+    public var showPinnedImNames: Bool? = nil
+    
+    public var showExcludedImNames: Bool? = nil
+    
     
     public override init?(imName: String) {
         super.init(imName: imName)
@@ -33,6 +37,14 @@ public class ViRecParams: ViSearchParams {
         
         if let dedupBy = self.dedupBy {
             dict["dedup_by"] = dedupBy
+        }
+        
+        if let showPinnedImNames = showPinnedImNames {
+            dict["show_pinned_im_names"] = showPinnedImNames ? "true" : "false"
+        }
+        
+        if let showExcludedImNames = showExcludedImNames {
+            dict["show_excluded_im_names"] = showExcludedImNames ? "true" : "false"
         }
         
         return dict;

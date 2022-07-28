@@ -24,6 +24,8 @@ open class ViImageResult: NSObject {
     /// only applicable for STL recommendations
     public var tags: [String: Any]?
     
+    public var pinned: Bool? = nil
+    
     public init?(_ im_name: String) {
         if im_name.isEmpty{
             print("\(type(of: self)).\(#function)[line:\(#line)] - error: im_name is missing")

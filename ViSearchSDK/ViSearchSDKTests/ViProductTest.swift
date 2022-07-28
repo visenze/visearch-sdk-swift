@@ -188,6 +188,74 @@ class ViProductTest: XCTestCase {
         
     }
     
+    func testProductSearchRecPinExclludeResponse() {
+        let urlResponse = URLResponse()
+        
+        let json: String = """
+        {
+            "reqid": "017a3bb0a050fb56218beb28b9e5ecf",
+            "status": "OK",
+            "method": "product/recommendations",
+            "page": 1,
+            "limit": 10,
+            "total": 2,
+            "product_types": [],
+            "result": [
+                {
+                    "product_id": "top-name-1",
+                    "main_image_url": "https://localhost/top-name-1.jpg",
+                    "data": {
+                        "title": "top-name-001"
+                    },
+                    "tags": {
+                        "category": "top"
+                    },
+                    "pinned" : "false",
+                    "alternatives": [
+                        {
+                            "product_id": "top-name-2",
+                            "main_image_url": "https://localhost/top-name-2.jpg",
+                            "data": {
+                                "title": "top-name-002"
+                            }
+                        },
+                        {
+                            "product_id": "top-name-3",
+                            "main_image_url": "https://localhost/top-name-3.jpg",
+                            "data": {
+                                "title": "top-name-003"
+                            }
+                        }
+                    ]
+                }
+               
+            ],
+            "excluded_pids" : ["p1" , "p2"],
+            "strategy": {
+                "id": 2,
+                "name": "Model outfit",
+                "algorithm": "STL"
+            },
+            "alt_limit": 5
+        }
+
+        """
+        
+        let data = json.data(using: .utf8)!
+        
+        let res = ViProductSearchResponse(response: urlResponse, data: data)
+        
+        let strategy = res.strategy!
+        XCTAssertEqual(2, strategy.strategyId!)
+        XCTAssertEqual("STL", strategy.algorithm!)
+        
+        XCTAssertEqual(2, res.excludedPids.count)
+        XCTAssertEqual("p1", res.excludedPids[0])
+        XCTAssertEqual("p2", res.excludedPids[1])
+
+        XCTAssertFalse(res.result[0].pinned!)
+    }
+    
     
 }
 

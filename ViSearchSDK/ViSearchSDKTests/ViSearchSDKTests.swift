@@ -79,6 +79,61 @@ class ViSearchSDKTests: XCTestCase {
         
         
     }
+    
+    func testRecommendationResponseWithPinExclude() {
+        
+        let urlResponse = URLResponse()
+        
+        let json: String = """
+        {
+          "status": "OK",
+          "method": "recommendations",
+          "algorithm": "STL",
+          "error": [],
+          "page": 1,
+          "limit": 3,
+          "total": 1,
+          "result": [
+            {
+              "im_name": "image_F01",
+              "value_map": {
+                "title": "image_F01"
+              },
+              "tags": {
+                "category": "top"
+              },
+              "pinned" : "true",
+              "alternatives": [
+                {
+                  "im_name": "image_bag_3",
+                  "value_map": {
+                    "title": "image_bag_3"
+                  }
+                }
+              ]
+            }
+          ],
+          "excluded_im_names" : ["im1", "im2"],
+          "reqid": "1156773933236717418"
+        }
+        """
+        
+        let data = json.data(using: .utf8)!
+    
+        let res = ViResponseData(response: urlResponse, data: data)
+        
+        XCTAssertEqual("STL", res.algorithm!)
+        let product = res.result[0]
+        XCTAssertEqual("image_F01", product.im_name)
+        XCTAssertEqual(1, product.alternatives.count)
+        XCTAssertEqual("image_bag_3", product.alternatives[0].im_name)
+        
+        XCTAssertEqual(2, res.excludedImNames.count)
+        XCTAssertEqual("im1", res.excludedImNames[0])
+        XCTAssertEqual("im2", res.excludedImNames[1])
+        
+        XCTAssertTrue(product.pinned!)
+    }
         
     /*
     func testVSR(){

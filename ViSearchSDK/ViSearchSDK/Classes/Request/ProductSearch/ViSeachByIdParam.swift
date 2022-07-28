@@ -21,6 +21,10 @@ open class ViSearchByIdParam : ViBaseProductSearchParam {
     
     public var strategyId: Int? = nil
     
+    public var showPinnedPids: Bool? = nil
+    
+    public var showExcludedPids: Bool? = nil
+    
     /// Constructor, checks for non-empty productId
     ///
     /// - parameter productId: Product's ID, retrieved from ViProduct if prior search was made
@@ -50,6 +54,14 @@ open class ViSearchByIdParam : ViBaseProductSearchParam {
         
         if let strategyId = self.strategyId {
             dict["strategy_id"] = String(strategyId)
+        }
+        
+        if let showPinnedPids = showPinnedPids {
+            dict["show_pinned_pids"] = showPinnedPids ? "true" : "false"
+        }
+        
+        if let showExcludedPids = showExcludedPids {
+            dict["show_excluded_pids"] = showExcludedPids ? "true" : "false"
         }
         
         return dict

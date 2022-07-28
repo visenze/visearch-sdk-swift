@@ -32,4 +32,6 @@ open class ViProduct {
     public var tags: [String: Any]?
     
     public var alternatives: [ViProduct] = []
+    
+    public var pinned: Bool? = nil
 }
