@@ -25,6 +25,10 @@ open class ViSearchByIdParam : ViBaseProductSearchParam {
     
     public var showExcludedPids: Bool? = nil
     
+    public var useSetBasedCtl: Bool? = nil
+    
+    public var setLimit: Int?
+    
     /// Constructor, checks for non-empty productId
     ///
     /// - parameter productId: Product's ID, retrieved from ViProduct if prior search was made
@@ -62,6 +66,14 @@ open class ViSearchByIdParam : ViBaseProductSearchParam {
         
         if let showExcludedPids = showExcludedPids {
             dict["show_excluded_pids"] = showExcludedPids ? "true" : "false"
+        }
+        
+        if let useSetBasedCtl = useSetBasedCtl {
+            dict["use_set_based_ctl"] = useSetBasedCtl ? "true" : "false"
+        }
+        
+        if let setLimit = self.setLimit {
+            dict["set_limit"] = String(setLimit)
         }
         
         return dict

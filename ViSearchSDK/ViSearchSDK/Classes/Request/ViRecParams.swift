@@ -19,6 +19,10 @@ public class ViRecParams: ViSearchParams {
     
     public var showExcludedImNames: Bool? = nil
     
+    public var useSetBasedCtl: Bool? = nil
+    
+    public var setLimit: Int?
+    
     
     public override init?(imName: String) {
         super.init(imName: imName)
@@ -45,6 +49,14 @@ public class ViRecParams: ViSearchParams {
         
         if let showExcludedImNames = showExcludedImNames {
             dict["show_excluded_im_names"] = showExcludedImNames ? "true" : "false"
+        }
+        
+        if let useSetBasedCtl = useSetBasedCtl {
+            dict["use_set_based_ctl"] = useSetBasedCtl ? "true" : "false"
+        }
+        
+        if let setLimit = self.setLimit {
+            dict["set_limit"] = String(setLimit)
         }
         
         return dict;
