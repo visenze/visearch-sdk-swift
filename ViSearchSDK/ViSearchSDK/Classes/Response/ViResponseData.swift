@@ -75,6 +75,7 @@ open class ViResponseData: NSObject {
     
     public var excludedImNames: [String] = []
     
+    public var setInfoList: [ViSetInfo] = []
     
     /// MARK: initializer
     public init(response: URLResponse, data: Data) {
@@ -140,6 +141,10 @@ open class ViResponseData: NSObject {
             if let detectionLimit = json["detection_limit"] as? Int {
                 self.detectionLimit = detectionLimit
             }
+            
+            if let setInfoJson = json["set_info"] as? [Any] {
+                self.setInfoList = ViResponseData.parseSetInfo(setInfoJson)
+            }
 
         }
         catch {
@@ -150,6 +155,25 @@ open class ViResponseData: NSObject {
     }
     
     // MARK: parsing json methods
+    public static func parseSetInfo(_ arr: [Any]) -> [ViSetInfo]{
+        var results = [ViSetInfo]()
+        for jsonItem in arr {
+            if let dict = jsonItem as? [String:Any] {
+                let setId = dict["set_id"] as? String
+                let setScore = parseFloat(dict, "set_score")
+                
+                let item = ViSetInfo()
+                item.setId = setId
+                item.setScore = setScore
+                
+                results.append(item)
+            }
+        }
+        
+        return results
+    }
+    
+    
     public static func parseProductTypes(_ arr: [Any]) -> [ViProductType]{
         var results = [ViProductType]()
         for jsonItem in arr {
