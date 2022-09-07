@@ -48,6 +48,8 @@ open class ViProductSearchResponse : NSObject {
     
     public var excludedPids: [String] = []
     
+    public var setInfoList: [ViSetInfo] = []
+    
     /// Constructor, uses the raw response from the URL query and parses it into the relevant data fields
     ///
     /// - parameter response: Response gotten from the URL request
@@ -113,6 +115,10 @@ open class ViProductSearchResponse : NSObject {
             
             if let sysMeta = json["query_sys_meta"] as? [String:String] {
                 querySysMeta = sysMeta
+            }
+            
+            if let setInfoJson = json["set_info"] as? [Any] {
+                self.setInfoList = ViResponseData.parseSetInfo(setInfoJson)
             }
             
         }

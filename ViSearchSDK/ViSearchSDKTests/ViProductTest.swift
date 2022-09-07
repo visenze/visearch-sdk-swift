@@ -188,7 +188,7 @@ class ViProductTest: XCTestCase {
         
     }
     
-    func testProductSearchRecPinExclludeResponse() {
+    func testProductSearchRecPinExcludeResponse() {
         let urlResponse = URLResponse()
         
         let json: String = """
@@ -255,6 +255,91 @@ class ViProductTest: XCTestCase {
 
         XCTAssertFalse(res.result[0].pinned!)
     }
+    
+    func testProductSearchRecCtlSetBasedResponse() {
+        let urlResponse = URLResponse()
+        
+        let json: String = """
+        {
+            "reqid": "017a3bb0a050fb56218beb28b9e5ecf",
+            "status": "OK",
+            "method": "product/recommendations",
+            "page": 1,
+            "limit": 10,
+            "total": 2,
+            "product_types": [],
+            "result": [
+                {
+                  "product_id": "dress1",
+                  "main_image_url": "http://test.com/img1.jpg",
+                  "tags": {
+                    "category": "dress",
+                    "set_id": "set1"
+                  },
+                  "score": 0.9
+                },
+                {
+                  "product_id": "shirt1",
+                  "main_image_url": "http://test.com/img2.jpg",
+                  "tags": {
+                    "category": "shirt",
+                    "set_id": "set1"
+                  },
+                  "score": 0.7
+                },
+                {
+                  "product_id": "shoe2",
+                  "main_image_url": "http://test.com/img2.jpg",
+                  "tags": {
+                    "category": "shoes",
+                    "set_id": "set2"
+                  },
+                  "score": 0.8
+                }
+              ],
+              "set_info": [
+                {
+                  "set_id": "set1",
+                  "set_score": 1000,
+                  "item_count": 2
+                },
+                {
+                  "set_id": "set2",
+                  "set_score": 900,
+                  "item_count": 1
+                }
+              ]
+        }
+
+        """
+        
+        let data = json.data(using: .utf8)!
+        
+        let res = ViProductSearchResponse(response: urlResponse, data: data)
+        
+    
+        XCTAssertEqual(3, res.result.count)
+        let r1 = res.result[0]
+        XCTAssertEqual("set1", r1.tags!["set_id"] as! String)
+        XCTAssertEqual("dress", r1.tags!["category"] as! String)
+    
+        let r2 = res.result[1]
+        XCTAssertEqual("set1", r2.tags!["set_id"] as! String)
+        XCTAssertEqual("shirt", r2.tags!["category"] as! String)
+        
+        let r3 = res.result[2]
+        XCTAssertEqual("set2", r3.tags!["set_id"] as! String)
+        XCTAssertEqual("shoes", r3.tags!["category"] as! String)
+    
+        XCTAssertEqual(2, res.setInfoList.count)
+        XCTAssertEqual("set1", res.setInfoList[0].setId)
+        XCTAssertTrue(res.setInfoList[0].setScore == 1000)
+        XCTAssertEqual("set2", res.setInfoList[1].setId)
+        XCTAssertTrue(res.setInfoList[1].setScore == 900)
+
+    }
+    
+    
     
     
 }
