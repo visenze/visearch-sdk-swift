@@ -11,4 +11,5 @@ import Foundation
 open class ViSetInfo: NSObject {
     public var setId : String? = nil
     public var setScore  : Float?
+    public var itemCount: Int?
 }

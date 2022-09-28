@@ -165,6 +165,7 @@ open class ViResponseData: NSObject {
                 let item = ViSetInfo()
                 item.setId = setId
                 item.setScore = setScore
+                item.itemCount = dict["item_count"] as? Int
                 
                 results.append(item)
             }
