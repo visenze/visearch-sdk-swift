@@ -160,7 +160,7 @@ class ViSearchSDKTests: XCTestCase {
     func testSBI() {
         let expectation = self.expectation(description: "wait_for_response")
         
-        ViProductSearch.sharedInstance.setUp(appKey: "", placementId: 1000, baseUrl: "https://search-dev.visenze.com")
+        ViProductSearch.sharedInstance.setUp(appKey: "", placementId: 1, baseUrl: "https://search.visenze.com")
         
         //let param = ViSearchByImageParam(imUrl: "https://cf.shopee.sg/file/e65789da4e612e63c79a4edf012adbdc")
         
@@ -168,12 +168,19 @@ class ViSearchSDKTests: XCTestCase {
         
         let param = ViSearchByImageParam(image: getImageWithColor(color: UIColor.red, size: CGSize(width:2000, height:2000)) )
         
-        param.box = ViBox(x1: 0, y1: 0, x2: 1000, y2: 1000)
+        //param.box = ViBox(x1: 0, y1: 0, x2: 1000, y2: 1000)
         
         //param?.groupBy = "merchant_category"
-        //param?.searchAllObjects = true
-        param.attributesToGet = ["sku","brand_name","sale_date","merchant_category"]
-        param.filters = ["merchant_category":"Clothing/Jackets/Denim"]
+        param.searchAllObjects = true
+        
+        //param.attributesToGet = ["sku","brand_name","sale_date","merchant_category"]
+        //param.filters = ["merchant_category":"Clothing/Jackets/Denim"]
+        let p1 = ViPoint(x: 0, y: 0)
+        let p2 = ViPoint(x: 100, y:100)
+        
+        param.points.append(p1)
+        param.points.append(p2)
+        
         
         ViProductSearch.sharedInstance.searchByImage(params: param) { (data: ViProductSearchResponse?) in
             dump(data)

@@ -333,9 +333,12 @@ class ViProductTest: XCTestCase {
     
         XCTAssertEqual(2, res.setInfoList.count)
         XCTAssertEqual("set1", res.setInfoList[0].setId)
+        XCTAssertEqual(2, res.setInfoList[0].itemCount)
+        
         XCTAssertTrue(res.setInfoList[0].setScore == 1000)
         XCTAssertEqual("set2", res.setInfoList[1].setId)
         XCTAssertTrue(res.setInfoList[1].setScore == 900)
+        XCTAssertEqual(1, res.setInfoList[1].itemCount)
 
     }
     
