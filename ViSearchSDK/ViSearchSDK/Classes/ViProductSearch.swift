@@ -50,6 +50,13 @@ open class ViProductSearch : NSObject {
         self.client = ViProductSearchClient(baseUrl: baseUrl, appKey: self.appKey!)
     }
     
+    public func newTracker() -> ViSenzeTracker {
+        return ViSearch.sharedInstance.newTracker(
+            code: "\(appKey!):\(placementId!)",
+            forCn: false
+        )
+    }
+    
     /// Returns a tracker meant for ProductSearch
     ///
     /// - parameter forCn: If the tracker is meant for cn

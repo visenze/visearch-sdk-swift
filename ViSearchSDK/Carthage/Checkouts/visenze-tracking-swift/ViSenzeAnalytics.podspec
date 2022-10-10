@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
   
   s.name         = "ViSenzeAnalytics"
-  s.version      = "0.1.3"
+  s.version      = "0.1.4"
   s.summary      = "ViSenze Tracking SDK"
 
   s.description  = <<-DESC
@@ -81,6 +81,6 @@ Pod::Spec.new do |s|
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
-  s.swift_versions = ['5.1', '5.2', '5.3']
+  s.swift_versions = ['5']
  
 end

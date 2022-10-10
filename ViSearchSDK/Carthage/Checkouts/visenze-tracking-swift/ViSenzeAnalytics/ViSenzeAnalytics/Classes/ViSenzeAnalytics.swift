@@ -15,6 +15,10 @@ public class ViSenzeAnalytics: NSObject {
         super.init()
     }
     
+    public func newTracker(code: String) -> ViSenzeTracker {
+        return ViSenzeTracker(code: code, isCn: false)!
+    }
+    
     /// Setup API client. Must be called first before various API calls
     ///
     /// - parameter appKey: application app key

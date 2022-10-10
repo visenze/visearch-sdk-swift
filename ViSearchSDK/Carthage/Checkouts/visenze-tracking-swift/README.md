@@ -15,7 +15,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'ViSenzeAnalytics', '~>0.1.3'
+    pod 'ViSenzeAnalytics', '~>0.1.4'
 end
 ...
 ```
@@ -28,17 +28,16 @@ pod install
 
 ## 3. Initialization
 
-You can initiliase ViSenze tracker with a tracking ID (code) by logging to ViSenze dashboard. There are two different endpoints for tracker (1 for China and another for the rest of the world). If the SDK is intended to be used outside of China, please set `forCn` parameter to false
-
+You can initiliase ViSenze tracker with a tracking ID (code) by logging to ViSenze dashboard. 
 
 ```
-let tracker = ViSenzeAnalytics.sharedInstance.newTracker(code: "your-code", forCn: false)
+let tracker = ViSenzeAnalytics.sharedInstance.newTracker(code: "your-code")
         
 ```
 
 ## 4. Send Event
 
-You can send various events as follow:
+You can send various events as follow. Note that it is optional to send transaction ID, product image URL and product position. You can create the event using the corresponding methods such as `VaEvent. VaEvent.newProductClickEvent (queryId: "", pid: "")` if you do not have other data.
 
 ```
 
@@ -64,6 +63,14 @@ tracker.sendEvent(add2Cart)
 let resLoadEvent = VaEvent.newResultLoadEvent(queryId: "xxx", pid:"your query product id")
 tracker.sendEvent(resLoadEvent)
 
+```
+
+User action(s) can also be sent through an batch event handler.
+
+A common use case for this batch event method is to group up all transactions by sending it in a batch. This SDK will automatically generate a transaction ID to group transactions as an order.
+
+```
+tracker.sendEvents(eventList)
 ```
 
 
