@@ -71,18 +71,34 @@ public class ViSenzeTracker: NSObject {
         self.userAgent =  VaDeviceData.sharedInstance.userAgent
     }
     
+    public func sendEvents(_ events: [VaEvent], handler:  ( (_ data: VaEventResponse?, Error?) -> Void )?) {
+        let randomTransId = VaEvent.generateRandomTransId()
+        
+        for e in events {
+            // assign same transaction ID for batch event if not provided
+            if e.isTransactionEvent() && (e.transId == nil || e.transId!.isEmpty) {
+                e.transId = randomTransId
+            }
+            
+            sendEvent(e, handler: handler)
+        }
+    }
     
     public func sendEvent(_ event: VaEvent,
                       handler:  ( (_ data: VaEventResponse?, Error?) -> Void )?
                       ) -> Void {
         
 
-        if event.uid == nil || event.uid?.count == 0{
+        if event.uid == nil || event.uid?.count == 0 {
             event.uid = VaSessionManager.sharedInstance.getUid()
         }
         
         if event.sid == nil || event.sid?.count == 0 {
             event.sid = VaSessionManager.sharedInstance.getSessionId()
+        }
+        
+        if event.isTransactionEvent() && (event.transId == nil || event.transId!.isEmpty) {
+            event.transId = VaEvent.generateRandomTransId()
         }
         
         let url = requestSerialization.generateRequestUrl(baseUrl: self.baseUrl,

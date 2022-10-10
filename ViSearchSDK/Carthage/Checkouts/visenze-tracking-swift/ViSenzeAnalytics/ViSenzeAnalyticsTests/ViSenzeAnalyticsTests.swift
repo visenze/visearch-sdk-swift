@@ -25,6 +25,7 @@ class ViSenzeAnalyticsTests: XCTestCase {
         
         var testEvent: VaEvent = VaEvent(action: "click")!
         tracker.sendEvent(testEvent) { (eventResponse, networkError) in
+            dump(eventResponse)
             print("done")
              expectation.fulfill()
         }
@@ -39,6 +40,20 @@ class ViSenzeAnalyticsTests: XCTestCase {
         self.measure {
             // Put the code you want to measure the time of here.
         }
+    }
+    
+    func testTrans() {
+        let tracker = ViSenzeAnalytics.sharedInstance.newTracker(code: "test", forCn: false)
+        let expectation = self.expectation(description: "wait_for_response")
+        
+        var testEvent: VaEvent = VaEvent.newTransactionEvent(queryId: "test", value: 2.0)!
+        tracker.sendEvent(testEvent) { (eventResponse, networkError) in
+            dump(eventResponse)
+            print("done")
+             expectation.fulfill()
+        }
+                
+        waitForExpectations(timeout: 30, handler: nil)
     }
 
 }
