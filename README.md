@@ -124,7 +124,15 @@ The Demo.xcworkspace project should be created.
 
 #### 2.3.2 Using Manual Approach
 
-You can also download the iOS [ViSearch SDK](https://github.com/visenze/visearch-sdk-swift/archive/master.zip) directly. To use it, unzip it and drag ViSearchSDK project into Demo project.
+You can also download the iOS [ViSearch SDK](https://github.com/visenze/visearch-sdk-swift/archive/master.zip) directly. To use it, unzip it and drag ViSearchSDK project (under ViSearchSDK folder) into your project. The ViSearchSDK project produces ViSearchSDK framework and has a dependency i.e. ViSenzeAnalytics. Before it can be used, you will need to run and pull ViSenzeAnalytics framework by running:
+
+```
+carthage update --use-xcframeworks
+```
+
+To verify the ViSearchSDK project can be compiled successfully, open `ViSearchSDK.xcodeproj` , make sure it can be built successfully and `ViSenzeAnalytics` framework is included under Frameworks and Libraries. If for some reasons, the framework is missing, you can also find it under `ViSearchSDK/Carthage/Build/ViSenzeAnalytics.xcframework` path. You can manually add the framework to the project if missing.
+
+After this, you can copy the ViSearchSDK folder into your project.
 
 <img src="./doc/ios2_1.png" alt="screenshot" height="200">
 
