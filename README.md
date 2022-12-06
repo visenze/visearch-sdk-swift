@@ -104,7 +104,9 @@ cd /path/to/Demo
 pod init
 ```
 
-Edit the Podfile as follow:
+Edit the Podfile as follow. Please update the version to the latest.
+This is just a reference.
+
 ```
 platform :ios, '9.0'
 use_frameworks!
@@ -185,6 +187,8 @@ Please init ViSearch client in this way if you connect to another endpoint rathe
 client = ViSearchClient(baseUrl: "https://custom-visearch.yourdomain.com", accessKey: accessKey, secret: secret)
 ```
 
+For searches in China, please change the endpoint to `https://visearch.visenze.com.cn`.
+
 By default, API search requests will timeout after 10s. To change the timeout, you can configure the client as below:
 
 ```swift
@@ -201,14 +205,16 @@ ViSearch.sharedInstance.client?.session = URLSession(configuration: (ViSearch.sh
 
 `ProductSearch` **must** be initialized with an `appKey` and `placementId` **before** it can be used. 
 
+For searches in China, please set the baseUrl to `https://search.visenze.com.cn`. For analytics, you will initialise the tracker with `forCn` set to true.
+
 ```swift
 import ViSearchSDK
 
 // initialize ProductSearch API using app key and placement id
-ViProductSearch.sharedInstance.setup(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID)
+ViProductSearch.sharedInstance.setUp(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID)
 
 // custom search endpoint
-ViProductSearch.sharedInstance.setup(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID, baseUrl:"https://custom-search.yourdomain.com")
+ViProductSearch.sharedInstance.setUp(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID, baseUrl:"https://custom-search.yourdomain.com")
 
 // configure timeout to 30s example. By default timeout is set 10s.
 ViProductSearch.sharedInstance.client?.timeoutInterval = 30
@@ -825,12 +831,14 @@ You can initiliase ViSenze tracker as follows depending on whether you are using
 
 ```swift
 import ViSearch
-import ViSenzeAnalytics
+
 ...
 
 # for ViSenze Console
 let tracker = ViProductSearch.sharedInstance.newTracker()
 
+# for sending events in China
+let cnTracker = ViProductSearch.sharedInstance.newTracker(forCn: true)
 
 # for ViSenze old dashboard
 let tracker = ViSearch.sharedInstance.newTracker(code: "your-code")
