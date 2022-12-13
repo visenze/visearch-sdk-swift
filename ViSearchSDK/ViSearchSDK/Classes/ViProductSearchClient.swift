@@ -43,6 +43,7 @@ open class ViProductSearchClient : ViSearchClient {
             apiEndPoint: path,
             searchParams: params
         )
+        
         // make request
         let request = NSMutableURLRequest(
             url: URL(string: url)!,
