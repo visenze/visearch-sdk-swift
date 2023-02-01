@@ -124,7 +124,21 @@ pod install
 ```
 The Demo.xcworkspace project should be created.
 
-#### 2.3.2 Using Manual Approach
+#### 2.3.2 Using Carthage
+
+1. Create a Cartfile in the same directory where your `.xcodeproj` or `.xcworkspace` is.
+2. List the dependency as follow: `github "visenze/visearch-sdk-swift" ~> 1.8.7` . Please change the version to latest available version.
+3. Run `carthage update --use-xcframeworks` or `carthage bootstrap --platform iOS --cache-builds --no-use-binaries --use-xcframeworks` . The command will fail as `ViSenzeAnalytics.xcframework` is not pulled as it is a dependency. We will resolve it in the next step.
+4. A Cartfile.resolved file and a Carthage directory will appear in the same directory where your .xcodeproj or .xcworkspace is
+5. Navigate to ViSearchSDK folder:  `cd Carthage/Checkouts/visearch-sdk-swift/ViSearchSDK` which contains the source code for ViSearchSDK.
+6. Run `carthage update --use-xcframeworks` or `carthage bootstrap --platform iOS --cache-builds --no-use-binaries --use-xcframeworks` . This will pull and build Analytics dependency.
+7. Return to the root directory where your `.xcodeproj` or `.xcworkspace` is.
+8. Run the carthage command again (same as step 3).
+9. The build will be successful.
+10. Drag the built `ViSearchSDK.xcframework` bundles from Carthage/Build into the "Frameworks and Libraries" section of your application’s Xcode project.
+11. If you are using Carthage for an application, select "Embed & Sign", otherwise "Do Not Embed".
+
+#### 2.3.3 Using Manual Approach
 
 You can also download the iOS [ViSearch SDK](https://github.com/visenze/visearch-sdk-swift/archive/master.zip) directly. To use it, unzip it and drag ViSearchSDK project (under ViSearchSDK folder) into your project. The ViSearchSDK project produces ViSearchSDK framework and has a dependency i.e. ViSenzeAnalytics. Before it can be used, you will need to run and pull ViSenzeAnalytics framework by running:
 
