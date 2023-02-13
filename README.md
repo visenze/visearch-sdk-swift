@@ -135,7 +135,7 @@ The Demo.xcworkspace project should be created.
 7. Return to the root directory where your `.xcodeproj` or `.xcworkspace` is.
 8. Run the carthage command again (same as step 3).
 9. The build will be successful.
-10. Drag the built `ViSearchSDK.xcframework` bundles from Carthage/Build into the "Frameworks and Libraries" section of your application’s Xcode project.
+10. Drag the built `ViSearchSDK.xcframework`/ `ViSenzeAnalytics.framework` bundles from Carthage/Build into the "Frameworks and Libraries" section of your application’s Xcode project.
 11. If you are using Carthage for an application, select "Embed & Sign", otherwise "Do Not Embed".
 
 #### 2.3.3 Using Manual Approach
