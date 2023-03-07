@@ -343,6 +343,90 @@ class ViProductTest: XCTestCase {
     }
     
     
+    func testProductSearchRecBestImagesResponse() {
+        let urlResponse = URLResponse()
+        
+        let json: String = """
+        {
+            "reqid": "01806a667776c6f8a31c28105fd99f",
+            "status": "OK",
+            "method": "product/recommendations",
+            "page": 1,
+            "limit": 10,
+            "total": 2,
+            "product_types": [],
+            "result": [
+                {
+                  "product_id": "dress1",
+                  "main_image_url": "http://test.com/img1.jpg",
+                  "best_images" : [
+                     {
+                        "type" : "product",
+                        "url" : "url11",
+                        "index" : "0"
+                     },
+                     {
+                        "type" : "outfit",
+                        "url" : "url21",
+                        "index" : "3"
+                     }
+                  ],
+                  "tags": {
+                    "category": "dress",
+                    "set_id": "set1"
+                  },
+                  "score": 0.9
+                }
+                
+              ],
+              "set_info": [
+                {
+                  "set_id": "set1",
+                  "set_score": 1000,
+                  "item_count": 2
+                },
+                {
+                  "set_id": "set2",
+                  "set_score": 900,
+                  "item_count": 1
+                }
+              ]
+        }
+
+        """
+        
+        let data = json.data(using: .utf8)!
+        
+        let res = ViProductSearchResponse(response: urlResponse, data: data)
+    
+        XCTAssertEqual(1, res.result.count)
+        let r1 = res.result[0]
+        XCTAssertEqual("set1", r1.tags!["set_id"] as! String)
+        XCTAssertEqual("dress", r1.tags!["category"] as! String)
+    
+        let bestImages = res.result[0].bestImages
+        XCTAssertEqual(2, bestImages.count)
+        
+        let b1 = bestImages[0]
+        XCTAssertEqual("0", b1.index)
+        XCTAssertEqual("product", b1.type)
+        XCTAssertEqual("url11", b1.url)
+        
+        let b2 = bestImages[1]
+        XCTAssertEqual("3", b2.index)
+        XCTAssertEqual("outfit", b2.type)
+        XCTAssertEqual("url21", b2.url)
+    
+        XCTAssertEqual(2, res.setInfoList.count)
+        XCTAssertEqual("set1", res.setInfoList[0].setId)
+        XCTAssertEqual(2, res.setInfoList[0].itemCount)
+        
+        XCTAssertTrue(res.setInfoList[0].setScore == 1000)
+        XCTAssertEqual("set2", res.setInfoList[1].setId)
+        XCTAssertTrue(res.setInfoList[1].setScore == 900)
+        XCTAssertEqual(1, res.setInfoList[1].itemCount)
+
+    }
     
     
 }

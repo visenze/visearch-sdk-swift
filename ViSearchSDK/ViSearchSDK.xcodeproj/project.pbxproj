@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BD06D1361DA3BDE600EC9B38 /* ViResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD06D1351DA3BDE600EC9B38 /* ViResponseData.swift */; };
 		BD06D1381DA3F59A00EC9B38 /* ViRequestSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD06D1371DA3F59A00EC9B38 /* ViRequestSerialization.swift */; };
+		BD283ABB29B7101600912D82 /* ViBestImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD283ABA29B7101600912D82 /* ViBestImage.swift */; };
 		BD3A860125F22B6400BB71CF /* ViProductSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3A860025F22B6400BB71CF /* ViProductSearch.swift */; };
 		BD50FD621DA8B4220035FD78 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD50FD611DA8B4220035FD78 /* UIColorExtension.swift */; };
 		BD5BE9E625F5F778004995D0 /* ViProductSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5BE9E525F5F778004995D0 /* ViProductSearchResponse.swift */; };
@@ -83,6 +84,7 @@
 /* Begin PBXFileReference section */
 		BD06D1351DA3BDE600EC9B38 /* ViResponseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViResponseData.swift; sourceTree = "<group>"; };
 		BD06D1371DA3F59A00EC9B38 /* ViRequestSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViRequestSerialization.swift; sourceTree = "<group>"; };
+		BD283ABA29B7101600912D82 /* ViBestImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViBestImage.swift; sourceTree = "<group>"; };
 		BD3A860025F22B6400BB71CF /* ViProductSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViProductSearch.swift; sourceTree = "<group>"; };
 		BD50FD611DA8B4220035FD78 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtension.swift; path = Helper/UIColorExtension.swift; sourceTree = "<group>"; };
 		BD5BE9E525F5F778004995D0 /* ViProductSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViProductSearchResponse.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				BD7020EE1E49BB99006BAE40 /* ViFacetItem.swift */,
 				BD815AA71FC8003800E8DA76 /* ViObjectResult.swift */,
 				BDD3C4D128C7A56400C0C1A4 /* ViSetInfo.swift */,
+				BD283ABA29B7101600912D82 /* ViBestImage.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				BD5F70582601F1B100132A1F /* ViProductObjectResult.swift in Sources */,
 				BDB76A2626983C6C000C750A /* ViStrategy.swift in Sources */,
 				BD72A3A025FF0FA1005C8BC0 /* ViGroupResult.swift in Sources */,
+				BD283ABB29B7101600912D82 /* ViBestImage.swift in Sources */,
 				BD65405A1DA63F5200E10162 /* ViSearch.swift in Sources */,
 				BD7DEDAB1DA2B6C400CDF6DE /* ViColorSearchParams.swift in Sources */,
 				BD5BE9F225F61FE0004995D0 /* ViProduct.swift in Sources */,
@@ -610,7 +614,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = NKN6QECX9M;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -628,7 +632,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8.7;
+				MARKETING_VERSION = 1.9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSearchSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -641,7 +645,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = NKN6QECX9M;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -659,7 +663,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8.7;
+				MARKETING_VERSION = 1.9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSearchSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

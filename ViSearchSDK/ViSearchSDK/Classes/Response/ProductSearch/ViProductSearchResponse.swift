@@ -241,6 +241,10 @@ open class ViProductSearchResponse : NSObject {
                     item.alternatives = ViProductSearchResponse.parseProductResults(alt)
                 }
                 
+                if let bestImages = dict["best_images"] as? [Any] {
+                    item.bestImages = ViResponseData.parseBestImages(bestImages)
+                }
+                
                 if let score = dict["score"] as? Double {
                     item.score = score
                 }

@@ -23,6 +23,7 @@ public class ViRecParams: ViSearchParams {
     
     public var setLimit: Int?
     
+    public var showBestProductImages: Bool? = nil
     
     public override init?(imName: String) {
         super.init(imName: imName)
@@ -57,6 +58,10 @@ public class ViRecParams: ViSearchParams {
         
         if let setLimit = self.setLimit {
             dict["set_limit"] = String(setLimit)
+        }
+        
+        if let showBestProductImages = showBestProductImages {
+            dict["show_best_product_images"] = showBestProductImages ? "true" : "false"
         }
         
         return dict;

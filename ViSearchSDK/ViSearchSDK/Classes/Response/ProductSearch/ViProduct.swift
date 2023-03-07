@@ -34,4 +34,6 @@ open class ViProduct {
     public var alternatives: [ViProduct] = []
     
     public var pinned: Bool? = nil
+    
+    public var bestImages: [ViBestImage] = []
 }

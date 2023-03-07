@@ -26,6 +26,8 @@ open class ViImageResult: NSObject {
     
     public var pinned: Bool? = nil
     
+    public var bestImages: [ViBestImage] = []
+    
     public init?(_ im_name: String) {
         if im_name.isEmpty{
             print("\(type(of: self)).\(#function)[line:\(#line)] - error: im_name is missing")
