@@ -29,6 +29,8 @@ open class ViSearchByIdParam : ViBaseProductSearchParam {
     
     public var setLimit: Int?
     
+    public var showBestProductImages: Bool? = nil
+    
     /// Constructor, checks for non-empty productId
     ///
     /// - parameter productId: Product's ID, retrieved from ViProduct if prior search was made
@@ -75,6 +77,11 @@ open class ViSearchByIdParam : ViBaseProductSearchParam {
         if let setLimit = self.setLimit {
             dict["set_limit"] = String(setLimit)
         }
+        
+        if let showBestProductImages = showBestProductImages {
+            dict["show_best_product_images"] = showBestProductImages ? "true" : "false"
+        }
+        
         
         return dict
     }
