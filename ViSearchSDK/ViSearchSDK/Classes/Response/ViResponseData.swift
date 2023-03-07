@@ -174,6 +174,25 @@ open class ViResponseData: NSObject {
         return results
     }
     
+    public static func parseBestImages(_ arr: [Any]) -> [ViBestImage]{
+        var results = [ViBestImage]()
+        for jsonItem in arr {
+            if let dict = jsonItem as? [String:Any] {
+                let type = dict["type"] as? String
+                let url = dict["url"] as? String
+                let index = dict["index"] as? String
+                
+                let item = ViBestImage()
+                item.type = type
+                item.url = url
+                item.index = index
+                
+                results.append(item)
+            }
+        }
+        
+        return results
+    }
     
     public static func parseProductTypes(_ arr: [Any]) -> [ViProductType]{
         var results = [ViProductType]()
@@ -267,6 +286,10 @@ open class ViResponseData: NSObject {
                     
                     if let alternatives = dict["alternatives"] as? [Any] {
                         item.alternatives = ViResponseData.parseResults(alternatives)
+                    }
+                    
+                    if let bestImages = dict["best_images"] as? [Any] {
+                        item.bestImages = ViResponseData.parseBestImages(bestImages)
                     }
                     
                     results.append(item)
