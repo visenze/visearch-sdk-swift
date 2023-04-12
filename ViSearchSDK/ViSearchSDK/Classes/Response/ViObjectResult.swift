@@ -18,6 +18,12 @@ open class ViObjectResult: NSObject {
     public var result: [ViImageResult] = []
     public var facets : [ViFacet] = []
     
+    public var id: String?
+    public var category: String?
+    public var name: String?
+    public var excludedImNames: [String] = []
+    
+    
     public init(type: String) {
         self.type = type
     }

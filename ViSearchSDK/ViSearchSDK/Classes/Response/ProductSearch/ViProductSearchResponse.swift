@@ -328,6 +328,18 @@ open class ViProductSearchResponse : NSObject {
                     object.result = ViProductSearchResponse.parseProductResults(res)
                 }
                 
+                object.id = dict["id"] as? String
+                object.category = dict["category"] as? String
+                object.name = dict["name"] as? String
+                
+                if let excludedPidList = dict["excluded_pids"] as? [String] {
+                    object.excludedPids = excludedPidList
+                }
+                
+                if let facetListJson = dict["facets"] as? [Any] {
+                    object.facets = ViResponseData.parseFacets(facetListJson)
+                }
+                
                 results.append(object)
             }
         }
