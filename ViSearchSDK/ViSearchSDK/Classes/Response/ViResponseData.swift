@@ -336,6 +336,15 @@ open class ViResponseData: NSObject {
                     item.facets = ViResponseData.parseFacets(facetListJson)
                 }
                 
+                item.id = dict["id"] as? String
+                item.category = dict["category"] as? String
+                item.name = dict["name"] as? String
+                
+                if let excludedImNameList = dict["excluded_im_names"] as? [String] {
+                    item.excludedImNames = excludedImNameList
+                }
+                
+                
                 results.append(item)
             }
         }

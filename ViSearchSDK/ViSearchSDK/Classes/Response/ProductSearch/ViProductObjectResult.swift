@@ -20,4 +20,10 @@ open class ViProductObjectResult {
     public var total: Int? = nil
     
     public var result: [ViProduct] = []
+    
+    public var id: String?
+    public var category: String?
+    public var name: String?
+    public var facets : [ViFacet] = []
+    public var excludedPids: [String] = []
 }
