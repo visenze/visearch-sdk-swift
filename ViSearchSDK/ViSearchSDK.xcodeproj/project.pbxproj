@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -58,6 +58,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		71E0277D29F97A51002FB3DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71E0277829F97A51002FB3DC /* ViSenzeAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BD9AD0B52507CC520012918F;
+			remoteInfo = ViSenzeAnalytics;
+		};
+		71E0277F29F97A51002FB3DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71E0277829F97A51002FB3DC /* ViSenzeAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BD9AD0BE2507CC520012918F;
+			remoteInfo = ViSenzeAnalyticsTests;
+		};
 		BD7DED8D1DA2AFCF00CDF6DE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BD7DED791DA2AFCF00CDF6DE /* Project object */;
@@ -82,6 +96,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		71E0277829F97A51002FB3DC /* ViSenzeAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ViSenzeAnalytics.xcodeproj; path = "Carthage/Checkouts/visenze-tracking-swift/ViSenzeAnalytics/ViSenzeAnalytics.xcodeproj"; sourceTree = "<group>"; };
 		BD06D1351DA3BDE600EC9B38 /* ViResponseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViResponseData.swift; sourceTree = "<group>"; };
 		BD06D1371DA3F59A00EC9B38 /* ViRequestSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViRequestSerialization.swift; sourceTree = "<group>"; };
 		BD283ABA29B7101600912D82 /* ViBestImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViBestImage.swift; sourceTree = "<group>"; };
@@ -154,6 +169,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		71E0277929F97A51002FB3DC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				71E0277E29F97A51002FB3DC /* ViSenzeAnalytics.framework */,
+				71E0278029F97A51002FB3DC /* ViSenzeAnalyticsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BD5BE9E425F5F76A004995D0 /* ProductSearch */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +301,7 @@
 		BDA3389D2535B98600D4E74A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				71E0277829F97A51002FB3DC /* ViSenzeAnalytics.xcodeproj */,
 				BDB8B79025F227F10034DF18 /* ViSenzeAnalytics.xcframework */,
 			);
 			name = Frameworks;
@@ -348,8 +373,9 @@
 		BD7DED791DA2AFCF00CDF6DE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = Hung;
 				TargetAttributes = {
 					BD7DED811DA2AFCF00CDF6DE = {
@@ -376,6 +402,12 @@
 			mainGroup = BD7DED781DA2AFCF00CDF6DE;
 			productRefGroup = BD7DED831DA2AFCF00CDF6DE /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 71E0277929F97A51002FB3DC /* Products */;
+					ProjectRef = 71E0277829F97A51002FB3DC /* ViSenzeAnalytics.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				BD7DED811DA2AFCF00CDF6DE /* ViSearchSDK */,
@@ -383,6 +415,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		71E0277E29F97A51002FB3DC /* ViSenzeAnalytics.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ViSenzeAnalytics.framework;
+			remoteRef = 71E0277D29F97A51002FB3DC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		71E0278029F97A51002FB3DC /* ViSenzeAnalyticsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ViSenzeAnalyticsTests.xctest;
+			remoteRef = 71E0277F29F97A51002FB3DC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		BD7DED801DA2AFCF00CDF6DE /* Resources */ = {
@@ -516,6 +565,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -578,6 +628,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -620,6 +671,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -633,6 +685,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.9.2;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSearchSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -651,6 +705,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -664,6 +719,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.9.2;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSearchSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
