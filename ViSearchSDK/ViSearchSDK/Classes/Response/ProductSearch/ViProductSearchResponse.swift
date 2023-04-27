@@ -328,6 +328,10 @@ open class ViProductSearchResponse : NSObject {
                     object.result = ViProductSearchResponse.parseProductResults(res)
                 }
                 
+                if let groups = dict["group_results"] as? [Any] {
+                    object.groupResults = ViProductSearchResponse.parseGroupResults(groups)
+                }
+                
                 object.id = dict["id"] as? String
                 object.category = dict["category"] as? String
                 object.name = dict["name"] as? String
