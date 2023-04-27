@@ -20,6 +20,7 @@ open class ViProductObjectResult {
     public var total: Int? = nil
     
     public var result: [ViProduct] = []
+    public var groupResults : [ViGroupResult] = []
     
     public var id: String?
     public var category: String?

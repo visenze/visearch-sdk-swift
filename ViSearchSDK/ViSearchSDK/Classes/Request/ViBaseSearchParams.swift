@@ -69,6 +69,8 @@ open class ViBaseSearchParams : ViSearchParamsProtocol {
     /// add dedup parameter
     public var dedup : Bool? = nil
     
+    public var strategyId: String? = nil
+    
     // MARK: Analytics parameters
     public var uid: String?
     public var sid: String?
@@ -109,6 +111,10 @@ open class ViBaseSearchParams : ViSearchParamsProtocol {
         
         if queryInfo {
             dict["qinfo"] = "true"
+        }
+        
+        if let strategyId = strategyId {
+            dict["strategy_id"] = strategyId
         }
         
         if let dedup = dedup {
