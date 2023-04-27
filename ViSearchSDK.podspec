@@ -86,7 +86,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  s.dependency "ViSenzeAnalytics", "~> 0.10.0"
+  s.dependency "ViSenzeAnalytics", "~> 0.2.0"
   s.swift_versions = ['5']
   
 end

@@ -11,11 +11,11 @@ Visenze Tracking library allows you to analyse visual search solutions' performa
 You can use CocoaPods to install the SDK. Edit the Podfile as follows:
 
 ```
-platform :ios, '8.0'
+platform :ios, '12.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'ViSenzeAnalytics', '~>0.1.4'
+    pod 'ViSenzeAnalytics', '~>0.2.0'
 end
 ...
 ```
