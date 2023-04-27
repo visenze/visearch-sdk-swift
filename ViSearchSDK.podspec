@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
   
   s.name         = "ViSearchSDK"
-  s.version      = "1.9.2"
+  s.version      = "1.10.0"
   s.summary      = "A Visual Search API solution (Swift SDK)"
 
   s.description  = <<-DESC
@@ -30,10 +30,10 @@ Pod::Spec.new do |s|
   # s.social_media_url   = "http://twitter.com/Ngo Hung"
 
   s.source = { :git => 'https://github.com/visenze/visearch-sdk-swift.git', :tag => s.version }
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '12.0'
 
   # s.platform     = :ios
-  s.platform     = :ios, "8.0"
+  s.platform     = :ios, "12.0"
 
   
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -86,7 +86,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  s.dependency "ViSenzeAnalytics", "~> 0.1"
+  s.dependency "ViSenzeAnalytics", "~> 0.10.0"
   s.swift_versions = ['5']
   
 end

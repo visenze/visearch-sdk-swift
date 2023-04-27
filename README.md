@@ -6,35 +6,44 @@
 
 ## Table of Contents
 
-1. [Overview](#1-overview)
-2. [Setup](#2-setup)
-   - 2.1 [Run the Demo](#21-run-the-demo)
-   - 2.2 [Set up Xcode Project](#22-set-up-xcode-project)
-   - 2.3 [Import ViSearch Swift SDK](##23-import-visearch-swift-sdk)
-   - 2.4 [Add Privacy Usage Description](#24-add-privacy-usage-description)
-3. [Initialization](#3-initialization)
-   - 3.1 [ViSearch](#31-visearch)
-   - 3.2 [ProductSearch](#32-viproductsearch)
-4. [Solution APIs](#4-solution-apis)
-   - 4.1 [ViSearch](#41-visearch)
-     - 4.1.1 [Visually Similar Recommendations](#411-visually-similar-recommendations)
-     - 4.1.2 [Search by Image](#412-search-by-image)
-       - 4.1.2.1 [Selection Box](#4121-selection-box)
-       - 4.1.2.2 [Resizing Settings](#4122-resizing-settings)
-     - 4.1.3 [Search by Color](#413-search-by-color)
-     - 4.1.4 [Multiple Products Search](#414-multiple-products-search)
-   - 4.2 [ProductSearch](#42-productsearch)
-5. [Search Results](#5-search-results)
-   - 5.1 [ViSearch](#51-visearch)
-   - 5.2 [ProductSearch](#52-productsearch)
-6. [Advanced Search Parameters](#6-advanced-search-parameters)
-   - 6.1 [Retrieving Metadata](#61-retrieving-metadata)
-   - 6.2 [Filtering Results](#62-filtering-results)
-   - 6.3 [Result Score](#63-result-score)
-   - 6.4 [Automatic Object Recognition Beta](#64-automatic-object-recognition-beta)
-   - 6.5 [Facets Filtering](#65-facets-filtering)
-7. [Event Tracking](#7-event-tracking)
-8. [Developer Notes](#8-developer-notes)
+- [ViSearch Swift SDK and Demo Source Code](#visearch-swift-sdk-and-demo-source-code)
+  - [Table of Contents](#table-of-contents)
+  - [1. Overview](#1-overview)
+  - [2. Setup](#2-setup)
+    - [2.1 Run the Demo](#21-run-the-demo)
+    - [2.2 Set up Xcode project](#22-set-up-xcode-project)
+    - [2.3 Import ViSearch Swift SDK](#23-import-visearch-swift-sdk)
+      - [2.3.1 Using CocoaPods](#231-using-cocoapods)
+      - [2.3.2 Using Carthage](#232-using-carthage)
+      - [2.3.3 Using Manual Approach](#233-using-manual-approach)
+    - [2.4 Add Privacy Usage Description](#24-add-privacy-usage-description)
+  - [3. Initialization](#3-initialization)
+    - [3.1 ViSearch](#31-visearch)
+    - [3.2 ProductSearch](#32-productsearch)
+  - [4. Solution APIs](#4-solution-apis)
+    - [4.1 ViSearch](#41-visearch)
+      - [4.1.1 Visually Similar Recommendations](#411-visually-similar-recommendations)
+      - [4.1.2 Search by Image](#412-search-by-image)
+        - [4.1.2.1 Selection Box](#4121-selection-box)
+        - [4.1.2.2 Resizing Settings](#4122-resizing-settings)
+      - [4.1.3 Search by Color](#413-search-by-color)
+      - [4.1.4 Multiple Products Search](#414-multiple-products-search)
+    - [4.2 ProductSearch](#42-productsearch)
+      - [4.2.1 Search By Image](#421-search-by-image)
+      - [4.2.2 Recommendations](#422-recommendations)
+  - [5. Search Results](#5-search-results)
+    - [5.1 ViSearch](#51-visearch)
+    - [5.2 ProductSearch](#52-productsearch)
+  - [6. Advanced Search Parameters](#6-advanced-search-parameters)
+    - [6.1 Retrieving Metadata](#61-retrieving-metadata)
+    - [6.2 Filtering Results](#62-filtering-results)
+    - [6.3 Result Score](#63-result-score)
+    - [6.4 Automatic Object Recognition Beta](#64-automatic-object-recognition-beta)
+    - [6.5 Facets Filtering](#65-facets-filtering)
+  - [7. Event Tracking](#7-event-tracking)
+    - [7.1 Setup Tracking](#71-setup-tracking)
+    - [7.2  Send Events](#72--send-events)
+  - [8. Developer Notes](#8-developer-notes)
 
 ---
 
@@ -108,11 +117,11 @@ Edit the Podfile as follow. Please update the version to the latest.
 This is just a reference.
 
 ```
-platform :ios, '9.0'
+platform :ios, '12.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'ViSearchSDK', '~>1.9.2'
+    pod 'ViSearchSDK', '~>1.10.0'
 end
 ...
 ```
@@ -127,7 +136,7 @@ The Demo.xcworkspace project should be created.
 #### 2.3.2 Using Carthage
 
 1. Create a Cartfile in the same directory where your `.xcodeproj` or `.xcworkspace` is.
-2. List the dependency as follow: `github "visenze/visearch-sdk-swift" ~> 1.8.7` . Please change the version to latest available version.
+2. List the dependency as follow: `github "visenze/visearch-sdk-swift" ~> 1.10.0` . Please change the version to latest available version.
 3. Run `carthage update --use-xcframeworks` or `carthage bootstrap --platform iOS --cache-builds --no-use-binaries --use-xcframeworks` . The command will fail as `ViSenzeAnalytics.xcframework` is not pulled as it is a dependency. We will resolve it in the next step.
 4. A Cartfile.resolved file and a Carthage directory will appear in the same directory where your .xcodeproj or .xcworkspace is
 5. Navigate to ViSearchSDK folder:  `cd Carthage/Checkouts/visearch-sdk-swift/ViSearchSDK` which contains the source code for ViSearchSDK.
