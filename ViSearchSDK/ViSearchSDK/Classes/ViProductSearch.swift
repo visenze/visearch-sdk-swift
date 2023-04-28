@@ -24,11 +24,6 @@ open class ViProductSearch : NSObject {
     
     private var client : ViProductSearchClient? = nil
     
-    /// Default Constructor
-    private override init() {
-        super.init()
-    }
-    
     /// Set up the SDK with the proper authentications, needs to be called first prior to any other SDK
     /// functions
     ///
