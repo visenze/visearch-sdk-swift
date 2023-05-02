@@ -22,7 +22,7 @@ open class ViProductSearch : NSObject {
     /// Placement ID
     private var placementId : Int? = nil
     
-    private var client : ViProductSearchClient? = nil
+    public var client : ViProductSearchClient? = nil
     
     /// Set up the SDK with the proper authentications, needs to be called first prior to any other SDK
     /// functions
