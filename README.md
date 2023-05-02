@@ -60,7 +60,7 @@ This SDK contains two sets of APIs that provide accurate, reliable and scalable 
 
 For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-swift).
 
-> Current stable version: `1.10.2` (Swift 5+)
+> Current stable version: `1.10.3` (Swift 5+)
 >
 > Supported iOS version: iOS 8.x and higher
 
@@ -123,7 +123,7 @@ platform :ios, '12.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'ViSearchSDK', '~>1.10.2'
+    pod 'ViSearchSDK', '~>1.10.3'
 end
 ...
 ```
@@ -138,7 +138,7 @@ The Demo.xcworkspace project should be created.
 #### 2.3.2 Using Carthage
 
 1. Create a Cartfile in the same directory where your `.xcodeproj` or `.xcworkspace` is.
-2. List the dependency as follow: `github "visenze/visearch-sdk-swift" ~> 1.10.2` . Please change the version to latest available version.
+2. List the dependency as follow: `github "visenze/visearch-sdk-swift" ~> 1.10.3` . Please change the version to latest available version.
 3. Run `carthage update --use-xcframeworks` or `carthage bootstrap --platform iOS --cache-builds --no-use-binaries --use-xcframeworks` . The command will fail as `ViSenzeAnalytics.xcframework` is not pulled as it is a dependency. We will resolve it in the next step.
 4. A Cartfile.resolved file and a Carthage directory will appear in the same directory where your .xcodeproj or .xcworkspace is
 5. Navigate to ViSearchSDK folder:  `cd Carthage/Checkouts/visearch-sdk-swift/ViSearchSDK` which contains the source code for ViSearchSDK.

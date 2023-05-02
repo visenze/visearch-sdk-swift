@@ -665,7 +665,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = NKN6QECX9M;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -684,7 +684,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.2;
+				MARKETING_VERSION = 1.10.3;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSearchSDK;
@@ -699,7 +699,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = NKN6QECX9M;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -718,7 +718,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.2;
+				MARKETING_VERSION = 1.10.3;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSearchSDK;
