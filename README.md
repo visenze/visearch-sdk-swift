@@ -104,13 +104,14 @@ Type a name for your project and press Next, here we use Demo as the project nam
 
 First you need to install the CocoaPods Ruby gem:
 
-```
+```sh
 # Xcode 7 + 8
 sudo gem install cocoapods --pre
 ```
 
 Then go to your project directory to create an empty Podfile
-```
+
+```sh
 cd /path/to/Demo
 pod init
 ```
@@ -118,7 +119,7 @@ pod init
 Edit the Podfile as follow. Please update the version to the latest.
 This is just a reference.
 
-```
+```sh
 platform :ios, '12.0'
 use_frameworks!
 
@@ -130,9 +131,10 @@ end
 
 Install the ViSearch SDK:
 
-```
+```sh
 pod install
 ```
+
 The Demo.xcworkspace project should be created.
 
 #### 2.3.2 Using Carthage
@@ -153,7 +155,7 @@ The Demo.xcworkspace project should be created.
 
 You can also download the iOS [ViSearch SDK](https://github.com/visenze/visearch-sdk-swift/archive/master.zip) directly. To use it, unzip it and drag ViSearchSDK project (under ViSearchSDK folder) into your project. The ViSearchSDK project produces ViSearchSDK framework and has a dependency i.e. ViSenzeAnalytics. Before it can be used, you will need to run and pull ViSenzeAnalytics framework by running:
 
-```
+```sh
 carthage update --use-xcframeworks
 ```
 
@@ -208,7 +210,7 @@ client = ViSearchClient(baseUrl: yourUrl, accessKey: accessKey, secret: secret)
 
 Please init ViSearch client in this way if you connect to another endpoint rather than default (https://visearch.visenze.com)
 
-```
+```swift
 client = ViSearchClient(baseUrl: "https://custom-visearch.yourdomain.com", accessKey: accessKey, secret: secret)
 ```
 
@@ -913,7 +915,7 @@ Note that it is optional to send transaction ID, product image URL and product p
 
 To send events, first retrieve the search query ID found in the search results call back:
 
-```
+```swift
 
 successHandler: {
                     (data : ViResponseData?) -> Void in
@@ -928,7 +930,7 @@ successHandler: {
 Then the linked events can be sent as follows:
 
 
-```
+```swift
 # send product click
 let productClickEvent = VaEvent.newProductClickEvent(queryId: "ViSearch reqid in API response", pid: "product ID", imgUrl: "product image URL", pos: 3)
 tracker.sendEvent(productClickEvent) { (eventResponse, networkError) in
@@ -957,7 +959,7 @@ User action(s) can also be sent through an batch event handler.
 
 A common use case for this batch event method is to group up all transactions by sending it in a batch. This SDK will automatically generate a transaction ID to group transactions as an order.
 
-```
+```swift
 tracker.sendEvents(eventList)
 ```
 
