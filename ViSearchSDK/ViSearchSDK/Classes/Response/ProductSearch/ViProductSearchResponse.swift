@@ -32,7 +32,7 @@ open class ViProductSearchResponse : NSObject {
     
     public var facets : [ViFacet] = []
     
-    public var productInfo : [String:Any] = [:]
+    public var productInfo : ViProduct? = nil
     
     public var objects : [ViProductObjectResult] = []
     
@@ -100,7 +100,7 @@ open class ViProductSearchResponse : NSObject {
             }
             
             if let prodInfo = json["product_info"] as? [String:Any] {
-                productInfo = prodInfo
+                productInfo = ViProductSearchResponse.parseProduct(prodInfo)
             }
             
             if let objs = json["objects"] as? [Any] {
@@ -211,66 +211,72 @@ open class ViProductSearchResponse : NSObject {
             // convert from json object to dictionary and then parse the data
             if let dict = jsonItem as? [String:Any] {
                 
-                let item = ViProduct()
-                
-                if let productId = dict["product_id"] as? String {
-                    item.productId = productId
-                }
-                
-                if let mainImageUrl = dict["main_image_url"] as? String {
-                    item.mainImageUrl = mainImageUrl
-                }
-                
-                if let data = dict["data"] as? [String:Any] {
-                    item.data = data
-                }
-                
-                if let vsData = dict["vs_data"] as? [String:Any] {
-                    item.vsData = vsData
-                }
-                
-                if let tags = dict["tags"] as? [String:Any] {
-                    item.tags = tags
-                }
-                
-                if let pinned = dict["pinned"] as? String {
-                    item.pinned = pinned == "true"
-                }
-                
-                if let alt = dict["alternatives"] as? [Any] {
-                    item.alternatives = ViProductSearchResponse.parseProductResults(alt)
-                }
-                
-                if let bestImages = dict["best_images"] as? [Any] {
-                    item.bestImages = ViResponseData.parseBestImages(bestImages)
-                }
-                
-                if let score = dict["score"] as? Double {
-                    item.score = score
-                }
-                
-                if let imageS3Url = dict["image_s3_url"] as? String {
-                    item.imageS3Url = imageS3Url
-                }
-                
-                if let detect = dict["detect"] as? String {
-                    item.detect = detect
-                }
-                
-                if let keyword = dict["keyword"] as? String {
-                    item.keyword = keyword
-                }
-                
-                if let box = dict["box"] as? [Int] {
-                    if box.count >= 4 {
-                        item.box = ViBox(x1: box[0], y1: box[1], x2: box[2], y2: box[3])
-                    }
-                }
-                
+                let item = ViProductSearchResponse.parseProduct(dict)
                 results.append(item)
             }
         }
         return results
+    }
+    
+    public static func parseProduct(_ dict: [String:Any]) -> ViProduct {
+    
+        let item = ViProduct()
+        
+        if let productId = dict["product_id"] as? String {
+            item.productId = productId
+        }
+        
+        if let mainImageUrl = dict["main_image_url"] as? String {
+            item.mainImageUrl = mainImageUrl
+        }
+        
+        if let data = dict["data"] as? [String:Any] {
+            item.data = data
+        }
+        
+        if let vsData = dict["vs_data"] as? [String:Any] {
+            item.vsData = vsData
+        }
+        
+        if let tags = dict["tags"] as? [String:Any] {
+            item.tags = tags
+        }
+        
+        if let pinned = dict["pinned"] as? String {
+            item.pinned = pinned == "true"
+        }
+        
+        if let alt = dict["alternatives"] as? [Any] {
+            item.alternatives = ViProductSearchResponse.parseProductResults(alt)
+        }
+        
+        if let bestImages = dict["best_images"] as? [Any] {
+            item.bestImages = ViResponseData.parseBestImages(bestImages)
+        }
+        
+        if let score = dict["score"] as? Double {
+            item.score = score
+        }
+        
+        if let imageS3Url = dict["image_s3_url"] as? String {
+            item.imageS3Url = imageS3Url
+        }
+        
+        if let detect = dict["detect"] as? String {
+            item.detect = detect
+        }
+        
+        if let keyword = dict["keyword"] as? String {
+            item.keyword = keyword
+        }
+        
+        if let box = dict["box"] as? [Int] {
+            if box.count >= 4 {
+                item.box = ViBox(x1: box[0], y1: box[1], x2: box[2], y2: box[3])
+            }
+        }
+        
+        return item
     }
     
    /// Returns an array of ViProductObjectResult that is parsed from a json array format string
