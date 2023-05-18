@@ -10,13 +10,12 @@
   - [Table of Contents](#table-of-contents)
   - [1. Overview](#1-overview)
   - [2. Setup](#2-setup)
-    - [2.1 Run the Demo](#21-run-the-demo)
-    - [2.2 Set up Xcode project](#22-set-up-xcode-project)
-    - [2.3 Import ViSearch Swift SDK](#23-import-visearch-swift-sdk)
-      - [2.3.1 Using CocoaPods](#231-using-cocoapods)
-      - [2.3.2 Using Carthage](#232-using-carthage)
-      - [2.3.3 Using Manual Approach](#233-using-manual-approach)
-    - [2.4 Add Privacy Usage Description](#24-add-privacy-usage-description)
+    - [2.1 Set up Xcode project](#21-set-up-xcode-project)
+    - [2.2 Import ViSearch Swift SDK](#22-import-visearch-swift-sdk)
+      - [2.2.1 Using CocoaPods](#221-using-cocoapods)
+      - [2.2.2 Using Carthage](#222-using-carthage)
+      - [2.2.3 Using Manual Approach](#223-using-manual-approach)
+    - [2.3 Add Privacy Usage Description](#23-add-privacy-usage-description)
   - [3. Initialization](#3-initialization)
     - [3.1 ViSearch](#31-visearch)
     - [3.2 ProductSearch](#32-productsearch)
@@ -66,29 +65,7 @@ For source code and references, please visit the [Github Repository](https://git
 
 ## 2. Setup
 
-### 2.1 Run the Demo
-
-The source code of a demo application is provided together with the SDK ([demo](https://github.com/visenze/visearch-sdk-swift/tree/master/Example)). You can simply open **Example** project in XCode and run the demo.
-
-<img src="./doc/xcode_1_1.png" alt="screenshot" height="200">
-
-You should initialize the ViSearch client in AppDelegate file by using your app key or access/secret key pair.
-
-```swift
-
-// recommended way of init ViSearch client with app key
-ViSearch.sharedInstance.setup(appKey: "YOUR_APP_KEY")
-
-// old way of init ViSearch client with access and secret key pair
-ViSearch.sharedInstance.setup(accessKey: "YOUR_ACCESS_KEY", secret: "YOUR_SECRET_KEY")
-       
-```
-
-You can play around with our demo app to see how we build up the cool image search feature using ViSearch SDK.
-
-<img src="./doc/ios_demo_1.png" alt="ios_demo1" width="1024">
-
-### 2.2 Set up Xcode project
+### 2.1 Set up Xcode project
 
 In Xcode, go to File > New > Project Select the Single View Application.
 
@@ -98,9 +75,9 @@ Type a name for your project and press Next, here we use Demo as the project nam
 
 <img src="./doc/ios1_1.png" alt="screenshot" style="max-width:100%;height: 300px;">
 
-### 2.3 Import ViSearch Swift SDK
+### 2.2 Import ViSearch Swift SDK
 
-#### 2.3.1 Using CocoaPods
+#### 2.2.1 Using CocoaPods
 
 First you need to install the CocoaPods Ruby gem:
 
@@ -137,7 +114,7 @@ pod install
 
 The Demo.xcworkspace project should be created.
 
-#### 2.3.2 Using Carthage
+#### 2.2.2 Using Carthage
 
 1. Create a Cartfile in the same directory where your `.xcodeproj` or `.xcworkspace` is.
 2. List the dependency as follow: `github "visenze/visearch-sdk-swift" ~> 1.10.3` . Please change the version to latest available version.
@@ -151,7 +128,7 @@ The Demo.xcworkspace project should be created.
 10. Drag the built `ViSearchSDK.xcframework`/ `ViSenzeAnalytics.framework` bundles from Carthage/Build into the "Frameworks and Libraries" section of your application’s Xcode project.
 11. If you are using Carthage for an application, select "Embed & Sign", otherwise "Do Not Embed".
 
-#### 2.3.3 Using Manual Approach
+#### 2.2.3 Using Manual Approach
 
 You can also download the iOS [ViSearch SDK](https://github.com/visenze/visearch-sdk-swift/archive/master.zip) directly. To use it, unzip it and drag ViSearchSDK project (under ViSearchSDK folder) into your project. The ViSearchSDK project produces ViSearchSDK framework and has a dependency i.e. ViSenzeAnalytics. Before it can be used, you will need to run and pull ViSenzeAnalytics framework by running:
 
@@ -181,7 +158,7 @@ After this, you can copy the ViSearchSDK folder into your project.
 
 You are done!
 
-### 2.4 Add Privacy Usage Description
+### 2.3 Add Privacy Usage Description
 
 iOS 10 now requires user permission to access camera and photo library. If your app requires these access, please add description for NSCameraUsageDescription, NSPhotoLibraryUsageDescription in the Info.plist. More details can be found [here](https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW24).
 
