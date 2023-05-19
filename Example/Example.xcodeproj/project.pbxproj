@@ -709,6 +709,7 @@
 				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = 345PN8HV64;
 				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.10.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.Example;
@@ -725,6 +726,7 @@
 				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = 345PN8HV64;
 				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.10.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.Example;
