@@ -14,6 +14,7 @@ open class ViProductObjectResult {
     public var score: Double? = nil
     
     public var box : ViBox? = nil
+    public var boxType: String?
     
     public var attributes: [String:Any] = [:]
     

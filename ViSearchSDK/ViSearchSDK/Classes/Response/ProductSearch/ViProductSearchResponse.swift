@@ -341,6 +341,7 @@ open class ViProductSearchResponse : NSObject {
                 object.id = dict["id"] as? String
                 object.category = dict["category"] as? String
                 object.name = dict["name"] as? String
+                object.boxType = dict["box_type"] as? String
                 
                 if let excludedPidList = dict["excluded_pids"] as? [String] {
                     object.excludedPids = excludedPidList
