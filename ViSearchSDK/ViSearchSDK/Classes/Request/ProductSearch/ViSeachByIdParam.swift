@@ -31,6 +31,8 @@ open class ViSearchByIdParam : ViBaseProductSearchParam {
     
     public var showBestProductImages: Bool? = nil
     
+    public var nonProductBasedRecs: Bool? = nil
+    
     public var boxList : [String] = []
     
     /// Constructor, checks for non-empty productId
@@ -82,6 +84,10 @@ open class ViSearchByIdParam : ViBaseProductSearchParam {
         
         if let showBestProductImages = showBestProductImages {
             dict["show_best_product_images"] = showBestProductImages ? "true" : "false"
+        }
+        
+        if let nonProductBasedRecs = nonProductBasedRecs {
+            dict["non_product_based_recs"] = nonProductBasedRecs ? "true" : "false"
         }
         
         if !boxList.isEmpty {

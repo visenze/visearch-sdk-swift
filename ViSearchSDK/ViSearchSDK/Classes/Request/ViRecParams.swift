@@ -25,6 +25,8 @@ public class ViRecParams: ViSearchParams {
     
     public var showBestProductImages: Bool? = nil
     
+    public var nonProductBasedRecs: Bool? = nil
+    
     public override init?(imName: String) {
         super.init(imName: imName)
     }
@@ -54,6 +56,10 @@ public class ViRecParams: ViSearchParams {
         
         if let useSetBasedCtl = useSetBasedCtl {
             dict["use_set_based_ctl"] = useSetBasedCtl ? "true" : "false"
+        }
+        
+        if let nonProductBasedRecs = nonProductBasedRecs {
+            dict["non_product_based_recs"] = nonProductBasedRecs ? "true" : "false"
         }
         
         if let setLimit = self.setLimit {
