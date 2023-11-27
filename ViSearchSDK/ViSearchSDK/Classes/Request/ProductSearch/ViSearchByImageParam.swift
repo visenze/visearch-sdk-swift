@@ -34,6 +34,8 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
     
     public var compress_box: String? = nil
     
+    public var q : String? = nil
+    
     /// Constructor using image URL
     ///
     /// - parameter imUrl: URL to an image
@@ -67,6 +69,16 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
     /// - parameter image: Loaded image data
     public init(image: UIImage){
         self.image = image
+    }
+    
+    // for multi-search
+    public init?(q: String){
+        self.q = q
+        
+        if q.isEmpty {
+            print("\(type(of: self)).\(#function)[line:\(#line)] - error: q is missing")
+            return nil
+        }
     }
     
     /// Get the compressed/resize image data
@@ -146,6 +158,10 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
         
         if let imId = imId {
             dict["im_id"] = imId
+        }
+        
+        if let q = q {
+            dict["q"] = q
         }
         
         if let b = box {

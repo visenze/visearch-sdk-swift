@@ -13,6 +13,8 @@ open class ViProductSearchClient : ViSearchClient {
     
     public typealias ProductSearchSuccess = (ViProductSearchResponse?) -> ()
     public typealias ProductSearchFailure = (Error) -> ()
+    public typealias AutoCompleteSuccess = (ViAutoCompleteResponse?) -> ()
+    
     
     /// Constructor, requires a base URL for endpoint and app key
     ///
@@ -151,6 +153,84 @@ open class ViProductSearchClient : ViSearchClient {
                 }
                 else{
                     let responseData = ViProductSearchResponse(response: response!, data: data!)
+                    successHandler(responseData)
+                }
+            }
+        })
+        
+        return task
+    }
+    
+    
+    @discardableResult
+    public func autoCompletePost(path:String, params:[String:Any], imageData:Data?,
+                          successHandler: @escaping AutoCompleteSuccess,
+                          failureHandler: @escaping ProductSearchFailure) -> URLSessionTask {
+        // make url
+        let url = requestSerialization.generateRequestUrl(
+            baseUrl: baseUrl,
+            apiEndPoint: path,
+            searchParams: params
+        )
+        
+        // make request
+        let request = NSMutableURLRequest(
+            url: URL(string: url)!,
+            cachePolicy: .useProtocolCachePolicy,
+            timeoutInterval: timeoutInterval
+        )
+        
+        // if an image data is provided, then the request will use multi-part
+        // form to send the image data, else the fallback is looking at imageUrl
+        if let data = imageData {
+            let boundary = ViMultipartFormData.randomBoundary()
+            request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            request.httpBody = ViMultipartFormData.encode(imageData: data, boundary: boundary);
+        }
+        
+        return autoCompleteHttpRequest(
+            method: ViHttpMethod.POST,
+            request: request,
+            successHandler: successHandler,
+            failureHandler: failureHandler
+        )
+    }
+    
+    private func autoCompleteHttpRequest(method: ViHttpMethod,
+                             request: NSMutableURLRequest,
+                             successHandler: @escaping AutoCompleteSuccess,
+                             failureHandler: @escaping ProductSearchFailure) -> URLSessionTask {
+        
+        request.httpMethod = method.rawValue
+        let task = createAutoCompleteSessionTaskWithRequest(
+            request: request,
+            successHandler: successHandler,
+            failureHandler: failureHandler
+        )
+        task.resume()
+        
+        return task
+    }
+    
+    private func createAutoCompleteSessionTaskWithRequest(request: NSMutableURLRequest,
+                                              successHandler: @escaping AutoCompleteSuccess,
+                                              failureHandler: @escaping ProductSearchFailure) -> URLSessionTask {
+        request.addValue(
+            getUserAgentValue(),
+            forHTTPHeaderField: ViSearchClient.userAgentHeader
+        )
+         
+        let task = session.dataTask(with: request as URLRequest , completionHandler:{
+            (data, response, error) in
+            if (error != nil) {
+                failureHandler(error!)
+            }
+            else {
+                if response == nil || data == nil {
+                    successHandler(nil)
+                }
+                else{
+                    let responseData = ViAutoCompleteResponse(response: response!, data: data!)
                     successHandler(responseData)
                 }
             }

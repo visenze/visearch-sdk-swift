@@ -21,6 +21,8 @@
 		BD5F70582601F1B100132A1F /* ViProductObjectResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5F70572601F1B100132A1F /* ViProductObjectResult.swift */; };
 		BD6540571DA6302D00E10162 /* ViUploadSearchParamsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6540561DA6302D00E10162 /* ViUploadSearchParamsTests.swift */; };
 		BD65405A1DA63F5200E10162 /* ViSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6540591DA63F5200E10162 /* ViSearch.swift */; };
+		BD6C2C542B14998F0047EC1C /* ViAutoCompleteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6C2C532B14998F0047EC1C /* ViAutoCompleteItem.swift */; };
+		BD6C2C562B149E4E0047EC1C /* ViAutoCompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6C2C552B149E4E0047EC1C /* ViAutoCompleteResponse.swift */; };
 		BD6CADEC25F5C1A600012929 /* ViSeachByIdParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6CADEB25F5C1A600012929 /* ViSeachByIdParam.swift */; };
 		BD6CADF025F5C1B700012929 /* ViBaseProductSearchParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6CADEF25F5C1B700012929 /* ViBaseProductSearchParam.swift */; };
 		BD6CADF325F5C1C600012929 /* ViSearchByImageParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6CADF225F5C1C600012929 /* ViSearchByImageParam.swift */; };
@@ -111,6 +113,8 @@
 		BD5F70572601F1B100132A1F /* ViProductObjectResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViProductObjectResult.swift; sourceTree = "<group>"; };
 		BD6540561DA6302D00E10162 /* ViUploadSearchParamsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViUploadSearchParamsTests.swift; sourceTree = "<group>"; };
 		BD6540591DA63F5200E10162 /* ViSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViSearch.swift; sourceTree = "<group>"; };
+		BD6C2C532B14998F0047EC1C /* ViAutoCompleteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViAutoCompleteItem.swift; sourceTree = "<group>"; };
+		BD6C2C552B149E4E0047EC1C /* ViAutoCompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViAutoCompleteResponse.swift; sourceTree = "<group>"; };
 		BD6CADEB25F5C1A600012929 /* ViSeachByIdParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViSeachByIdParam.swift; sourceTree = "<group>"; };
 		BD6CADEF25F5C1B700012929 /* ViBaseProductSearchParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViBaseProductSearchParam.swift; sourceTree = "<group>"; };
 		BD6CADF225F5C1C600012929 /* ViSearchByImageParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViSearchByImageParam.swift; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 				BD72A39F25FF0FA1005C8BC0 /* ViGroupResult.swift */,
 				BDB76A2526983C6C000C750A /* ViStrategy.swift */,
 				BDF87E22281BCD8D0040E0D4 /* ViExperiment.swift */,
+				BD6C2C552B149E4E0047EC1C /* ViAutoCompleteResponse.swift */,
 			);
 			path = ProductSearch;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 				BD815AA71FC8003800E8DA76 /* ViObjectResult.swift */,
 				BDD3C4D128C7A56400C0C1A4 /* ViSetInfo.swift */,
 				BD283ABA29B7101600912D82 /* ViBestImage.swift */,
+				BD6C2C532B14998F0047EC1C /* ViAutoCompleteItem.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -496,8 +502,10 @@
 				BD72A3A025FF0FA1005C8BC0 /* ViGroupResult.swift in Sources */,
 				BD283ABB29B7101600912D82 /* ViBestImage.swift in Sources */,
 				BD65405A1DA63F5200E10162 /* ViSearch.swift in Sources */,
+				BD6C2C542B14998F0047EC1C /* ViAutoCompleteItem.swift in Sources */,
 				BD7DEDAB1DA2B6C400CDF6DE /* ViColorSearchParams.swift in Sources */,
 				BD5BE9F225F61FE0004995D0 /* ViProduct.swift in Sources */,
+				BD6C2C562B149E4E0047EC1C /* ViAutoCompleteResponse.swift in Sources */,
 				BD815AA81FC8003800E8DA76 /* ViObjectResult.swift in Sources */,
 				BD7020ED1E49BB1D006BAE40 /* ViFacet.swift in Sources */,
 				BD6CADF025F5C1B700012929 /* ViBaseProductSearchParam.swift in Sources */,
