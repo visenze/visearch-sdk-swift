@@ -143,7 +143,7 @@ open class ViProductSearchResponse : NSObject {
     /// - parameter err: Json converted dictionary for the "error" field
     ///
     /// - returns: ViErrorMsg
-    private static func parseErrorMsg(err: [String:Any]) -> ViErrorMsg {
+    public static func parseErrorMsg(err: [String:Any]) -> ViErrorMsg {
         let result = ViErrorMsg()
         
         if let code = err["code"] as? Int {

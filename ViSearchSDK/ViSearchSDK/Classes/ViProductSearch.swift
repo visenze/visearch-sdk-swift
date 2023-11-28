@@ -13,6 +13,9 @@ open class ViProductSearch : NSObject {
     public static let BASE_URL = "https://search.visenze.com"
     public static let SBI_ENDPOINT = "v1/product/search_by_image"
     public static let VSR_ENDPOINT = "v1/product/recommendations"
+    public static let MULTISEARCH_ENDPOINT = "v1/product/multisearch"
+    public static let MULTISEARCH_AUTOCOMPLETE_ENDPOINT = "v1/product/multisearch/autocomplete"
+    
     
     public static let sharedInstance = ViProductSearch();
     
@@ -92,6 +95,49 @@ open class ViProductSearch : NSObject {
             failureHandler: failureHandler
         )
     }
+    
+    @discardableResult
+    public func multiSearch(
+        params:ViSearchByImageParam,
+        successHandler: @escaping ViProductSearchClient.ProductSearchSuccess,
+        failureHandler: @escaping ViProductSearchClient.ProductSearchFailure) -> URLSessionTask {
+        
+        // important: this method must be before params.toDict
+        // this will resize image and generate the resized box
+        let imageData = params.getCompressedImageData()
+        
+        var parameters = addAuth(dict: params.toDict())
+        parameters = addAnalytics(dict: parameters)
+        return client!.post(
+            path: ViProductSearch.MULTISEARCH_ENDPOINT,
+            params: parameters,
+            imageData: imageData,
+            successHandler: successHandler,
+            failureHandler: failureHandler
+        )
+    }
+    
+    @discardableResult
+    public func multiSearchAutoComplete(
+        params:ViSearchByImageParam,
+        successHandler: @escaping ViProductSearchClient.AutoCompleteSuccess,
+        failureHandler: @escaping ViProductSearchClient.ProductSearchFailure) -> URLSessionTask {
+        
+        // important: this method must be before params.toDict
+        // this will resize image and generate the resized box
+        let imageData = params.getCompressedImageData()
+        
+        var parameters = addAuth(dict: params.toDict())
+        parameters = addAnalytics(dict: parameters)
+        return client!.autoCompletePost(
+            path: ViProductSearch.MULTISEARCH_AUTOCOMPLETE_ENDPOINT,
+            params: parameters,
+            imageData: imageData,
+            successHandler: successHandler,
+            failureHandler: failureHandler
+        )
+    }
+    
     
     /// API for Search By ID, it is non-blocking (async func), need to wait for task to end or either
     /// handlers to execute
