@@ -31,6 +31,8 @@
     - [4.2 ProductSearch](#42-productsearch)
       - [4.2.1 Search By Image](#421-search-by-image)
       - [4.2.2 Recommendations](#422-recommendations)
+      - [4.2.3 Multisearch](#423-multisearch)
+      - [4.2.4 Multisearch autocomplete](#424-multisearch-autocomplete)
   - [5. Search Results](#5-search-results)
     - [5.1 ViSearch](#51-visearch)
     - [5.2 ProductSearch](#52-productsearch)
@@ -571,6 +573,54 @@ let params = ViSearchByIdParam(productId: "PRODUCT_ID")
 ViProductSearch.sharedInstance.searchById(
     successHandler: { 
         (response: ViProductSearchResponse?) -> Void in
+        // your function to process response
+    },
+    failureHandler: {
+        (err: Error) -> Void in 
+        // your function to handle error
+    }
+)
+```
+
+#### 4.2.3 Multisearch
+
+POST /v1/product/multisearch
+
+```swift
+import ViSearchSDK
+...
+let params = ViSearchByImageParam(image: UIImage(contentsOfFile: "IMAGE_FILEPATH"))
+
+params.q = "my-text-query"
+
+ViProductSearch.sharedInstance.multisearch(
+    params: params,
+    successHandler: { 
+        (response: ViProductSearchResponse?) -> Void in
+        // your function to process response
+    },
+    failureHandler: {
+        (err: Error) -> Void in 
+        // your function to handle error
+    }
+)
+```
+
+#### 4.2.4 Multisearch autocomplete
+
+POST /v1/product/multisearch/autocomplete
+
+```swift
+import ViSearchSDK
+...
+let params = ViSearchByImageParam(image: UIImage(contentsOfFile: "IMAGE_FILEPATH"))
+
+params.q = "my-partial-text-query"
+
+ViProductSearch.sharedInstance.multiSearchAutoComplete(
+    params: params,
+    successHandler: { 
+        (response: ViAutoCompleteResponse?) -> Void in
         // your function to process response
     },
     failureHandler: {
