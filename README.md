@@ -13,8 +13,9 @@
     - [2.1 Set up Xcode project](#21-set-up-xcode-project)
     - [2.2 Import ViSearch Swift SDK](#22-import-visearch-swift-sdk)
       - [2.2.1 Using CocoaPods](#221-using-cocoapods)
-      - [2.2.2 Using Carthage](#222-using-carthage)
-      - [2.2.3 Using Manual Approach](#223-using-manual-approach)
+      - [2.2.2 Using Swift Package Manager](#222-using-swift-package-manager)
+      - [2.2.3 Using Carthage](#223-using-carthage)
+      - [2.2.4 Using Manual Approach](#224-using-manual-approach)
     - [2.3 Add Privacy Usage Description](#23-add-privacy-usage-description)
   - [3. Initialization](#3-initialization)
     - [3.1 ViSearch](#31-visearch)
@@ -116,7 +117,28 @@ pod install
 
 The Demo.xcworkspace project should be created.
 
-#### 2.2.2 Using Carthage
+#### 2.2.2 Using Swift Package Manager
+
+You can add ViSearchSDK to an Xcode project by adding it to your project as a package.
+
+> https://github.com/visenze/visearch-sdk-swift
+
+If you want to use Dependencies in a [SwiftPM](https://swift.org/package-manager/) project, it's as
+simple as adding it to your `Package.swift`:
+
+``` swift
+dependencies: [
+  .package(url: "https://github.com/visenze/visearch-sdk-swift", from: "1.11.0")
+]
+```
+
+And then adding the product to any target that needs access to the library:
+
+```swift
+.product(name: "ViSearchSDK", package: "visearch-sdk-swift"),
+```
+
+#### 2.2.3 Using Carthage
 
 1. Create a Cartfile in the same directory where your `.xcodeproj` or `.xcworkspace` is.
 2. List the dependency as follow: `github "visenze/visearch-sdk-swift" ~> 1.10.3` . Please change the version to latest available version.
@@ -130,7 +152,7 @@ The Demo.xcworkspace project should be created.
 10. Drag the built `ViSearchSDK.xcframework`/ `ViSenzeAnalytics.framework` bundles from Carthage/Build into the "Frameworks and Libraries" section of your application’s Xcode project.
 11. If you are using Carthage for an application, select "Embed & Sign", otherwise "Do Not Embed".
 
-#### 2.2.3 Using Manual Approach
+#### 2.2.4 Using Manual Approach
 
 You can also download the iOS [ViSearch SDK](https://github.com/visenze/visearch-sdk-swift/archive/master.zip) directly. To use it, unzip it and drag ViSearchSDK project (under ViSearchSDK folder) into your project. The ViSearchSDK project produces ViSearchSDK framework and has a dependency i.e. ViSenzeAnalytics. Before it can be used, you will need to run and pull ViSenzeAnalytics framework by running:
 
