@@ -53,7 +53,9 @@
 
 ## 1. Overview
 
-This SDK contains two sets of APIs that provide accurate, reliable and scalable search. It is an open source software to provide easy integration of ViSearch APIs and ProductSearch APIs with your iOS applications. See the table below for more API specific information:
+This SDK contains two sets of APIs that provide accurate, reliable and scalable search. Please use **ProductSearch** API for current latest version.
+
+It is an open source software to provide easy integration of ViSearch APIs and ProductSearch APIs with your iOS applications. See the table below for more API specific information:
 
 |API|Description|
 |---|---|
@@ -62,7 +64,7 @@ This SDK contains two sets of APIs that provide accurate, reliable and scalable 
 
 For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-swift).
 
-> Current stable version: `1.10.6` (Swift 5+)
+> Current stable version: `1.11.0` (Swift 5+)
 >
 > Supported iOS version: iOS 8.x and higher
 
@@ -104,7 +106,7 @@ platform :ios, '12.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'ViSearchSDK', '~>1.10.6'
+    pod 'ViSearchSDK', '~>1.11.0'
 end
 ...
 ```
@@ -141,7 +143,7 @@ And then adding the product to any target that needs access to the library:
 #### 2.2.3 Using Carthage
 
 1. Create a Cartfile in the same directory where your `.xcodeproj` or `.xcworkspace` is.
-2. List the dependency as follow: `github "visenze/visearch-sdk-swift" ~> 1.10.3` . Please change the version to latest available version.
+2. List the dependency as follow: `github "visenze/visearch-sdk-swift" ~> 1.11.0` . Please change the version to latest available version.
 3. Run `carthage update --use-xcframeworks` or `carthage bootstrap --platform iOS --cache-builds --no-use-binaries --use-xcframeworks` . The command will fail as `ViSenzeAnalytics.xcframework` is not pulled as it is a dependency. We will resolve it in the next step.
 4. A Cartfile.resolved file and a Carthage directory will appear in the same directory where your .xcodeproj or .xcworkspace is
 5. Navigate to ViSearchSDK folder:  `cd Carthage/Checkouts/visearch-sdk-swift/ViSearchSDK` which contains the source code for ViSearchSDK.
@@ -188,7 +190,7 @@ iOS 10 now requires user permission to access camera and photo library. If your 
 
 ## 3. Initialization
 
-### 3.1 ViSearch
+### 3.1 ViSearch (Deprecated)
 
 `ViSearch` **must** be initialized with an `appKey` or `accessKey`/`secretKey` pair **before** it can be used.
 
@@ -267,7 +269,7 @@ placement222.setUp(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID)
 
 ## 4. Solution APIs
 
-### 4.1 ViSearch
+### 4.1 ViSearch (Deprecated)
 
 #### 4.1.1 Visually Similar Recommendations
 
