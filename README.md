@@ -59,7 +59,7 @@ It is an open source software to provide easy integration of ViSearch APIs and P
 
 |API|Description|
 |---|---|
-|**ViSearch**| Four search methods are provided based on the ViSearch Solution APIs - [*Find Similar*](), [*You May Also Like*](), [*Search By Image*]() and [*Search By Color*](). For more details, see [ViSearch API Documentation](http://www.visenze.com/docs/overview/introduction).|
+|**ViSearch**| Four search methods are provided based on the ViSearch legacy Solution APIs (**Deprecated**) - [*Find Similar*](), [*You May Also Like*](), [*Search By Image*]() and [*Search By Color*](). For more details, see [ViSearch API Documentation](http://www.visenze.com/docs/overview/introduction).|
 |**ProductSearch**| ViSenze Discovery Suite provides your customers a better and more intuitive product search and discovery experience by helping them search, navigate and interact with products more easily. The ProductSearch API provides a new set of product-based APIs that work with ViSenze Catalog Manager. In the SDK, ProductSearch API is refered to as `ViProductSearch`.|
 
 For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-swift).
