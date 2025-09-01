@@ -15,6 +15,8 @@ open class ViProductSearch : NSObject {
     public static let VSR_ENDPOINT = "v1/product/recommendations"
     public static let MULTISEARCH_ENDPOINT = "v1/product/multisearch"
     public static let MULTISEARCH_AUTOCOMPLETE_ENDPOINT = "v1/product/multisearch/autocomplete"
+    public static let MULTISEARCH_COMPL_ENDPOINT = "v1/product/multisearch/complementary"
+    public static let MULTISEARCH_OUTFIT_ENDPOINT = "v1/product/multisearch/outfit-recommendations"
     
     
     public static let sharedInstance = ViProductSearch();
@@ -110,6 +112,48 @@ open class ViProductSearch : NSObject {
         parameters = addAnalytics(dict: parameters)
         return client!.post(
             path: ViProductSearch.MULTISEARCH_ENDPOINT,
+            params: parameters,
+            imageData: imageData,
+            successHandler: successHandler,
+            failureHandler: failureHandler
+        )
+    }
+    
+    @discardableResult
+    public func multiSearchComplementary(
+        params:ViSearchByImageParam,
+        successHandler: @escaping ViProductSearchClient.ProductSearchSuccess,
+        failureHandler: @escaping ViProductSearchClient.ProductSearchFailure) -> URLSessionTask {
+        
+        // important: this method must be before params.toDict
+        // this will resize image and generate the resized box
+        let imageData = params.getCompressedImageData()
+        
+        var parameters = addAuth(dict: params.toDict())
+        parameters = addAnalytics(dict: parameters)
+        return client!.post(
+            path: ViProductSearch.MULTISEARCH_COMPL_ENDPOINT,
+            params: parameters,
+            imageData: imageData,
+            successHandler: successHandler,
+            failureHandler: failureHandler
+        )
+    }
+    
+    @discardableResult
+    public func multiSearchOutfitRec(
+        params:ViSearchByImageParam,
+        successHandler: @escaping ViProductSearchClient.ProductSearchSuccess,
+        failureHandler: @escaping ViProductSearchClient.ProductSearchFailure) -> URLSessionTask {
+        
+        // important: this method must be before params.toDict
+        // this will resize image and generate the resized box
+        let imageData = params.getCompressedImageData()
+        
+        var parameters = addAuth(dict: params.toDict())
+        parameters = addAnalytics(dict: parameters)
+        return client!.post(
+            path: ViProductSearch.MULTISEARCH_OUTFIT_ENDPOINT,
             params: parameters,
             imageData: imageData,
             successHandler: successHandler,

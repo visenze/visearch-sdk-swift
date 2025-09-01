@@ -34,6 +34,9 @@ open class ViProductSearchResponse : NSObject {
     
     public var productInfo : ViProduct? = nil
     
+    // for multisearch
+    public var qinfo : ViProduct? = nil
+    
     public var objects : [ViProductObjectResult] = []
     
     public var groupResults : [ViGroupResult] = []
@@ -101,6 +104,10 @@ open class ViProductSearchResponse : NSObject {
             
             if let prodInfo = json["product_info"] as? [String:Any] {
                 productInfo = ViProductSearchResponse.parseProduct(prodInfo)
+            }
+            
+            if let queryInfo = json["qinfo"] as? [String:Any] {
+                qinfo = ViProductSearchResponse.parseProduct(queryInfo)
             }
             
             if let objs = json["objects"] as? [Any] {
@@ -236,6 +243,10 @@ open class ViProductSearchResponse : NSObject {
         
         if let vsData = dict["vs_data"] as? [String:Any] {
             item.vsData = vsData
+        }
+        
+        if let sysData = dict["sys"] as? [String:Any] {
+            item.sysData = sysData
         }
         
         if let tags = dict["tags"] as? [String:Any] {

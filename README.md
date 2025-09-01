@@ -34,6 +34,8 @@
       - [4.2.2 Recommendations](#422-recommendations)
       - [4.2.3 Multisearch](#423-multisearch)
       - [4.2.4 Multisearch autocomplete](#424-multisearch-autocomplete)
+      - [4.2.5 Multisearch complementary](#425-multisearch-complementary)
+      - [4.2.6 Multisearch outfit recommendations](#426-multisearch-outfit-recommendations)
   - [5. Search Results](#5-search-results)
     - [5.1 ViSearch](#51-visearch)
     - [5.2 ProductSearch](#52-productsearch)
@@ -64,7 +66,7 @@ It is an open source software to provide easy integration of ViSearch APIs and P
 
 For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-swift).
 
-> Current stable version: `1.11.0` (Swift 5+)
+> Current stable version: `1.12.0` (Swift 5+)
 >
 > Supported iOS version: iOS 8.x and higher
 
@@ -106,7 +108,7 @@ platform :ios, '12.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'ViSearchSDK', '~>1.11.0'
+    pod 'ViSearchSDK', '~>1.12.0'
 end
 ...
 ```
@@ -130,7 +132,7 @@ simple as adding it to your `Package.swift`:
 
 ``` swift
 dependencies: [
-  .package(url: "https://github.com/visenze/visearch-sdk-swift", from: "1.11.0")
+  .package(url: "https://github.com/visenze/visearch-sdk-swift", from: "1.12.0")
 ]
 ```
 
@@ -653,6 +655,55 @@ ViProductSearch.sharedInstance.multiSearchAutoComplete(
     }
 )
 ```
+
+#### 4.2.5 Multisearch Complementary
+
+POST /v1/product/multisearch/complementary
+
+```swift
+import ViSearchSDK
+...
+let params = ViSearchByImageParam(image: UIImage(contentsOfFile: "IMAGE_FILEPATH"))
+
+params.q = "my-text-query"
+
+ViProductSearch.sharedInstance.multiSearchComplementary(
+    params: params,
+    successHandler: { 
+        (response: ViProductSearchResponse?) -> Void in
+        // your function to process response
+    },
+    failureHandler: {
+        (err: Error) -> Void in 
+        // your function to handle error
+    }
+)
+```
+
+#### 4.2.6 Multisearch Outfit Recommendations
+
+POST /v1/product/multisearch/outfit-recommendations
+
+```swift
+import ViSearchSDK
+...
+let params = ViSearchByImageParam(image: UIImage(contentsOfFile: "IMAGE_FILEPATH"))
+
+params.q = "my-text-query"
+
+ViProductSearch.sharedInstance.multiSearchOutfitRec(
+    params: params,
+    successHandler: { 
+        (response: ViProductSearchResponse?) -> Void in
+        // your function to process response
+    },
+    failureHandler: {
+        (err: Error) -> Void in 
+        // your function to handle error
+    }
+)
+```
+
 
 ## 5. Search Results
 

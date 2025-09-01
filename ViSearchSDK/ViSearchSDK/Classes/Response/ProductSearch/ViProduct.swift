@@ -18,6 +18,9 @@ open class ViProduct {
     
     public var vsData : [String:Any] = [:]
     
+    // for multisearch
+    public var sysData : [String:Any] = [:]
+    
     public var score : Double? = nil
     
     public var imageS3Url : String? = nil

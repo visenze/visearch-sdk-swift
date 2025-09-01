@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
   
   s.name         = "ViSearchSDK"
-  s.version      = "1.11.0"
+  s.version      = "1.12.0"
   s.summary      = "A Visual Search API solution (Swift SDK)"
 
   s.description  = <<-DESC
