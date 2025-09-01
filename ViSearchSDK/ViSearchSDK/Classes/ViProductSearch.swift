@@ -15,6 +15,8 @@ open class ViProductSearch : NSObject {
     public static let VSR_ENDPOINT = "v1/product/recommendations"
     public static let MULTISEARCH_ENDPOINT = "v1/product/multisearch"
     public static let MULTISEARCH_AUTOCOMPLETE_ENDPOINT = "v1/product/multisearch/autocomplete"
+    public static let MULTISEARCH_COMPL_ENDPOINT = "v1/product/multisearch/complementary"
+    public static let MULTISEARCH_OUTFIT_ENDPOINT = "v1/product/multisearch/outfit-recommendations"
     
     
     public static let sharedInstance = ViProductSearch();
