@@ -24,6 +24,10 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
     
     public var vsAttributesToGet : [String] = []
     
+    // new multisearch params
+    public var sysAttributesToGet : [String] = []
+    public var globalFilter : String? = nil
+    
     public var vsConfig : [String:String] = [:]
     
     public var facets : [String] = []
@@ -143,6 +147,14 @@ open class ViBaseProductSearchParam : ViSearchParamsProtocol {
         
         if !vsAttributesToGet.isEmpty {
             dict["vs_attrs_to_get"] = vsAttributesToGet
+        }
+        
+        if !sysAttributesToGet.isEmpty {
+            dict["sys_attrs_to_get"] = sysAttributesToGet
+        }
+        
+        if let gf = globalFilter {
+            dict["global_filter"] = gf
         }
         
         if !vsConfig.isEmpty {

@@ -36,6 +36,14 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
     
     public var q : String? = nil
     
+    // new multisearch params
+    public var pid : String? = nil
+    public var similarScoreMin : Float? = nil
+    public var sayt : Bool? = nil
+    public var spellCorrection : Bool? = nil
+    public var qinfo : Bool? = nil
+    public var boosts : String? = nil
+    
     /// Constructor using image URL
     ///
     /// - parameter imUrl: URL to an image
@@ -187,6 +195,31 @@ open class ViSearchByImageParam : ViBaseProductSearchParam {
         if let searchAllObjects = searchAllObjects {
             dict["search_all_objects"] = searchAllObjects ? "true" : "false"
         }
+        
+        if let pid = pid {
+            dict["pid"] = pid
+        }
+        
+        if let boosts = boosts {
+            dict["boosts"] = boosts
+        }
+        
+        if let similarScoreMin = similarScoreMin {
+            dict["similar_score_min"] = String(similarScoreMin)
+        }
+        
+        if let sayt = sayt {
+            dict["sayt"] = String(sayt)
+        }
+        
+        if let spellCorrection = spellCorrection {
+            dict["spell_correction"] = String(spellCorrection)
+        }
+        
+        if let qinfo = qinfo {
+            dict["qinfo"] = String(qinfo)
+        }
+        
         
         if points.count > 0 {
             var pointArr : [String] = []
