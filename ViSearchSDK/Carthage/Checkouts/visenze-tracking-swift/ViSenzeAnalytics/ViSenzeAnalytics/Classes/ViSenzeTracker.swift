@@ -14,7 +14,7 @@ public enum VaApiMethod: String {
 }
 
 public class ViSenzeTracker: NSObject {
-    public static let DEFAULT_ENDPOINT = "https://analytics.data.visenze.com"
+    public static let DEFAULT_ENDPOINT = "https://multimodal.analytics.data.rezolve.com"
     public static let DEFAULT_CN_ENDPOINT = "https://analytics.visenze.com.cn"
     
     private static let userAgentHeader : String = "User-Agent"

@@ -12,7 +12,7 @@ let package = Package(
 		),
     ],
 	dependencies: [
-		.package(url: "https://github.com/visenze/visenze-tracking-swift", .upToNextMajor(from: "0.2.1"))
+		.package(url: "https://github.com/visenze/visenze-tracking-swift", .upToNextMajor(from: "0.2.2"))
 	],
     targets: [
         .target(
