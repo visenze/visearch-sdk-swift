@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
   
   s.name         = "ViSearchSDK"
-  s.version      = "1.12.0"
+  s.version      = "1.12.1"
   s.summary      = "A Visual Search API solution (Swift SDK)"
 
   s.description  = <<-DESC
@@ -86,7 +86,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  s.dependency "ViSenzeAnalytics", "~> 0.2.0"
+  s.dependency "ViSenzeAnalytics", "~> 0.2.2"
   s.swift_versions = ['5']
   
 end

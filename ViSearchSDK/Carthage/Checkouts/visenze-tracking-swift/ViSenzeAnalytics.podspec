@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
   
   s.name         = "ViSenzeAnalytics"
-  s.version      = "0.2.0"
+  s.version      = "0.2.2"
   s.summary      = "ViSenze Tracking SDK"
 
   s.description  = <<-DESC
