@@ -237,7 +237,7 @@ ViSearch.sharedInstance.client?.session = URLSession(configuration: (ViSearch.sh
 
 `ProductSearch` **must** be initialized with an `appKey` and `placementId` **before** it can be used. 
 
-For searches in China, please set the baseUrl to `https://search.visenze.com.cn`. For analytics, you will initialise the tracker with `forCn` set to true.
+For Azure apps, please set the baseUrl to `https://multimodal.search.rezolve.com`. For AWS apps please set the baseUrl to `https://search.visenze.com`
 
 ```swift
 import ViSearchSDK
@@ -246,7 +246,7 @@ import ViSearchSDK
 ViProductSearch.sharedInstance.setUp(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID)
 
 // custom search endpoint
-ViProductSearch.sharedInstance.setUp(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID, baseUrl:"https://custom-search.yourdomain.com")
+ViProductSearch.sharedInstance.setUp(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID, baseUrl:"https://multimodal.search.rezolve.com")
 
 // configure timeout to 30s example. By default timeout is set 10s.
 ViProductSearch.sharedInstance.client?.timeoutInterval = 30
