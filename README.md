@@ -62,7 +62,7 @@ It is an open source software to provide easy integration of ViSearch APIs and P
 |API|Description|
 |---|---|
 |**ViSearch**| Four search methods are provided based on the ViSearch legacy Solution APIs (**Deprecated**) - [*Find Similar*](), [*You May Also Like*](), [*Search By Image*]() and [*Search By Color*](). For more details, see [ViSearch API Documentation](http://www.visenze.com/docs/overview/introduction).|
-|**ProductSearch**| ViSenze Discovery Suite provides your customers a better and more intuitive product search and discovery experience by helping them search, navigate and interact with products more easily. The ProductSearch API provides a new set of product-based APIs that work with ViSenze Catalog Manager. In the SDK, ProductSearch API is refered to as `ViProductSearch`.|
+|**ProductSearch**| Rezolve Discovery Suite provides your customers a better and more intuitive product search and discovery experience by helping them search, navigate and interact with products more easily. The ProductSearch API provides a new set of product-based APIs that work with Rezolve Catalog Manager. In the SDK, ProductSearch API is refered to as `ViProductSearch`.|
 
 For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-swift).
 
@@ -289,7 +289,7 @@ ViSearch.sharedInstance.findSimilar( params: params!,
                         (data : ViResponseData?) -> Void in
                             // Do something when request succeeds
                             // preview by calling : dump(data)
-                            // check ViResponseData.hasError and ViResponseData.error for any errors return by ViSenze server
+                            // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
                     },
                    failureHandler: {
                         (err) -> Void in
@@ -320,7 +320,7 @@ ViSearch.sharedInstance.uploadSearch(params: params,
                         (data : ViResponseData?) -> Void in
                         // Do something when request succeeds
                         // preview by calling : dump(data)
-                        // check ViResponseData.hasError and ViResponseData.error for any errors return by ViSenze server
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
                     },
                     failureHandler: {
                         (err) -> Void in
@@ -343,7 +343,7 @@ ViSearch.sharedInstance.uploadSearch(params: params!,
                         (data : ViResponseData?) -> Void in
                         // Do something when request succeeds
                         // preview by calling : dump(data)
-                        // check ViResponseData.hasError and ViResponseData.error for any errors return by ViSenze server
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
                     },
                     failureHandler: {
                         (err) -> Void in
@@ -366,7 +366,7 @@ ViSearch.sharedInstance.uploadSearch(params: params!,
                         (data : ViResponseData?) -> Void in
                         // Do something when request succeeds
                         // preview by calling : dump(data)
-                        // check ViResponseData.hasError and ViResponseData.error for any errors return by ViSenze server
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
                     },
                     failureHandler: {
                         (err) -> Void in
@@ -451,7 +451,7 @@ client.colorSearch( params: params!,
                         (data : ViResponseData?) -> Void in
                         // Do something when request succeeds
                         // preview by calling : dump(data)
-                        // check ViResponseData.hasError and ViResponseData.error for any errors return by ViSenze server
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
                         },
                     failureHandler: {
                         (err) -> Void in
@@ -482,7 +482,7 @@ ViSearch.sharedInstance.discoverSearch(params: params,
                         (data : ViResponseData?) -> Void in
                         // Do something when request succeeds
                         // preview by calling : dump(data)
-                        // check ViResponseData.hasError and ViResponseData.error for any errors return by ViSenze server
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
                     },
                     failureHandler: {
                         (err) -> Void in
@@ -505,7 +505,7 @@ ViSearch.sharedInstance.discoverSearch(params: params!,
                         (data : ViResponseData?) -> Void in
                         // Do something when request succeeds
                         // preview by calling : dump(data)
-                        // check ViResponseData.hasError and ViResponseData.error for any errors return by ViSenze server
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
                     },
                     failureHandler: {
                         (err) -> Void in
@@ -528,7 +528,7 @@ ViSearch.sharedInstance.discoverSearch(params: params!,
                         (data : ViResponseData?) -> Void in
                         // Do something when request succeeds
                         // preview by calling : dump(data)
-                        // check ViResponseData.hasError and ViResponseData.error for any errors return by ViSenze server
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
                     },
                     failureHandler: {
                         (err) -> Void in
@@ -738,7 +738,7 @@ Below are the properties of a **ViImageResult** .
                                 (data : ViResponseData?) -> Void in
                                 // Do something when request succeeds
                                 // preview by calling : dump(data)
-                                // check ViResponseData.hasError and ViResponseData.error for any errors return by ViSenze server
+                                // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
 
                                 if let data = data {
                                     // check if that there is no error
@@ -822,7 +822,7 @@ successHandler: {
                     (data : ViResponseData?) -> Void in
                     // Do something when request succeeds
                     // preview by calling : dump(data)
-                    // check ViResponseData.hasError and ViResponseData.error for any errors return by ViSenze server
+                    // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
 
                     if let data = data {
                         // check if that there is no error
@@ -906,7 +906,7 @@ With Automatic Object Recognition, ViSearch /uploadsearch API is smart to detect
 
 You can turn on the feature in upload search by setting the API parameter "detection=all". We are now able to detect various types of fashion items, including `Top`, `Dress`, `Bottom`, `Shoe`, `Bag`, `Watch` and `Indian Ethnic Wear`. The list is ever-expanding as we explore this feature for other categories.
 
-Notice: This feature is currently available for fashion application type only. You will need to make sure your app type is configurated as "fashion" on [ViSenze dashboard](https://developers.visenze.com/setup/#Choose-Your-Application-Type).
+Notice: This feature is currently available for fashion application type only. You will need to make sure your app type is configurated as "fashion" on [Rezolve dashboard](https://developers.visenze.com/setup/#Choose-Your-Application-Type).
 
 ```swift
 params.detection = "all";
@@ -929,7 +929,7 @@ The detected product types are listed in `product_types` together with the match
 
 You can get the facet results by sending a list of fields to enable faceting on. Here are some limitations on the request:
 
-- Facet fields need to be marked as `searchable` on ViSenze dashboard.
+- Facet fields need to be marked as `searchable` on Rezolve dashboard.
 Text field is not supported as facet field even it is `searchable`.
 System will return value range, the min, max value for numerical fields which are in ‘int’, ‘float’ type.
 
@@ -966,25 +966,25 @@ To improve search performance and gain useful data insights, it is recommended t
 
 ### 7.1 Setup Tracking
 
-You can initiliase ViSenze tracker as follows depending on whether you are using new ViSenze Console (console.visenze.com) or ViSenze Dashboard (dashboard.visenze.com). 
+You can initiliase Rezolve tracker as follows depending on whether you are using new Rezolve Console (ms.console.rezolve.com) or Rezolve Dashboard (dashboard.visenze.com). 
 
 ```swift
 import ViSearch
 
 ...
 
-# for ViSenze Console
+# for Rezolve Console
 let tracker = ViProductSearch.sharedInstance.newTracker()
 
 # for sending events in China
 let cnTracker = ViProductSearch.sharedInstance.newTracker(forCn: true)
 
-# for ViSenze old dashboard
+# for Rezolve old dashboard
 let tracker = ViSearch.sharedInstance.newTracker(code: "your-code")
 
 ```
 
-To get ViSenze autogenerated `uid` and session Id for analytics purposes, you can call
+To get Rezolve autogenerated `uid` and session Id for analytics purposes, you can call
 
 ```swift
 // get uid
@@ -1104,7 +1104,7 @@ json | Custom json parameter. Max length: 512. | No
 
 ## 8. Developer Notes
 
-The SDK requires ViSenze Tracking library as a dependency [https://github.com/visenze/visenze-tracking-swift](https://github.com/visenze/visenze-tracking-swift). For local development, the dependency can be pulled by running the following within `ViSearchSDK` folder.
+The SDK requires Rezolve Tracking library as a dependency [https://github.com/visenze/visenze-tracking-swift](https://github.com/visenze/visenze-tracking-swift). For local development, the dependency can be pulled by running the following within `ViSearchSDK` folder.
 
 ```
 # first update version within Cartfile
