@@ -54,7 +54,7 @@ It is an open source software to provide easy integration of ViSearch APIs and P
 
 For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-swift).
 
-> Current stable version: `1.12.1` (Swift 5+)
+> Current stable version: `1.13.0` (Swift 5+)
 >
 > Supported iOS version: iOS 8.x and higher
 
@@ -96,7 +96,7 @@ platform :ios, '12.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'ViSearchSDK', '~>1.12.1'
+    pod 'ViSearchSDK', '~>1.13.0'
 end
 ...
 ```
@@ -120,7 +120,7 @@ simple as adding it to your `Package.swift`:
 
 ``` swift
 dependencies: [
-  .package(url: "https://github.com/visenze/visearch-sdk-swift", from: "1.12.1")
+  .package(url: "https://github.com/visenze/visearch-sdk-swift", from: "1.13.0")
 ]
 ```
 
@@ -133,7 +133,7 @@ And then adding the product to any target that needs access to the library:
 #### 2.2.3 Using Carthage
 
 1. Create a Cartfile in the same directory where your `.xcodeproj` or `.xcworkspace` is.
-2. List the dependency as follow: `github "visenze/visearch-sdk-swift" ~> 1.12.1` . Please change the version to latest available version.
+2. List the dependency as follow: `github "visenze/visearch-sdk-swift" ~> 1.13.0` . Please change the version to latest available version.
 3. Run `carthage update --use-xcframeworks` or `carthage bootstrap --platform iOS --cache-builds --no-use-binaries --use-xcframeworks` . The command will fail as `ViSenzeAnalytics.xcframework` is not pulled as it is a dependency. We will resolve it in the next step.
 4. A Cartfile.resolved file and a Carthage directory will appear in the same directory where your .xcodeproj or .xcworkspace is
 5. Navigate to ViSearchSDK folder:  `cd Carthage/Checkouts/visearch-sdk-swift/ViSearchSDK` which contains the source code for ViSearchSDK.
@@ -186,26 +186,32 @@ iOS 10 now requires user permission to access camera and photo library. If your 
 
 ### 3.2 ProductSearch
 
-`ProductSearch` **must** be initialized with an `appKey` and `placementId` **before** it can be used. 
+`ProductSearch` **must** be initialized with an `appKey` and `placementId` **before** it can be used.
 
-For Azure apps, please set the baseUrl to `https://multimodal.search.rezolve.com`. For AWS apps please set the baseUrl to `https://search.visenze.com`
+Use the `cloud` parameter to target the new cloud-specific domains — `.aws` for AWS-hosted apps and `.azure` for Azure-hosted apps. The legacy `baseUrl` overload is still supported for backward compatibility.
 
 ```swift
 import ViSearchSDK
 
-// initialize ProductSearch API using app key and placement id
+// Recommended: initialize with cloud deployment target (uses new domain + updated endpoint paths)
+// For AWS-hosted apps:
+ViProductSearch.sharedInstance.setUp(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID, cloud: .aws)
+
+// For Azure-hosted apps:
+ViProductSearch.sharedInstance.setUp(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID, cloud: .azure)
+
+// Legacy: initialize without a cloud (uses https://multimodal.search.rezolve.com — still supported)
 ViProductSearch.sharedInstance.setUp(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID)
 
-// custom search endpoint
-ViProductSearch.sharedInstance.setUp(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID, baseUrl:"https://multimodal.search.rezolve.com")
+// Legacy: initialize with an explicit base URL — still supported.
+// New cloud domains (multisearch-aw/az.rezolve.com) are auto-detected and use updated endpoint paths.
+ViProductSearch.sharedInstance.setUp(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID, baseUrl: "https://multimodal.search.rezolve.com")
 
-// configure timeout to 30s example. By default timeout is set 10s.
+// Configure timeout to 30s. Default is 10s.
 ViProductSearch.sharedInstance.client?.timeoutInterval = 30
 ViProductSearch.sharedInstance.client?.sessionConfig.timeoutIntervalForRequest = 30
 ViProductSearch.sharedInstance.client?.sessionConfig.timeoutIntervalForResource = 30
 ViProductSearch.sharedInstance.client?.session = URLSession(configuration: (ViProductSearch.sharedInstance.client?.sessionConfig)!)
-
-
 ```
 
 #### 3.2.1 Setup for multiple placements
@@ -213,9 +219,11 @@ ViProductSearch.sharedInstance.client?.session = URLSession(configuration: (ViPr
 If you want to create multiple instances of ProductSearch, you can instantiate ViProductSearch multiple times
 
 ```swift
+// Using the new cloud-specific deployment target:
 var placement111 = ViProductSearch()
-placement111.setUp(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID)
+placement111.setUp(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID, cloud: .aws)
 
+// Legacy setup (still supported):
 var placement222 = ViProductSearch()
 placement222.setUp(appKey: "YOUR_KEY", placementId: YOUR_PLACEMENT_ID)
 ```
