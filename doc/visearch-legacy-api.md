@@ -1,0 +1,571 @@
+# ViSearch Legacy API (Deprecated)
+
+> **This API is deprecated.** Please use the [ProductSearch API](../README.md#42-productsearch) instead.
+
+---
+
+## Table of Contents
+
+- [1. Initialization](#1-initialization)
+- [2. Solution APIs](#2-solution-apis)
+  - [2.1 Visually Similar Recommendations](#21-visually-similar-recommendations)
+  - [2.2 Search by Image](#22-search-by-image)
+    - [2.2.1 Selection Box](#221-selection-box)
+    - [2.2.2 Resizing Settings](#222-resizing-settings)
+  - [2.3 Search by Color](#23-search-by-color)
+  - [2.4 Multiple Products Search](#24-multiple-products-search)
+- [3. Search Results](#3-search-results)
+- [4. Advanced Search Parameters](#4-advanced-search-parameters)
+  - [4.1 Retrieving Metadata](#41-retrieving-metadata)
+  - [4.2 Filtering Results](#42-filtering-results)
+  - [4.3 Result Score](#43-result-score)
+  - [4.4 Automatic Object Recognition Beta](#44-automatic-object-recognition-beta)
+  - [4.5 Facets Filtering](#45-facets-filtering)
+
+---
+
+## 1. Initialization
+
+`ViSearch` **must** be initialized with an `appKey` or `accessKey`/`secretKey` pair **before** it can be used.
+
+```swift
+import ViSearchSDK
+...
+// using default ViSearch client. The client, by default, will connect to Visenze's server
+
+// recommended way of init ViSearch client with app key
+ViSearch.sharedInstance.setup(appKey: "YOUR_APP_KEY")
+
+// old way of init ViSearch client with access and secret key pair
+ViSearch.sharedInstance.setup(accessKey: "YOUR_ACCESS_KEY", secret: "YOUR_SECRET_KEY")
+
+...
+// or using customized client, which connects to your own server
+client = ViSearchClient(baseUrl: yourUrl, accessKey: accessKey, secret: secret)
+...
+```
+
+Please init ViSearch client in this way if you connect to another endpoint rather than default (https://visearch.visenze.com)
+
+```swift
+client = ViSearchClient(baseUrl: "https://custom-visearch.yourdomain.com", accessKey: accessKey, secret: secret)
+```
+
+For searches in China, please change the endpoint to `https://visearch.visenze.com.cn`.
+
+By default, API search requests will timeout after 10s. To change the timeout, you can configure the client as below:
+
+```swift
+            
+// configure timeout to 30s example. By default timeout is set 10s.
+ViSearch.sharedInstance.client?.timeoutInterval = 30
+ViSearch.sharedInstance.client?.sessionConfig.timeoutIntervalForRequest = 30
+ViSearch.sharedInstance.client?.sessionConfig.timeoutIntervalForResource = 30
+ViSearch.sharedInstance.client?.session = URLSession(configuration: (ViSearch.sharedInstance.client?.sessionConfig)!)
+    
+```
+
+---
+
+## 2. Solution APIs
+
+### 2.1 Visually Similar Recommendations
+
+GET /search
+
+**Visually Similar Recommendations** solution is used to search for visually similar images in the image database giving an indexed image's unique identifier (im_name).
+
+```swift
+import ViSearchSDK
+
+...
+let params = ViSearchParams(imName: "imName-example")
+ViSearch.sharedInstance.findSimilar( params: params!,
+                    successHandler: {
+                        (data : ViResponseData?) -> Void in
+                            // Do something when request succeeds
+                            // preview by calling : dump(data)
+                            // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
+                    },
+                   failureHandler: {
+                        (err) -> Void in
+                        // Do something when request fails e.g. due to network error
+                        print ("error: \(err.localizedDescription)")
+                    })
+
+...
+```
+
+### 2.2 Search by Image
+
+POST /uploadsearch
+
+**Search by image** solution is used to search similar images by uploading an image or providing an image url. You should construct the `UIImage` object and pass it to `ViUploadSearchParams` to start a search.
+
+* Using Image
+
+```swift
+import ViSearchSDK
+...
+
+let image = UIImage(named: "someImage.png")
+let params = ViUploadSearchParams(image: image!)
+
+ViSearch.sharedInstance.uploadSearch(params: params,
+                    successHandler: {
+                        (data : ViResponseData?) -> Void in
+                        // Do something when request succeeds
+                        // preview by calling : dump(data)
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
+                    },
+                    failureHandler: {
+                        (err) -> Void in
+                        // Do something when request fails e.g. due to network error
+                        print ("error: \(err.localizedDescription)")
+					})
+
+```
+
+* Alternatively, you can pass an image url directly to `ViUploadSearchParams` to start the search:
+
+```swift
+import ViSearchSDK
+...
+
+let params = ViUploadSearchParams(im_url: "http://somesite.com/sample_image.png")
+        
+ViSearch.sharedInstance.uploadSearch(params: params!,
+                    successHandler: {
+                        (data : ViResponseData?) -> Void in
+                        // Do something when request succeeds
+                        // preview by calling : dump(data)
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
+                    },
+                    failureHandler: {
+                        (err) -> Void in
+                        // Do something when request fails e.g. due to network error
+                        print ("error: \(err.localizedDescription)")
+                    })
+...
+```
+
+* Once uploading an image, you will receive a im\_id attribute from the [Search Results](#3-search-results). If you want to search the same image again, you can save the bandwidth by specifying the im\_id in the params:
+
+```swift
+import ViSearchSDK
+...
+
+let params = ViUploadSearchParams(im_id: "im_id_example")
+        
+ViSearch.sharedInstance.uploadSearch(params: params!,
+                    successHandler: {
+                        (data : ViResponseData?) -> Void in
+                        // Do something when request succeeds
+                        // preview by calling : dump(data)
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
+                    },
+                    failureHandler: {
+                        (err) -> Void in
+                        // Do something when request fails e.g. due to network error
+                        print ("error: \(err.localizedDescription)")
+                    })
+
+...
+```
+
+#### 2.2.1 Selection Box
+
+If the object you wish to search for takes up only a small portion of your image, or other irrelevant objects exists in the same image, chances are the search result could become inaccurate. Use the Box parameter to refine the search area of the image to improve accuracy. The box coordinated is set with respect to the original size of the uploading image. Note: the coordinate system uses pixel as unit instead of point.
+
+```swift
+// create the box to refine the area on the searching image
+// ViBox(x1, y1, x2, y2) where (0,0) is the top-left corner
+// of the image, (x1, y1) is the top-left corner of the box,
+// and (x2, y2) is the bottom-right corner of the box.
+...
+
+let params = ViUploadSearchParams(.....)
+
+let box = ViBox(x1: 0, y1: 0, x2: 100, y2: 100)
+params!.box = box
+        
+// start searching
+...
+```
+
+#### 2.2.2 Resizing Settings
+
+When performing upload search, you may notice the increased search latency with increased image file size. This is due to the increased time spent in network transferring your images to the ViSearch server, and the increased time for processing larger image files in ViSearch.
+
+To reduce upload search latency, by default the uploadSearch method makes a copy of your image file and resizes the copy to 512x512 pixels if one of the original dimensions exceed 512 pixels. This is the optimized size to lower search latency while not sacrificing search accuracy for general use cases:
+
+```swift
+// by default, the max width of the image is set to 512px, quality is 0.97
+let params = ViUploadSearchParams(.....)
+
+// or you can explicitly set a param's settings
+params?.img_settings = ViImageSettings(setting: .highQualitySetting)
+        
+```
+
+If your image contains fine details such as textile patterns and textures, you can use an image with larger size for search to get better search result:
+
+```swift
+// by default, the max width of the image is set to 512px, quality is 0.97
+let params = ViUploadSearchParams(.....)
+
+// set the image with high quality settings.
+// Max width is 1024px, and the quality is 0.985. Note: Quality with 1.0 take huge space
+params?.img_settings = ViImageSettings(setting: .highQualitySetting)
+
+```
+
+Or, provide the customized resize settings. To make efficient use the of the memory and network bandwidth of mobile device, the maximum size is set at 1024 x 1024. Any image exceeds the limit will be resized to the limit:
+
+```swift
+//resize the image to 800 by 800 area using jpeg 0.9 quality
+params?.img_settings = ViImageSettings(size: CGSize(width: 800, height: 800), quality: 0.9)
+        
+```
+
+### 2.3 Search by Color
+
+GET /colorsearch
+
+**Search by color** solution is used to search images with similar color by providing a color code. The color code should be in **Hexadecimal** and passed to `ViColorSearchParams` as a `String`.
+
+```swift
+import ViSearchSDK
+...
+
+let params = ViColorSearchParams(color: "ff00ff")
+// alternately, you can pass UIColor object to the initializer
+// let params = ViColorSearchParams(color: someUIColorObject)
+
+client.colorSearch( params: params!,
+                    successHandler: {
+                        (data : ViResponseData?) -> Void in
+                        // Do something when request succeeds
+                        // preview by calling : dump(data)
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
+                        },
+                    failureHandler: {
+                        (err) -> Void in
+                        // Do something when request fails e.g. due to network error
+                        print ("error: \(err.localizedDescription)")
+					})
+
+...
+```
+
+### 2.4 Multiple Products Search
+
+POST /discoversearch
+
+**Multiple Product Search** solution is to search similar images by uploading an image or providing an image url, similar to **Search by Image**. Multiple Product Search is able to detect all objects in the image and return similar images for each at one time.
+
+* Using Image
+
+```swift
+import ViSearchSDK
+...
+
+let image = UIImage(named: "someImage.png")
+let params = ViUploadSearchParams(image: image!)
+
+ViSearch.sharedInstance.discoverSearch(params: params,
+                    successHandler: {
+                        (data : ViResponseData?) -> Void in
+                        // Do something when request succeeds
+                        // preview by calling : dump(data)
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
+                    },
+                    failureHandler: {
+                        (err) -> Void in
+                        // Do something when request fails e.g. due to network error
+                        print ("error: \(err.localizedDescription)")
+					})
+
+```
+
+* Alternatively, you can pass an image url directly to `ViUploadSearchParams` to start the search:
+
+```swift
+import ViSearchSDK
+...
+
+let params = ViUploadSearchParams(im_url: "http://somesite.com/sample_image.png")
+        
+ViSearch.sharedInstance.discoverSearch(params: params!,
+                    successHandler: {
+                        (data : ViResponseData?) -> Void in
+                        // Do something when request succeeds
+                        // preview by calling : dump(data)
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
+                    },
+                    failureHandler: {
+                        (err) -> Void in
+                        // Do something when request fails e.g. due to network error
+                        print ("error: \(err.localizedDescription)")
+                    })
+...
+```
+
+* Once uploading an image, you will receive a im\_id attribute from the [Search Results](#3-search-results). If you want to search the same image again, you can save the bandwidth by specifying the im\_id in the params:
+
+```swift
+import ViSearchSDK
+...
+
+let params = ViUploadSearchParams(im_id: "im_id_example")
+        
+ViSearch.sharedInstance.discoverSearch(params: params!,
+                    successHandler: {
+                        (data : ViResponseData?) -> Void in
+                        // Do something when request succeeds
+                        // preview by calling : dump(data)
+                        // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
+                    },
+                    failureHandler: {
+                        (err) -> Void in
+                        // Do something when request fails e.g. due to network error
+                        print ("error: \(err.localizedDescription)")
+                    })
+
+...
+```
+
+---
+
+## 3. Search Results
+
+After a successful search request, a list of results are passed to the callback function in the form of **ViResponseData**. You can use the following properties from the result to fulfill your own purpose.
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+|hasError|Bool|true if there are errors returned by Visenze server. |
+|error|[String]| return the error messages from server if there is any. |
+|result|[ViImageResult]|A list of image results returned from the server.|
+|reqId|String?|A request id which can be used for tracking. More details can be found in the [Event Tracking](../README.md#7-event-tracking) section. |
+|im_id|String?|An image id returned in the result which represents a image just uploaded. It can be re-used to do an upload search on the same image again. More details in [Search by image](#22-search-by-image)|
+
+Below are the properties of a **ViImageResult**.
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+|im_name|String|the identify name of the image.|
+|im_url|String?|url of the image if available e.g. when set getAllFl to true or set fl property to include im_url|
+|score|Float?|A float value ranging from 0.0 to 1.0. Refer to *Section 4.3 Result Score*.|
+|metadataDict|Dictionary|Other metadata returned from server. Refer to *Section 4.1 Retrieving Metadata*.|
+
+```swift
+
+ // example
+ ViSearch.sharedInstance.uploadSearch( params: params!,
+                             successHandler: {
+                                (data : ViResponseData?) -> Void in
+                                // Do something when request succeeds
+                                // preview by calling : dump(data)
+                                // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
+
+                                if let data = data {
+                                    // check if that there is no error
+                                    if !data.hasError {
+                                        for imgResult in data.result {
+                                            // process img result
+                                        }
+                                    }
+                                }
+
+            },
+                             failureHandler: {
+                                (err) -> Void in
+                                // Do something when request fails e.g. due to network error
+                                print ("error: \(err.localizedDescription)")
+        })
+
+
+```
+
+You can provide pagination parameters to control the paging of the image search results by configuring the basic search parameters in `ViBaseSearchParams`. As the result is returned in a format of a list of images page by page, use `limit` to set the number of results per page, `page` to indicate the page number:
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| page | Integer | Optional parameter to specify the page of results. The first page of result is 1. Defaults to 1. |
+| limit | Integer | Optional parameter to specify the result per page limit. Defaults to 10. |
+
+```swift
+// For example, when the server side has 60 items, the search operation will return
+// the first 30 items with page = 1 and limit = 30. By changing the page to 2,
+// the search will return the last 30 items.
+...        
+params.page = 2;
+params.limit = 30;
+
+// start searching
+...
+```
+
+---
+
+## 4. Advanced Search Parameters
+
+### 4.1 Retrieving Metadata
+
+To retrieve metadata of your search results, provide a list of metadata keys as the `fl` (field list) in the basic search property:
+
+```swift
+params!.fl = ["price","brand","im_url"]
+```
+
+To retrieve all metadata of your image results, specify `get_all_fl` parameter and set it to true:
+```swift
+params.getAllFl = true;
+```
+
+In result callback you can read the metadata:
+```swift
+
+successHandler: {
+                    (data : ViResponseData?) -> Void in
+                    // Do something when request succeeds
+                    // preview by calling : dump(data)
+                    // check ViResponseData.hasError and ViResponseData.error for any errors return by Rezolve server
+
+                    if let data = data {
+                        // check if that there is no error
+                        if !data.hasError {
+                            for imgResult in data.result {
+                                // process img result
+                                // example: extract price meta-data if available in server
+                                print imgResult.metadataDict["price"]
+                            }
+                        }
+                    }
+
+}
+
+
+```
+
+>Only metadata of type string, int, and float can be retrieved from ViSearch. Metadata of type text is not available for retrieval.
+
+### 4.2 Filtering Results
+
+To filter search results based on metadata values, provide a map of metadata key to filter value as the `fq` (filter query) property:
+
+```swift
+...
+
+// the type of "count" on db schema is int,
+// so we can specify the value range, or do a value match
+
+params?.fq["count"] = "0, 199"
+params?.fq["count"] = "199"
+
+// the type of "price" on db schema is float,
+// so we can specify the value range, or do a value match
+params?.fq["price"] = "0.0, 199.0"
+params?.fq["price"] = "15.0"
+
+// the type of "description" on db schema is string, so we can do a string match.
+params?.fq["description"] = "wooden"
+
+// start searching
+...
+```
+
+Querying syntax for each metadata type is listed in the following table:
+
+Type | FQ
+--- | ---
+string | Metadata value must be exactly matched with the query value, e.g. "Vintage Wingtips" would not match "vintage wingtips" or "vintage"
+text | Metadata value will be indexed using full-text-search engine and supports fuzzy text matching, e.g. "A pair of high quality leather wingtips" would match any word in the phrase
+int | Metadata value can be either: <ul><li>exactly matched with the query value</li><li>matched with a ranged query ```minValue,maxValue```, e.g. int value ```1, 99```, and ```199``` would match ranged query ```0,199``` but would not match ranged query ```200,300```</li></ul>
+float | Metadata value can be either <ul><li>exactly matched with the query value</li><li>matched with a ranged query ```minValue,maxValue```, e.g. float value 1.0, 99.99, and 199.99 would match ranged query ```0.0,199.99``` but would not match ranged query ```200.0,300.0```</li></ul>
+
+### 4.3 Result Score
+
+ViSearch image search results are ranked in descending order i.e. from the highest scores to the lowest, ranging from 1.0 to 0.0. By default, the score for each result is not returned. You can turn on the score parameter to retrieve the scores for each image result:
+
+```Swift
+...
+
+params.score = true; // result will include score for every image
+
+// start searching
+...
+
+```
+
+If you need to restrict search results from a minimum score to a maximum score, specify the score_min and/or score_max parameters:
+```swift
+...
+
+params.score = true; // result will include score for every image
+params.scoreMin = 0.3; // the minimum score is 0.3  
+params.scoreMax = 0.8; // the maximum score is 0.8
+
+// start searching. Every image result will have a score within [0.3, 0.8].
+...
+```
+
+### 4.4 Automatic Object Recognition Beta
+
+With Automatic Object Recognition, ViSearch /uploadsearch API is smart to detect the objects present in the query image and suggest the best matched product type to run the search on.
+
+You can turn on the feature in upload search by setting the API parameter "detection=all". We are now able to detect various types of fashion items, including `Top`, `Dress`, `Bottom`, `Shoe`, `Bag`, `Watch` and `Indian Ethnic Wear`. The list is ever-expanding as we explore this feature for other categories.
+
+Notice: This feature is currently available for fashion application type only. You will need to make sure your app type is configurated as "fashion" on [Rezolve dashboard](https://developers.visenze.com/setup/#Choose-Your-Application-Type).
+
+```swift
+params.detection = "all";
+```
+You can use the Box parameter to restrict the image area [x1, y1, x2, y2] as the portion of your image to search for. When you input a box with 0 width and 0 height, eg. "box":[574,224,574,224]. We will treat it as a point and detect the object over the current point.
+
+![](https://developers.visenze.com/api/images/detection_point.png)
+
+You could also recognize objects from a particular type on the uploaded query image through configuring the detection parameter to a specific product type as "detection={type}". Our API will run the search within that product type.
+
+Sample request to detect `bag` in an uploaded image:
+
+```swift
+params.detection = "bag";
+```
+
+The detected product types are listed in `product_types` together with the match score and box area of the detected object. Multiple objects can be detected from the query image and they are ranked from the highest score to lowest. The full list of supported product types by our API will also be returned in `product_types_list`.
+
+### 4.5 Facets Filtering
+
+You can get the facet results by sending a list of fields to enable faceting on. Here are some limitations on the request:
+
+- Facet fields need to be marked as `searchable` on Rezolve dashboard.
+Text field is not supported as facet field even it is `searchable`.
+System will return value range, the min, max value for numerical fields which are in 'int', 'float' type.
+
+- Only facet values that exist in current search results will be returned. For example, if your search results contain 10 unique brands, then the facet filters will return the value for these 10 brands.
+ 
+- Facet value list is ordered by the item count descendingly.
+When the value is set to all (facets = *), all the searchable fields will be used as facet fields.
+
+Name | Type | Description
+--- | --- | --- |
+facets | array | List of fields to enable faceting.
+facets_limit | Int | Limit of the number of facet values to be returned. Only for non-numerical fields.
+facets_show_count | Boolean | Option to show the facets count in the response.
+
+```swift
+params?.facets = ["price", "brand"]
+params?.facetsLimit = 10
+params?.facetShowCount = true
+
+// view facet results
+ViResponseData.facets
+
+// numerical facet would have a min and max
+// ViFacet.min , ViFacet.max
+
+// string fields would have a count (if facetShowCount is set )
+// ViFacet.items
+
+```
