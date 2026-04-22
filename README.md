@@ -444,9 +444,6 @@ import ViSearch
 # for Rezolve Console
 let tracker = ViProductSearch.sharedInstance.newTracker()
 
-# for sending events in China
-let cnTracker = ViProductSearch.sharedInstance.newTracker(forCn: true)
-
 # for Rezolve old dashboard
 let tracker = ViSearch.sharedInstance.newTracker(code: "your-code")
 
