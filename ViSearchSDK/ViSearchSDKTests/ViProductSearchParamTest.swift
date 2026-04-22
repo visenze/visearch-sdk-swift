@@ -65,7 +65,95 @@ class ViProductSearchParamTest: XCTestCase {
         XCTAssertNil(ViSearchByIdParam(productId: ""))
         XCTAssertNotNil(ViSearchByIdParam(productId: "PRODUCT_ID"))
     }
-    
+
+    // MARK: - MsCloud enum
+
+    func testMsCloudValues() {
+        XCTAssertEqual(MsCloud.aws.baseUrl,   "https://multisearch-aw.rezolve.com")
+        XCTAssertEqual(MsCloud.azure.baseUrl, "https://multisearch-az.rezolve.com")
+    }
+
+    // MARK: - setUp(cloud:)
+
+    func testSetUpWithCloudAWS() {
+        let sdk = ViProductSearch()
+        sdk.setUp(appKey: "TEST_KEY", placementId: 1, cloud: .aws)
+
+        XCTAssertEqual(sdk.client?.baseUrl, ViProductSearch.AWS_URL)
+        XCTAssertEqual(sdk.sbiEndpoint,                     ViProductSearch.SBI_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.vsrEndpoint,                     ViProductSearch.VSR_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.multiSearchEndpoint,             ViProductSearch.MULTISEARCH_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.multiSearchComplEndpoint,        ViProductSearch.MULTISEARCH_COMPL_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.multiSearchOutfitEndpoint,       ViProductSearch.MULTISEARCH_OUTFIT_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.multiSearchAutoCompleteEndpoint, ViProductSearch.MULTISEARCH_AUTOCOMPLETE_ENDPOINT_NEW)
+    }
+
+    func testSetUpWithCloudAzure() {
+        let sdk = ViProductSearch()
+        sdk.setUp(appKey: "TEST_KEY", placementId: 1, cloud: .azure)
+
+        XCTAssertEqual(sdk.client?.baseUrl, ViProductSearch.AZURE_URL)
+        XCTAssertEqual(sdk.sbiEndpoint,                     ViProductSearch.SBI_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.vsrEndpoint,                     ViProductSearch.VSR_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.multiSearchEndpoint,             ViProductSearch.MULTISEARCH_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.multiSearchComplEndpoint,        ViProductSearch.MULTISEARCH_COMPL_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.multiSearchOutfitEndpoint,       ViProductSearch.MULTISEARCH_OUTFIT_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.multiSearchAutoCompleteEndpoint, ViProductSearch.MULTISEARCH_AUTOCOMPLETE_ENDPOINT_NEW)
+    }
+
+    // MARK: - setUp(baseUrl:) domain detection
+
+    func testSetUpLegacyBackwardCompat() {
+        let sdk = ViProductSearch()
+        sdk.setUp(appKey: "TEST_KEY", placementId: 1)
+
+        XCTAssertEqual(sdk.client?.baseUrl, ViProductSearch.BASE_URL)
+        XCTAssertEqual(sdk.sbiEndpoint,                     ViProductSearch.SBI_ENDPOINT)
+        XCTAssertEqual(sdk.vsrEndpoint,                     ViProductSearch.VSR_ENDPOINT)
+        XCTAssertEqual(sdk.multiSearchEndpoint,             ViProductSearch.MULTISEARCH_ENDPOINT)
+        XCTAssertEqual(sdk.multiSearchComplEndpoint,        ViProductSearch.MULTISEARCH_COMPL_ENDPOINT)
+        XCTAssertEqual(sdk.multiSearchOutfitEndpoint,       ViProductSearch.MULTISEARCH_OUTFIT_ENDPOINT)
+        XCTAssertEqual(sdk.multiSearchAutoCompleteEndpoint, ViProductSearch.MULTISEARCH_AUTOCOMPLETE_ENDPOINT)
+    }
+
+    func testSetUpWithBaseUrlNewAwsDomain() {
+        let sdk = ViProductSearch()
+        sdk.setUp(appKey: "TEST_KEY", placementId: 1, baseUrl: ViProductSearch.AWS_URL)
+
+        XCTAssertEqual(sdk.client?.baseUrl, ViProductSearch.AWS_URL)
+        XCTAssertEqual(sdk.sbiEndpoint,                     ViProductSearch.SBI_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.vsrEndpoint,                     ViProductSearch.VSR_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.multiSearchEndpoint,             ViProductSearch.MULTISEARCH_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.multiSearchComplEndpoint,        ViProductSearch.MULTISEARCH_COMPL_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.multiSearchOutfitEndpoint,       ViProductSearch.MULTISEARCH_OUTFIT_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.multiSearchAutoCompleteEndpoint, ViProductSearch.MULTISEARCH_AUTOCOMPLETE_ENDPOINT_NEW)
+    }
+
+    func testSetUpWithBaseUrlNewAzureDomain() {
+        let sdk = ViProductSearch()
+        sdk.setUp(appKey: "TEST_KEY", placementId: 1, baseUrl: ViProductSearch.AZURE_URL)
+
+        XCTAssertEqual(sdk.client?.baseUrl, ViProductSearch.AZURE_URL)
+        XCTAssertEqual(sdk.sbiEndpoint,                     ViProductSearch.SBI_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.vsrEndpoint,                     ViProductSearch.VSR_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.multiSearchEndpoint,             ViProductSearch.MULTISEARCH_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.multiSearchComplEndpoint,        ViProductSearch.MULTISEARCH_COMPL_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.multiSearchOutfitEndpoint,       ViProductSearch.MULTISEARCH_OUTFIT_ENDPOINT_NEW)
+        XCTAssertEqual(sdk.multiSearchAutoCompleteEndpoint, ViProductSearch.MULTISEARCH_AUTOCOMPLETE_ENDPOINT_NEW)
+    }
+
+    func testSetUpWithBaseUrlLegacyDomain() {
+        let sdk = ViProductSearch()
+        sdk.setUp(appKey: "TEST_KEY", placementId: 1, baseUrl: "https://search-dev.visenze.com")
+
+        XCTAssertEqual(sdk.sbiEndpoint,                     ViProductSearch.SBI_ENDPOINT)
+        XCTAssertEqual(sdk.vsrEndpoint,                     ViProductSearch.VSR_ENDPOINT)
+        XCTAssertEqual(sdk.multiSearchEndpoint,             ViProductSearch.MULTISEARCH_ENDPOINT)
+        XCTAssertEqual(sdk.multiSearchComplEndpoint,        ViProductSearch.MULTISEARCH_COMPL_ENDPOINT)
+        XCTAssertEqual(sdk.multiSearchOutfitEndpoint,       ViProductSearch.MULTISEARCH_OUTFIT_ENDPOINT)
+        XCTAssertEqual(sdk.multiSearchAutoCompleteEndpoint, ViProductSearch.MULTISEARCH_AUTOCOMPLETE_ENDPOINT)
+    }
+
 }
 
 

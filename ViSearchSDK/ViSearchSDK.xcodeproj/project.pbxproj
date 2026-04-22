@@ -11,6 +11,7 @@
 		BD06D1381DA3F59A00EC9B38 /* ViRequestSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD06D1371DA3F59A00EC9B38 /* ViRequestSerialization.swift */; };
 		BD283ABB29B7101600912D82 /* ViBestImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD283ABA29B7101600912D82 /* ViBestImage.swift */; };
 		BD3A860125F22B6400BB71CF /* ViProductSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3A860025F22B6400BB71CF /* ViProductSearch.swift */; };
+		FAF9D5BEDAC04F2387FB5FE4 /* MsCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8823F91884A5AA74CA79A /* MsCloud.swift */; };
 		BD50FD621DA8B4220035FD78 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD50FD611DA8B4220035FD78 /* UIColorExtension.swift */; };
 		BD5BE9E625F5F778004995D0 /* ViProductSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5BE9E525F5F778004995D0 /* ViProductSearchResponse.swift */; };
 		BD5BE9E925F60607004995D0 /* ViProductSearchClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5BE9E825F60607004995D0 /* ViProductSearchClient.swift */; };
@@ -103,6 +104,7 @@
 		BD06D1371DA3F59A00EC9B38 /* ViRequestSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViRequestSerialization.swift; sourceTree = "<group>"; };
 		BD283ABA29B7101600912D82 /* ViBestImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViBestImage.swift; sourceTree = "<group>"; };
 		BD3A860025F22B6400BB71CF /* ViProductSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViProductSearch.swift; sourceTree = "<group>"; };
+		CDD8823F91884A5AA74CA79A /* MsCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MsCloud.swift; sourceTree = "<group>"; };
 		BD50FD611DA8B4220035FD78 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtension.swift; path = Helper/UIColorExtension.swift; sourceTree = "<group>"; };
 		BD5BE9E525F5F778004995D0 /* ViProductSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViProductSearchResponse.swift; sourceTree = "<group>"; };
 		BD5BE9E825F60607004995D0 /* ViProductSearchClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViProductSearchClient.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				BD6540591DA63F5200E10162 /* ViSearch.swift */,
 				BD3A860025F22B6400BB71CF /* ViProductSearch.swift */,
 				BD5BE9E825F60607004995D0 /* ViProductSearchClient.swift */,
+				CDD8823F91884A5AA74CA79A /* MsCloud.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				BD6CADF325F5C1C600012929 /* ViSearchByImageParam.swift in Sources */,
 				BDF87E23281BCD8D0040E0D4 /* ViExperiment.swift in Sources */,
 				BD3A860125F22B6400BB71CF /* ViProductSearch.swift in Sources */,
+				FAF9D5BEDAC04F2387FB5FE4 /* MsCloud.swift in Sources */,
 				BD5F70582601F1B100132A1F /* ViProductObjectResult.swift in Sources */,
 				BDB76A2626983C6C000C750A /* ViStrategy.swift in Sources */,
 				BD72A3A025FF0FA1005C8BC0 /* ViGroupResult.swift in Sources */,
